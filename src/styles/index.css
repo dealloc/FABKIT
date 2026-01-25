@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-page text-foreground;
+    }
+}
