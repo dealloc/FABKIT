@@ -1,11 +1,21 @@
 @import "tailwindcss";
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
+@theme {
+	--color-primary: #a6864a;
+	--color-dark: #2a2a2a;
+	--color-page: #ffffff;
+	--color-foreground: #111827;
+	--color-border: #e5e7eb;
+
+	--breakpoint-xs: 30rem;
+}
+
 @layer base {
-    * {
-        @apply border-border;
-    }
-    body {
-        @apply bg-page text-foreground;
-    }
+	* {
+		@apply border-border;
+	}
+	body {
+		@apply bg-page text-foreground;
+	}
 }
