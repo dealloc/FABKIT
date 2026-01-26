@@ -77,7 +77,7 @@ export function Menu() {
 								</TransitionChild>
 
 								{/* Mobile sidebar content */}
-								<div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-2 dark:bg-dark">
+								<div className="flex grow flex-col gap-y-5 overflow-y-auto bg-surface px-6 pb-2">
 									<div className="flex h-16 shrink-0 items-center gap-1 text-primary">
 										<img
 											className="h-8 w-auto"
@@ -99,16 +99,16 @@ export function Menu() {
 																onClick={() => setSidebarOpen(false)}
 																className={[
 																	item.route === location.pathname
-																		? "bg-gray-50 text-primary dark:bg-primary dark:text-white"
-																		: "text-gray-500 hover:bg-gray-50 hover:text-primary dark:hover:bg-primary dark:hover:text-white",
+																		? "bg-surface-active text-heading"
+																		: "text-menu-inactive hover:bg-surface-active hover:text-heading",
 																	"group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
 																].join(" ")}
 															>
 																<item.icon
 																	className={[
 																		item.route === location.pathname
-																			? "text-primary dark:text-white"
-																			: "text-gray-400 group-hover:text-primary dark:group-hover:text-white",
+																			? "text-heading"
+																			: "text-menu-icon-inactive group-hover:text-heading",
 																		"size-6 shrink-0",
 																	].join(" ")}
 																	aria-hidden="true"
@@ -130,7 +130,7 @@ export function Menu() {
 
 			{/* Static sidebar for desktop */}
 			<div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
-				<div className="flex grow flex-col border-r border-gray-200 bg-white px-6 dark:bg-dark">
+				<div className="flex grow flex-col border-r border-border bg-surface px-6">
 					<div className="flex h-48 items-center justify-center">
 						<img
 							className="h-30 w-auto"
@@ -138,7 +138,7 @@ export function Menu() {
 							alt="FABKIT Logo"
 						/>
 					</div>
-					<hr className="h-px border-0 bg-gray-200 dark:bg-gray-200" />
+					<hr className="h-px border-0 bg-border" />
 					<nav className="mt-5 flex flex-1 flex-col">
 						<ul className="flex flex-1 flex-col gap-y-7">
 							<li>
@@ -149,16 +149,16 @@ export function Menu() {
 												to={item.route}
 												className={[
 													item.route === location.pathname
-														? "bg-gray-50 text-primary dark:bg-primary dark:text-white"
-														: "text-gray-500 hover:bg-gray-50 hover:text-primary dark:hover:bg-primary dark:hover:text-white",
+														? "bg-surface-active text-heading"
+														: "text-menu-inactive hover:bg-surface-active hover:text-heading",
 													"group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
 												].join(" ")}
 											>
 												<item.icon
 													className={[
 														item.route === location.pathname
-															? "text-primary dark:text-white"
-															: "text-gray-400 group-hover:text-primary dark:group-hover:text-white",
+															? "text-heading"
+															: "text-menu-icon-inactive group-hover:text-heading",
 														"size-6 shrink-0",
 													].join(" ")}
 													aria-hidden="true"
@@ -175,7 +175,7 @@ export function Menu() {
 			</div>
 
 			{/* Mobile top bar */}
-			<div className="sticky top-0 z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-xs sm:px-6 lg:hidden dark:bg-dark">
+			<div className="sticky top-0 z-40 flex items-center gap-x-6 bg-surface px-4 py-4 shadow-xs sm:px-6 lg:hidden">
 				<button
 					type="button"
 					className="-m-2.5 p-2.5 text-primary lg:hidden"

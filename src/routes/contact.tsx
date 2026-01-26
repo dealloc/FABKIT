@@ -58,15 +58,13 @@ function ContactPage() {
 	return (
 		<>
 			{/* Header */}
-			<div className="border-b border-primary/20 bg-white dark:bg-dark">
+			<div className="border-b border-border-primary bg-surface">
 				<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 					<div className="py-8">
-						<h1 className="text-3xl font-bold text-primary dark:text-white">
+						<h1 className="text-3xl font-bold text-heading">
 							{t("contact.title")}
 						</h1>
-						<p className="mt-2 text-primary/70 dark:text-white/70">
-							{t("contact.sub_title")}
-						</p>
+						<p className="mt-2 text-muted">{t("contact.sub_title")}</p>
 					</div>
 				</div>
 			</div>
@@ -76,12 +74,12 @@ function ContactPage() {
 					{/* Left Column */}
 					<div className="space-y-8">
 						{/* Get in Touch */}
-						<div className="rounded-lg border-2 border-primary/20 bg-white shadow-lg dark:bg-dark">
-							<div className="border-b border-primary/20 bg-primary/5 px-6 py-4 dark:bg-primary/10">
-								<h2 className="text-xl font-semibold text-primary dark:text-white">
+						<div className="rounded-lg border-2 border-border-primary bg-surface shadow-lg">
+							<div className="border-b border-border-primary bg-surface-muted px-6 py-4">
+								<h2 className="text-xl font-semibold text-heading">
 									{t("contact.get_in_touch")}
 								</h2>
-								<p className="mt-1 text-sm text-primary/70 dark:text-white/70">
+								<p className="mt-1 text-sm text-muted">
 									{t("contact.get_in_touch_description")}
 								</p>
 							</div>
@@ -92,16 +90,16 @@ function ContactPage() {
 										href={link.href}
 										target="_blank"
 										rel="noreferrer"
-										className="group flex items-center gap-4 rounded-lg border-2 border-primary/20 p-4 transition-all duration-200 hover:border-primary/40 hover:bg-primary/5"
+										className="group flex items-center gap-4 rounded-lg border-2 border-border-primary p-4 transition-all duration-200 hover:border-primary/40 hover:bg-surface-muted"
 									>
 										<div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 transition-colors group-hover:bg-primary/20">
 											<link.icon className="h-6 w-6 text-primary" />
 										</div>
 										<div>
-											<h3 className="font-semibold text-primary dark:text-white">
+											<h3 className="font-semibold text-heading">
 												{t(link.name)}
 											</h3>
-											<p className="text-sm text-primary/70 dark:text-white/70">
+											<p className="text-sm text-muted">
 												{t(link.description)}
 											</p>
 										</div>
@@ -111,13 +109,13 @@ function ContactPage() {
 						</div>
 
 						{/* About Section */}
-						<div className="rounded-lg border-2 border-primary/20 bg-white shadow-lg dark:bg-dark">
-							<div className="border-b border-primary/20 bg-primary/5 px-6 py-4 dark:bg-primary/10">
-								<h2 className="text-xl font-semibold text-primary dark:text-white">
+						<div className="rounded-lg border-2 border-border-primary bg-surface shadow-lg">
+							<div className="border-b border-border-primary bg-surface-muted px-6 py-4">
+								<h2 className="text-xl font-semibold text-heading">
 									{t("contact.about_title")}
 								</h2>
 							</div>
-							<div className="space-y-4 p-6 text-primary/80 leading-relaxed dark:text-white/80">
+							<div className="space-y-4 p-6 text-body leading-relaxed">
 								<p>
 									Our goal is simple: creating high-quality tools for the Flesh
 									and Blood TCG community. As passionate FaB players ourselves,
@@ -160,12 +158,12 @@ function ContactPage() {
 					{/* Right Column */}
 					<div className="space-y-8">
 						{/* Our Team */}
-						<div className="rounded-lg border-2 border-primary/20 bg-white shadow-lg dark:bg-dark">
-							<div className="border-b border-primary/20 bg-primary/5 px-6 py-4 dark:bg-primary/10">
-								<h2 className="text-xl font-semibold text-primary dark:text-white">
+						<div className="rounded-lg border-2 border-border-primary bg-surface shadow-lg">
+							<div className="border-b border-border-primary bg-surface-muted px-6 py-4">
+								<h2 className="text-xl font-semibold text-heading">
 									{t("contact.team_title")}
 								</h2>
-								<p className="mt-1 text-sm text-primary/70 dark:text-white/70">
+								<p className="mt-1 text-sm text-muted">
 									{t("contact.team_description")}
 								</p>
 							</div>
@@ -173,27 +171,25 @@ function ContactPage() {
 								{teamMembers.map((member) => (
 									<div
 										key={member.name}
-										className="rounded-lg border border-primary/20 bg-primary/5 p-6 dark:bg-primary/10"
+										className="rounded-lg border border-border-primary bg-surface-muted p-6"
 									>
 										<div className="flex items-center gap-6">
 											<div className="relative flex h-24 w-24 items-center justify-center">
 												<img src={member.avatar} alt={member.name} />
 											</div>
 											<div>
-												<h3 className="text-lg font-semibold text-primary dark:text-white">
+												<h3 className="text-lg font-semibold text-heading">
 													{t(member.name)}
 												</h3>
-												<p className="text-primary/70 dark:text-white/70">
-													{t(member.role)}
-												</p>
-												<p className="mt-1 text-sm text-primary/60 dark:text-white/60">
+												<p className="text-muted">{t(member.role)}</p>
+												<p className="mt-1 text-sm text-subtle">
 													{t(member.description)}
 												</p>
 											</div>
 										</div>
 										{member.avatarCredit && (
 											<div className="mt-3 text-right">
-												<p className="text-xs text-primary/40 dark:text-white/40">
+												<p className="text-xs text-faint">
 													{t(member.avatarCredit)}
 												</p>
 											</div>
@@ -204,9 +200,9 @@ function ContactPage() {
 						</div>
 
 						{/* Special Mentions */}
-						<div className="rounded-lg border-2 border-primary/20 bg-white shadow-lg dark:bg-dark">
-							<div className="border-b border-primary/20 bg-primary/5 px-6 py-4 dark:bg-primary/10">
-								<h2 className="text-xl font-semibold text-primary dark:text-white">
+						<div className="rounded-lg border-2 border-border-primary bg-surface shadow-lg">
+							<div className="border-b border-border-primary bg-surface-muted px-6 py-4">
+								<h2 className="text-xl font-semibold text-heading">
 									{t("contact.special_mentions_title")}
 								</h2>
 							</div>
@@ -214,12 +210,12 @@ function ContactPage() {
 								{specialMentions.map((mention) => (
 									<div
 										key={mention.name}
-										className="rounded bg-primary/5 p-3 text-sm text-primary/80 dark:bg-primary/10 dark:text-white/80"
+										className="rounded bg-surface-muted p-3 text-sm text-body"
 									>
-										<span className="font-semibold text-primary dark:text-white">
+										<span className="font-semibold text-heading">
 											{mention.name}
 										</span>
-										<span className="text-primary/60 dark:text-white/60">
+										<span className="text-subtle">
 											{" "}
 											- {mention.description}
 										</span>
@@ -229,9 +225,9 @@ function ContactPage() {
 						</div>
 
 						{/* Ko-Fi Supporters */}
-						<div className="rounded-lg border-2 border-primary/20 bg-white shadow-lg dark:bg-dark">
-							<div className="border-b border-primary/20 bg-primary/5 px-6 py-4 dark:bg-primary/10">
-								<h2 className="text-xl font-semibold text-primary dark:text-white">
+						<div className="rounded-lg border-2 border-border-primary bg-surface shadow-lg">
+							<div className="border-b border-border-primary bg-surface-muted px-6 py-4">
+								<h2 className="text-xl font-semibold text-heading">
 									{t("contact.supporters_title")}
 								</h2>
 							</div>
@@ -239,12 +235,12 @@ function ContactPage() {
 								{supporters.map((supporter) => (
 									<div
 										key={supporter}
-										className="rounded bg-primary/5 p-3 text-sm text-primary/80 dark:bg-primary/10 dark:text-white/80 mb-2"
+										className="mb-2 rounded bg-surface-muted p-3 text-sm text-body"
 									>
 										<span className="font-medium">{supporter}</span>
 									</div>
 								))}
-								<div className="py-4 text-center text-xs italic text-primary/60 dark:text-white/60">
+								<div className="py-4 text-center text-xs italic text-subtle">
 									{t("contact.supporters_subtext")}
 								</div>
 							</div>
