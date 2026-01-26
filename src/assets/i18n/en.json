@@ -55,6 +55,17 @@
 			"label": "Featured Artist",
 			"fab_discord_link": "Join the Flesh and Blood discord and follow the custom-card channel for future contests",
 			"our_discord_link": "Join our Discord server"
+		},
+		"image_upload": {
+			"drag_or_click": "Drop your image here or click to browse",
+			"drop_here": "Release to upload your image",
+			"supported_formats": "PNG, JPG, or GIF",
+			"max_size": "Maximum file size: {{maxSizeInMb, number}}MB",
+			"error_invalid_format": "Invalid file format. Please use PNG, JPG, or GIF",
+			"error_too_large": "File is too large. Maximum size is {{maxSizeInMb, number}}MB",
+			"success": "Image loaded",
+			"remove": "Remove image",
+			"preview_alt": "Image preview"
 		}
 	}
 }
