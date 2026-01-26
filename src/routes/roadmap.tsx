@@ -3,7 +3,7 @@ import { Clock, Lightbulb } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { currentWorkItems, futurePlans } from "../config/roadmap";
 import "../styles/roadmap.css";
-import * as React from "react";
+import type * as React from "react";
 
 export const Route = createFileRoute("/roadmap")({
 	component: RoadmapPage,
@@ -62,7 +62,9 @@ function getPriorityColor(priority: Priority): string {
 	}
 }
 
-const sortedCurrentWorkItems = sortByPriorityAndTitle(currentWorkItems as RoadmapItem[]);
+const sortedCurrentWorkItems = sortByPriorityAndTitle(
+	currentWorkItems as RoadmapItem[],
+);
 const sortedFuturePlans = sortByPriorityAndTitle(futurePlans as RoadmapItem[]);
 
 function RoadmapPage() {

@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { Discord } from "../components/icons/Discord.tsx";
 import { Github } from "../components/icons/Github.tsx";
+import Contact from "../config/contact.ts";
 
 export const Route = createFileRoute("/contact")({
 	component: ContactPage,
@@ -11,13 +12,13 @@ const contactLinks = [
 	{
 		name: "GitHub Repository",
 		description: "contact.links_github_description",
-		href: "https://github.com/FABKIT/FABKIT",
+		href: Contact.Repository,
 		icon: Github,
 	},
 	{
 		name: "Discord Community",
 		description: "contact.links_discord_description",
-		href: "https://discord.gg/4twcdby9xp",
+		href: Contact.DiscordInvite,
 		icon: Discord,
 	},
 ];
