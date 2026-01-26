@@ -1,0 +1,18 @@
+/* keeps the sizing of icons in the tiptap editor under control. */
+.fab-icon {
+    display: inline-block;
+    width: 0.9em;
+    height: 0.9em;
+    max-width: 0.9em;
+    max-height: 0.9em;
+    background-size: 88%;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    vertical-align: -0.15em;
+    cursor: pointer;
+    user-select: all;
+    -webkit-user-select: all;
+    -moz-user-select: all;
+    -ms-user-select: all;
+    pointer-events: none;
+}
