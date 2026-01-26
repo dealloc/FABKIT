@@ -3,6 +3,7 @@ import { ThemeProvider } from "next-themes";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./styles/index.css";
+import "./i18n.ts";
 
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";

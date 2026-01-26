@@ -1,0 +1,20 @@
+{
+	"footer": {
+		"disclaimer": "FABKIT is in no way affiliated with Legend Story Studios. Legend Story Studios®, Flesh and Blood™, and set names are trademarks of Legend Story Studios. Flesh and Blood characters, cards, logos, and art are property of Legend Story Studios. Card Images © Legend Story Studios",
+		"credits": "Developed by Thencros & Lambstream"
+	},
+	"contact": {
+		"title": "Contact Us",
+		"sub_title": "Give your feedback on FABKIT",
+		"get_in_touch": "Get in Touch",
+		"get_in_touch_description": "Connect with us through these platforms",
+		"links_github_description": "Report issues, contribute code, or check our latest updates",
+		"links_discord_description": "Join our server for support, discussions and showing off your custom cards!",
+		"about_title": "About FABKIT",
+		"team_title": "Our Team",
+		"team_description": "The people behind FABKIT",
+		"special_mentions_title": "Special Mentions",
+		"supporters_title": "Sponsors & Supporters",
+		"supporters_subtext": "Every supporter gets their name on our website as well as a role on our discord server!"
+	}
+}

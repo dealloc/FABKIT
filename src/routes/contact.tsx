@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 import { Discord } from "../components/icons/Discord.tsx";
 import { Github } from "../components/icons/Github.tsx";
 
@@ -9,14 +10,13 @@ export const Route = createFileRoute("/contact")({
 const contactLinks = [
 	{
 		name: "GitHub Repository",
-		description: "Report issues, contribute code, or check our latest updates",
+		description: "contact.links_github_description",
 		href: "https://github.com/FABKIT/FABKIT",
 		icon: Github,
 	},
 	{
 		name: "Discord Community",
-		description:
-			"Join our server for support, discussions and showing off your custom cards!",
+		description: "contact.links_discord_description",
 		href: "https://discord.gg/4twcdby9xp",
 		icon: Discord,
 	},
@@ -50,30 +50,22 @@ const specialMentions = [
 	},
 ];
 
-const supporters = [
-    'SalisburyBavo',
-    'SalisburyBavo',
-    'SalisburyBavo',
-    'SalisburyBavo',
-    'SalisburyBavo',
-    'SalisburyBavo',
-    'SalisburyBavo',
-    'SalisburyBavo',
-    'SalisburyBavo',
-]
+const supporters = ["SalisburyBavo"];
 
 function ContactPage() {
+	const { t } = useTranslation();
+
 	return (
-		<div className="min-h-screen bg-white dark:bg-dark">
+		<>
 			{/* Header */}
 			<div className="border-b border-primary/20 bg-white dark:bg-dark">
 				<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 					<div className="py-8">
 						<h1 className="text-3xl font-bold text-primary dark:text-white">
-							Contact us
+							{t("contact.title")}
 						</h1>
 						<p className="mt-2 text-primary/70 dark:text-white/70">
-							Give your feedback on FABKIT
+							{t("contact.sub_title")}
 						</p>
 					</div>
 				</div>
@@ -87,10 +79,10 @@ function ContactPage() {
 						<div className="rounded-lg border-2 border-primary/20 bg-white shadow-lg dark:bg-dark">
 							<div className="border-b border-primary/20 bg-primary/5 px-6 py-4 dark:bg-primary/10">
 								<h2 className="text-xl font-semibold text-primary dark:text-white">
-									Get in Touch
+									{t("contact.get_in_touch")}
 								</h2>
 								<p className="mt-1 text-sm text-primary/70 dark:text-white/70">
-									Connect with us through these platforms
+									{t("contact.get_in_touch_description")}
 								</p>
 							</div>
 							<div className="space-y-4 p-6">
@@ -107,10 +99,10 @@ function ContactPage() {
 										</div>
 										<div>
 											<h3 className="font-semibold text-primary dark:text-white">
-												{link.name}
+												{t(link.name)}
 											</h3>
 											<p className="text-sm text-primary/70 dark:text-white/70">
-												{link.description}
+												{t(link.description)}
 											</p>
 										</div>
 									</a>
@@ -122,7 +114,7 @@ function ContactPage() {
 						<div className="rounded-lg border-2 border-primary/20 bg-white shadow-lg dark:bg-dark">
 							<div className="border-b border-primary/20 bg-primary/5 px-6 py-4 dark:bg-primary/10">
 								<h2 className="text-xl font-semibold text-primary dark:text-white">
-									About FABKIT
+									{t("contact.about_title")}
 								</h2>
 							</div>
 							<div className="space-y-4 p-6 text-primary/80 leading-relaxed dark:text-white/80">
@@ -171,10 +163,10 @@ function ContactPage() {
 						<div className="rounded-lg border-2 border-primary/20 bg-white shadow-lg dark:bg-dark">
 							<div className="border-b border-primary/20 bg-primary/5 px-6 py-4 dark:bg-primary/10">
 								<h2 className="text-xl font-semibold text-primary dark:text-white">
-									Our Team
+									{t("contact.team_title")}
 								</h2>
 								<p className="mt-1 text-sm text-primary/70 dark:text-white/70">
-									The people behind FABKIT
+									{t("contact.team_description")}
 								</p>
 							</div>
 							<div className="space-y-6 p-6">
@@ -189,21 +181,23 @@ function ContactPage() {
 											</div>
 											<div>
 												<h3 className="text-lg font-semibold text-primary dark:text-white">
-													{member.name}
+													{t(member.name)}
 												</h3>
 												<p className="text-primary/70 dark:text-white/70">
-													{member.role}
+													{t(member.role)}
 												</p>
 												<p className="mt-1 text-sm text-primary/60 dark:text-white/60">
-													{member.description}
+													{t(member.description)}
 												</p>
 											</div>
 										</div>
-										<div className="mt-3 text-right">
-											<p className="text-xs text-primary/40 dark:text-white/40">
-												{member.avatarCredit}
-											</p>
-										</div>
+										{member.avatarCredit && (
+											<div className="mt-3 text-right">
+												<p className="text-xs text-primary/40 dark:text-white/40">
+													{t(member.avatarCredit)}
+												</p>
+											</div>
+										)}
 									</div>
 								))}
 							</div>
@@ -213,7 +207,7 @@ function ContactPage() {
 						<div className="rounded-lg border-2 border-primary/20 bg-white shadow-lg dark:bg-dark">
 							<div className="border-b border-primary/20 bg-primary/5 px-6 py-4 dark:bg-primary/10">
 								<h2 className="text-xl font-semibold text-primary dark:text-white">
-									Special Mentions
+									{t("contact.special_mentions_title")}
 								</h2>
 							</div>
 							<div className="max-h-32 space-y-2 overflow-y-auto p-4">
@@ -238,24 +232,26 @@ function ContactPage() {
 						<div className="rounded-lg border-2 border-primary/20 bg-white shadow-lg dark:bg-dark">
 							<div className="border-b border-primary/20 bg-primary/5 px-6 py-4 dark:bg-primary/10">
 								<h2 className="text-xl font-semibold text-primary dark:text-white">
-									Ko-Fi Supporters
+									{t("contact.supporters_title")}
 								</h2>
 							</div>
 							<div className="max-h-32 overflow-y-auto p-4">
-                                {supporters.map((supporter) => (
-                                    <div key={supporter} className="rounded bg-primary/5 p-3 text-sm text-primary/80 dark:bg-primary/10 dark:text-white/80 mb-2">
-                                        <span className="font-medium">{supporter}</span>
-                                    </div>
-                                ))}
-                                <div className="py-4 text-center text-xs italic text-primary/60 dark:text-white/60">
-									Every supporter gets their name on our website as well as a
-									role on our discord server!
+								{supporters.map((supporter) => (
+									<div
+										key={supporter}
+										className="rounded bg-primary/5 p-3 text-sm text-primary/80 dark:bg-primary/10 dark:text-white/80 mb-2"
+									>
+										<span className="font-medium">{supporter}</span>
+									</div>
+								))}
+								<div className="py-4 text-center text-xs italic text-primary/60 dark:text-white/60">
+									{t("contact.supporters_subtext")}
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 }
