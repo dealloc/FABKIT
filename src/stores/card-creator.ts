@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
+import { type CardBack, CardBacks } from "../config/cards/card_backs.ts";
 import type { CardFormField } from "../config/cards/form_fields.ts";
 import type { CardType } from "../config/cards/types.ts";
 
@@ -10,6 +11,7 @@ type FormFieldValues = {
 
 interface CardCreatorState extends FormFieldValues {
 	cardType: CardType | null;
+	cardBack: CardBack;
 	setCardType: (type: CardType | null) => void;
 	setCardPitch: (value: string) => void;
 	setCardName: (value: string) => void;
@@ -30,6 +32,7 @@ interface CardCreatorState extends FormFieldValues {
 
 const initialState = {
 	cardType: null,
+	cardBack: CardBacks[0],
 	CardPitch: null,
 	CardName: null,
 	CardResource: null,
