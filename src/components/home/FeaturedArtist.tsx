@@ -1,8 +1,8 @@
 import { ArrowRight, ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import Contact from "../../config/contact.ts";
 import { featuredArtists } from "../../config/featured_artist.tsx";
-import Contact from '../../config/contact.ts';
 
 export function FeaturedArtist() {
 	const { t } = useTranslation();
@@ -111,7 +111,7 @@ export function FeaturedArtist() {
 					</div>
 
 					<div className="space-y-4 text-body leading-relaxed">
-                        {featuredArtist.description}
+						{featuredArtist.description}
 					</div>
 
 					<div className="space-y-2 pt-2">
