@@ -16,5 +16,18 @@
 		"special_mentions_title": "Special Mentions",
 		"supporters_title": "Sponsors & Supporters",
 		"supporters_subtext": "Every supporter gets their name on our website as well as a role on our discord server!"
+	},
+	"roadmap": {
+		"title": "Development Roadmap",
+		"subtitle": "Track our progress and see what's coming next for FABKIT",
+		"current_work_title": "Currently Working On",
+		"current_work_description": "Active development tasks and recently completed features",
+		"future_plans_title": "Future Plans & Ideas",
+		"future_plans_description": "Planned features and ideas we're considering for future development",
+		"support_title": "Support FABKIT",
+		"support_description": "Help us keep building awesome features",
+		"suggestions_title": "Have suggestions or feedback?",
+		"suggestions_text": "We'd love to hear from you! Let us know what features you'd like to see.",
+		"get_in_touch": "Get in Touch"
 	}
 }

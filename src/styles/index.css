@@ -2,6 +2,24 @@
 
 @theme {
 	--color-primary: #a6864a;
+	--color-secondary: oklch(0.55 0.1 45);
+	--color-tertiary: oklch(0.55 0.1 250);
+
+	/* Primary variants */
+	--color-primary-light: oklch(0.75 0.1 85);
+	--color-primary-dark: oklch(0.45 0.1 85);
+
+	/* Secondary variants */
+	--color-secondary-light: oklch(0.75 0.1 45);
+	--color-secondary-dark: oklch(0.35 0.1 45);
+
+	/* Tertiary variants */
+	--color-tertiary-light: oklch(0.75 0.1 250);
+	--color-tertiary-dark: oklch(0.35 0.1 250);
+
+	/* Idea status */
+	--color-idea: oklch(0.65 0.1 85);
+	--color-idea-light: oklch(0.95 0.02 85);
 
 	/* Semantic background colors */
 	--color-surface: #ffffff;
