@@ -39,7 +39,7 @@ export default defineConfig({
 				"cardbacks/generated/equipment-flat-683e11f01cef0.png",
 				"cardbacks/generated/fabled-resource-1-dented-683e109970027.png",
 				"cardbacks/generated/fabled-resource-2-dented-683e10997022b.png",
-				"cardbacks/generated/fabled-resource-3-dented-683e1099703da.png"
+				"cardbacks/generated/fabled-resource-3-dented-683e1099703da.png",
 			],
 			manifest: {
 				name: "FabKit",

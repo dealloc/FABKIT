@@ -5,14 +5,14 @@ import { createRoot } from "react-dom/client";
 import "./styles/index.css";
 import "./i18n.ts";
 
+import { NotFound } from "./components/not-found.tsx";
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
-import {NotFound} from "./routes/not-found.tsx";
 
 // Create a new router instance
 const router = createRouter({
 	routeTree,
-	defaultNotFoundComponent: () => <NotFound />
+	defaultNotFoundComponent: () => <NotFound />,
 });
 
 // Register the router instance for type safety

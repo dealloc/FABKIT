@@ -12,25 +12,13 @@ type FormFieldValues = {
 interface CardCreatorState extends FormFieldValues {
 	cardType: CardType | null;
 	cardBack: CardBack;
-	setCardType: (type: CardType | null) => void;
-	setCardPitch: (value: string) => void;
-	setCardName: (value: string) => void;
-	setCardResource: (value: string) => void;
-	setCardText: (value: string) => void;
-	setCardPower: (value: string) => void;
-	setCardTalent: (value: string) => void;
-	setCardClass: (value: string) => void;
-	setCardSecondaryClass: (value: string) => void;
-	setCardSubType: (value: string) => void;
-	setCardRarity: (value: string) => void;
-	setCardDefense: (value: string) => void;
-	setCardLife: (value: string) => void;
-	setCardHeroIntellect: (value: string) => void;
-	setCardWeapon: (value: string) => void;
+}
+
+interface CardCreatorActions {
 	reset: () => void;
 }
 
-const initialState = {
+const initialState: CardCreatorState = {
 	cardType: null,
 	cardBack: CardBacks[0],
 	CardPitch: null,
@@ -49,24 +37,9 @@ const initialState = {
 	CardWeapon: null,
 };
 
-export const useCardCreator = create<CardCreatorState>()(
+export const useCardCreator = create<CardCreatorState & CardCreatorActions>()(
 	devtools((set) => ({
 		...initialState,
-		setCardType: (type) => set({ cardType: type }),
-		setCardPitch: (value) => set({ CardPitch: value }),
-		setCardName: (value) => set({ CardName: value }),
-		setCardResource: (value) => set({ CardResource: value }),
-		setCardText: (value) => set({ CardText: value }),
-		setCardPower: (value) => set({ CardPower: value }),
-		setCardTalent: (value) => set({ CardTalent: value }),
-		setCardClass: (value) => set({ CardClass: value }),
-		setCardSecondaryClass: (value) => set({ CardSecondaryClass: value }),
-		setCardSubType: (value) => set({ CardSubType: value }),
-		setCardRarity: (value) => set({ CardRarity: value }),
-		setCardDefense: (value) => set({ CardDefense: value }),
-		setCardLife: (value) => set({ CardLife: value }),
-		setCardHeroIntellect: (value) => set({ CardHeroIntellect: value }),
-		setCardWeapon: (value) => set({ CardWeapon: value }),
 		reset: () => set(initialState),
 	})),
 );
