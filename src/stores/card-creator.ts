@@ -46,7 +46,7 @@ const initialState: CardCreatorState = {
 	CardClass: null,
 	CardSecondaryClass: null,
 	CardSubType: null,
-	CardRarity: null,
+	CardRarity: "basic",
 	CardDefense: null,
 	CardLife: null,
 	CardHeroIntellect: null,
