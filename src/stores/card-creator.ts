@@ -74,7 +74,7 @@ const initialState: CardCreatorState = {
 	CardLife: null,
 	CardHeroIntellect: null,
 	CardWeapon: null,
-	CardMacroGroup: null
+	CardMacroGroup: null,
 };
 
 export const useCardCreator = create<CardCreatorState & CardCreatorActions>()(

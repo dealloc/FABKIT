@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useCardCreator } from "../../../stores/card-creator.ts";
 import Select from "../../form/Select.tsx";
+import { useIsFieldVisible } from "../../utils.ts";
 
 const pitchOptions = [
 	{ label: "1", value: "1" },
@@ -14,7 +15,9 @@ const pitchOptions = [
 export function CardPitchField() {
 	const { t } = useTranslation();
 	const { CardPitch, setPitch } = useCardCreator();
+	const shouldShow = useIsFieldVisible("CardPitch");
 
+	if (!shouldShow) return null;
 	return (
 		<Select
 			label={t("card_creator.pitch_label")}

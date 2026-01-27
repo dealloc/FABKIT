@@ -11,13 +11,13 @@ import { CardPitchField } from "../components/card-creator/fields/CardPitchField
 import { CardPowerField } from "../components/card-creator/fields/CardPowerField.tsx";
 import { CardRarityField } from "../components/card-creator/fields/CardRarityField.tsx";
 import { CardResourceField } from "../components/card-creator/fields/CardResourceField.tsx";
+import { CardSecondaryClassField } from "../components/card-creator/fields/CardSecondaryClassField.tsx";
 import { CardSetnumberField } from "../components/card-creator/fields/CardSetnumberField.tsx";
 import { CardSubTypeField } from "../components/card-creator/fields/CardSubTypeField.tsx";
 import { CardTalentField } from "../components/card-creator/fields/CardTalentField.tsx";
 import { CardTextField } from "../components/card-creator/fields/CardTextField.tsx";
 import { CardTypeField } from "../components/card-creator/fields/CardTypeField.tsx";
 import { CardWeaponField } from "../components/card-creator/fields/CardWeaponField.tsx";
-import { CardSecondaryClassField } from "../components/card-creator/fields/SecondaryCardClassField.tsx";
 import { Preview } from "../components/card-creator/Preview.tsx";
 
 export const Route = createFileRoute("/card-creator")({

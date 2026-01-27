@@ -3,10 +3,12 @@ import { useTranslation } from "react-i18next";
 import { type CardTalent, CardTalents } from "../../../config/cards.ts";
 import { useCardCreator } from "../../../stores/card-creator.ts";
 import Select, { type SelectOption } from "../../form/Select.tsx";
+import { useIsFieldVisible } from "../../utils.ts";
 
 export function CardTalentField() {
 	const { t } = useTranslation();
 	const { CardTalent, setCardTalent } = useCardCreator();
+	const shouldShow = useIsFieldVisible("CardTalent");
 
 	// TODO: invalidate memo when `t`'s language changes?
 	const options: SelectOption<CardTalent>[] = useMemo(
@@ -18,6 +20,7 @@ export function CardTalentField() {
 		[t],
 	);
 
+	if (!shouldShow) return null;
 	return (
 		<Select
 			label={t("card_creator.talent_label")}

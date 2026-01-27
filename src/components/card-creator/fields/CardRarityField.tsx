@@ -5,11 +5,14 @@ import {
 	type CardRarity,
 } from "../../../config/cards/rarities.ts";
 import { useCardCreator } from "../../../stores/card-creator.ts";
+import { useIsFieldVisible } from "../../utils.ts";
 
 export function CardRarityField() {
 	const { t } = useTranslation();
 	const { CardRarity, setCardRarity } = useCardCreator();
+	const shouldShow = useIsFieldVisible("CardRarity");
 
+	if (!shouldShow) return null;
 	return (
 		<Field className="space-y-1">
 			<Label className="block text-sm font-medium text-muted mb-2">

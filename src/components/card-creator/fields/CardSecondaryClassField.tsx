@@ -3,10 +3,12 @@ import { useTranslation } from "react-i18next";
 import { type CardClass, CardClasses } from "../../../config/cards/classes.ts";
 import { useCardCreator } from "../../../stores/card-creator.ts";
 import Select, { type SelectOption } from "../../form/Select.tsx";
+import { useIsFieldVisible } from "../../utils.ts";
 
 export function CardSecondaryClassField() {
 	const { t } = useTranslation();
 	const { CardSecondaryClass, setCardSecondaryClass } = useCardCreator();
+	const shouldShow = useIsFieldVisible("CardSecondaryClass");
 
 	// TODO: invalidate memo when `t`'s language changes?
 	const options: SelectOption<CardClass>[] = useMemo(
@@ -18,6 +20,7 @@ export function CardSecondaryClassField() {
 		[t],
 	);
 
+	if (!shouldShow) return null;
 	return (
 		<Select
 			label={t("card_creator.secondary_class_label")}

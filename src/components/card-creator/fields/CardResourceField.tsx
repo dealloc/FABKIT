@@ -1,11 +1,14 @@
 import { useTranslation } from "react-i18next";
 import { useCardCreator } from "../../../stores/card-creator.ts";
 import TextInput from "../../form/TextInput.tsx";
+import { useIsFieldVisible } from "../../utils.ts";
 
 export function CardResourceField() {
 	const { t } = useTranslation();
 	const { CardResource, setCardResource } = useCardCreator();
+	const shouldShow = useIsFieldVisible("CardResource");
 
+	if (!shouldShow) return null;
 	return (
 		<TextInput
 			label={t("card_creator.resource_label")}

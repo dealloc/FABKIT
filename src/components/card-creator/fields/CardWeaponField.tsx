@@ -1,11 +1,14 @@
 import { Field, Label, Radio, RadioGroup } from "@headlessui/react";
 import { useTranslation } from "react-i18next";
 import { useCardCreator } from "../../../stores/card-creator.ts";
+import { useIsFieldVisible } from "../../utils.ts";
 
 export function CardWeaponField() {
 	const { t } = useTranslation();
 	const { CardWeapon, setCardWeapon } = useCardCreator();
+	const shouldShow = useIsFieldVisible("CardWeapon");
 
+	if (!shouldShow) return null;
 	return (
 		<Field className="space-y-1">
 			<Label className="block text-sm font-medium text-muted">
