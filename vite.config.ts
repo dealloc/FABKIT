@@ -1,11 +1,23 @@
 import tailwindcss from "@tailwindcss/vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import react from "@vitejs/plugin-react";
+import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 
 // https://vite.dev/config/
 export default defineConfig({
+	build: {
+		rolldownOptions: {
+			output: {
+				advancedChunks: {
+					groups: [
+						{ name: 'tiptap-emoji', test: /@tiptap\/extension-emoji/ },
+					]
+				}
+			}
+		},
+	},
 	plugins: [
 		tailwindcss(),
 		tanstackRouter({
@@ -59,6 +71,13 @@ export default defineConfig({
 					},
 				],
 			},
+		}),
+		visualizer({
+			template: "treemap", // or sunburst
+			open: false,
+			gzipSize: true,
+			brotliSize: true,
+			filename: "analyse.html", // will be saved in project's root
 		}),
 	],
 });

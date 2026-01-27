@@ -26,6 +26,7 @@ dist-ssr
 # Compiler generated files
 src/routeTree.gen.ts
 src/i18n.d.ts
+analyse.html
 
 # Local AI files
 .claude/settings.local.json
