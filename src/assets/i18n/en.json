@@ -153,7 +153,11 @@
 		"secondary_class_label": "Secondary class (optional)",
 		"subtype_label": "Subtype",
 		"rarity_label": "Rarity",
-		"defense_label": "Defense"
+		"defense_label": "Defense",
+		"artwork_label": "Artwork",
+		"artwork_credits_label": "Artwork Credits",
+		"set_number_label": "Set Number",
+		"text_label": "Card text"
 	},
 	"components": {
 		"featured_artist": {

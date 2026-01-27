@@ -1,3 +1,4 @@
+import type { Content } from "@tiptap/react";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { type CardBack, CardBacks } from "../config/cards/card_backs.ts";
@@ -15,10 +16,21 @@ type FormFieldValues = {
 interface CardCreatorState extends FormFieldValues {
 	cardType: CardType | null;
 	cardBack: CardBack;
+	cardArtwork: Blob | null;
+	cardArtworkCredits: string | null;
+	cardSetNumber: string | null;
+	// textual representation of the rich text editor's content
+	cardTextHTML: string | null;
+	// text editor's internal representation of the content, used for hydrating the editor.
+	cardTextNode: Content | null;
 }
 
 interface CardCreatorActions {
 	setCardType: (cardType: CardType) => void;
+	setCardArtwork: (artwork: Blob | null) => void;
+	setCardArtworkCredits: (credits: string | null) => void;
+	setCardSetNumber: (setNumber: string | null) => void;
+	setCardText: (html: string, content: Content) => void;
 	setPitch: (pitch: CardFormFieldValue["CardPitch"]) => void;
 	setCardName: (name: string) => void;
 	setCardResource: (resource: CardFormFieldValue["CardResource"]) => void;
@@ -37,6 +49,11 @@ interface CardCreatorActions {
 const initialState: CardCreatorState = {
 	cardType: null,
 	cardBack: CardBacks[0],
+	cardArtwork: null,
+	cardArtworkCredits: null,
+	cardSetNumber: null,
+	cardTextHTML: null,
+	cardTextNode: null,
 	CardPitch: null,
 	CardName: null,
 	CardResource: null,
@@ -57,6 +74,13 @@ export const useCardCreator = create<CardCreatorState & CardCreatorActions>()(
 	devtools((set) => ({
 		...initialState,
 		setCardType: (cardType: CardType) => set({ cardType }),
+		setCardArtwork: (artwork: Blob | null) => set({ cardArtwork: artwork }),
+		setCardArtworkCredits: (credits: string | null) =>
+			set({ cardArtworkCredits: credits }),
+		setCardSetNumber: (setNumber: string | null) =>
+			set({ cardSetNumber: setNumber }),
+		setCardText: (html: string, content: Content) =>
+			set({ cardTextHTML: html, cardTextNode: content }),
 		setPitch: (pitch: CardFormFieldValue["CardPitch"]) =>
 			set({ CardPitch: pitch }),
 		setCardName: (name: string) => set({ CardName: name }),

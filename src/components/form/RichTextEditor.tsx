@@ -3,7 +3,7 @@ import Emoji from "@tiptap/extension-emoji";
 import { BulletList, ListItem, OrderedList } from "@tiptap/extension-list";
 import TextAlign from "@tiptap/extension-text-align";
 import Underline from "@tiptap/extension-underline";
-import { EditorContent, useEditor } from "@tiptap/react";
+import {type Content, EditorContent, useEditor} from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import {
 	AlignCenter as AlignCenterIcon,
@@ -16,11 +16,20 @@ import {
 } from "lucide-react";
 import { EditorCustomEmojiRows } from "../../config/editor.ts";
 import "../../styles/components/rich-text-editor.css";
+import {useEffect} from "react";
 
 const customEmojisRow1 = EditorCustomEmojiRows[0];
 const customEmojisRow2 = EditorCustomEmojiRows[1];
 
-export default function RichTextEditor() {
+export interface RichTextEditorProps {
+	content: Content | null;
+	onChange?: (html: string, content: Content) => void;
+}
+
+export default function RichTextEditor({
+	content,
+	onChange,
+}: RichTextEditorProps) {
 	const editor = useEditor({
 		extensions: [
 			StarterKit.configure({
@@ -52,9 +61,11 @@ export default function RichTextEditor() {
 				emojis: [...customEmojisRow1, ...customEmojisRow2],
 			}),
 		],
-		content: "",
+		content: '',
 		onUpdate: ({ editor }) => {
-			console.info(editor.getJSON());
+			if (onChange) {
+				onChange(editor.getHTML(), editor.getJSON());
+			}
 		},
 		editorProps: {
 			attributes: {
@@ -65,12 +76,13 @@ export default function RichTextEditor() {
 	});
 
 	// // Sync external content changes to editor
-	// useEffect(() => {
-	// 	if (editor && content !== null) {
-	// 		console.info("Synchronizing content:", content);
-	// 		editor.commands.setContent(content as Content);
-	// 	}
-	// }, [editor, content]);
+	useEffect(() => {
+		if (editor?.isFocused !== true && content) {
+			editor.commands.setContent(content, {
+				emitUpdate: false
+			});
+		}
+	}, [editor, content]);
 
 	if (!editor) {
 		return <p>Editor failed to load...</p>;

@@ -1,4 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { CardArtworkCreditsField } from "../components/card-creator/fields/CardArtworkCreditsField.tsx";
+import { CardArtworkField } from "../components/card-creator/fields/CardArtworkField.tsx";
 import { CardClassField } from "../components/card-creator/fields/CardClassField.tsx";
 import { CardDefenseField } from "../components/card-creator/fields/CardDefenseField.tsx";
 import { CardNameField } from "../components/card-creator/fields/CardNameField.tsx";
@@ -6,8 +8,10 @@ import { CardPitchField } from "../components/card-creator/fields/CardPitchField
 import { CardPowerField } from "../components/card-creator/fields/CardPowerField.tsx";
 import { CardRarityField } from "../components/card-creator/fields/CardRarityField.tsx";
 import { CardResourceField } from "../components/card-creator/fields/CardResourceField.tsx";
+import { CardSetnumberField } from "../components/card-creator/fields/CardSetnumberField.tsx";
 import { CardSubTypeField } from "../components/card-creator/fields/CardSubTypeField.tsx";
 import { CardTalentField } from "../components/card-creator/fields/CardTalentField.tsx";
+import { CardTextField } from "../components/card-creator/fields/CardTextField.tsx";
 import { CardTypeField } from "../components/card-creator/fields/CardTypeField.tsx";
 import { CardSecondaryClassField } from "../components/card-creator/fields/SecondaryCardClassField.tsx";
 import { Preview } from "../components/card-creator/Preview.tsx";
@@ -32,6 +36,10 @@ function RouteComponent() {
 					<CardSubTypeField />
 					<CardRarityField />
 					<CardDefenseField />
+					<CardArtworkField />
+					<CardArtworkCreditsField />
+					<CardSetnumberField />
+					<CardTextField />
 				</div>
 			</section>
 			<section className="flex flex-col p-4 max-w-1/3">
