@@ -26,8 +26,8 @@ export const Route = createFileRoute("/card-creator")({
 
 function RouteComponent() {
 	return (
-		<div className="flex flex-row flex-1">
-			<section className="p-4 flex-1 space-y-6">
+		<div className="flex flex-col md:grid grid-flow-cols grid-cols-4 gap-2 flex-1">
+			<section className="p-4 col-span-3 space-y-6">
 				<div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
 					<CardTypeField />
 					<CardPitchField />
@@ -50,7 +50,7 @@ function RouteComponent() {
 					<CardTextField />
 				</div>
 			</section>
-			<section className="flex flex-col p-4 max-w-1/3">
+			<section className="flex flex-col p-4">
 				<Preview />
 			</section>
 		</div>
