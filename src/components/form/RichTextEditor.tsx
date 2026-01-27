@@ -15,7 +15,7 @@ import {
 	Underline as UnderlineIcon,
 } from "lucide-react";
 import { EditorCustomEmojiRows } from "../../config/editor.ts";
-import '../../styles/components/rich-text-editor.css';
+import "../../styles/components/rich-text-editor.css";
 
 const customEmojisRow1 = EditorCustomEmojiRows[0];
 const customEmojisRow2 = EditorCustomEmojiRows[1];

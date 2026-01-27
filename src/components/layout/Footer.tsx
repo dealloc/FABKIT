@@ -1,7 +1,7 @@
 import type { ComponentType, SVGProps } from "react";
 import { useTranslation } from "react-i18next";
-import { Discord } from "./icons/Discord.tsx";
-import { Github } from "./icons/Github.tsx";
+import { Discord } from "../icons/Discord.tsx";
+import { Github } from "../icons/Github.tsx";
 
 type NavItem = {
 	name: string;

@@ -1,0 +1,29 @@
+import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import { type CardClass, CardClasses } from "../../../config/cards/classes.ts";
+import { useCardCreator } from "../../../stores/card-creator.ts";
+import Select, { type SelectOption } from "../../form/Select.tsx";
+
+export function CardClassField() {
+	const { t } = useTranslation();
+	const { CardClass, setCardClass } = useCardCreator();
+
+	// TODO: invalidate memo when `t`'s language changes?
+	const options: SelectOption<CardClass>[] = useMemo(
+		() =>
+			Object.keys(CardClasses).map((key) => ({
+				value: key as CardClass,
+				label: t(CardClasses[key as CardClass]),
+			})),
+		[t],
+	);
+
+	return (
+		<Select
+			label={t("card_creator.class_label")}
+			value={CardClass || "none"}
+			onChange={setCardClass}
+			options={options}
+		/>
+	);
+}

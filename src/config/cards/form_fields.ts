@@ -1,10 +1,15 @@
 // The name of each form field available in the card creator form.
+
+import type { CardClass } from "./classes.ts";
+import type { CardRarity } from "./rarities.ts";
+import type { CardTalent } from "./talents.ts";
+
 export type CardFormField =
 	| "CardPitch"
 	| "CardName"
 	| "CardResource"
-	| "CardText"
 	| "CardPower"
+	| "CardText"
 	| "CardTalent"
 	| "CardClass"
 	| "CardSecondaryClass"
@@ -14,3 +19,21 @@ export type CardFormField =
 	| "CardLife"
 	| "CardHeroIntellect"
 	| "CardWeapon";
+
+// Maps each form field to its specific type
+export type CardFormFieldValue = {
+	CardPitch: 1 | 2 | 3;
+	CardName: string;
+	CardResource: string;
+	CardText: string;
+	CardPower: string;
+	CardTalent: CardTalent;
+	CardClass: CardClass;
+	CardSecondaryClass: CardClass;
+	CardSubType: string;
+	CardRarity: CardRarity;
+	CardDefense: string;
+	CardLife: string;
+	CardHeroIntellect: string;
+	CardWeapon: "(1H)" | "(2H)";
+};

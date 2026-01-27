@@ -1,7 +1,8 @@
 import { Description, Field, Input, Label } from "@headlessui/react";
 import type { ComponentProps } from "react";
 
-interface TextInputProps extends Omit<ComponentProps<typeof Input>, "className"> {
+interface TextInputProps
+	extends Omit<ComponentProps<typeof Input>, "className"> {
 	label: string;
 	description?: string;
 	required?: boolean;

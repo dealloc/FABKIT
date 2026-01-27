@@ -142,6 +142,19 @@
 		"suggestions_text": "We'd love to hear from you! Let us know what features you'd like to see.",
 		"get_in_touch": "Get in Touch"
 	},
+	"card_creator": {
+		"type_label": "Type",
+		"pitch_label": "Pitch",
+		"name_label": "Name",
+		"resource_label": "Cost",
+		"power_label": "Power",
+		"talent_label": "Talent",
+		"class_label": "Class",
+		"secondary_class_label": "Secondary class (optional)",
+		"subtype_label": "Subtype",
+		"rarity_label": "Rarity",
+		"defense_label": "Defense"
+	},
 	"components": {
 		"featured_artist": {
 			"label": "Featured Artist",

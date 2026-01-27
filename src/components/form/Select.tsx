@@ -9,22 +9,22 @@ import {
 } from "@headlessui/react";
 import { Check, ChevronDown } from "lucide-react";
 
-interface SelectOption {
-	value: string;
+export interface SelectOption<T extends string> {
+	value: T;
 	label: string;
 }
 
-interface SelectProps {
+interface SelectProps<T extends string> {
 	label: string;
 	description?: string;
 	required?: boolean;
-	value: string;
-	onChange: (value: string) => void;
-	options: SelectOption[];
+	value: T | null;
+	onChange: (value: T) => void;
+	options: SelectOption<T>[];
 	placeholder?: string;
 }
 
-export default function Select({
+export default function Select<T extends string>({
 	label,
 	description,
 	required,
@@ -32,7 +32,7 @@ export default function Select({
 	onChange,
 	options,
 	placeholder,
-}: SelectProps) {
+}: SelectProps<T>) {
 	const selectedOption = options.find((opt) => opt.value === value);
 
 	return (
@@ -44,7 +44,7 @@ export default function Select({
 			{description && (
 				<Description className="text-xs text-subtle">{description}</Description>
 			)}
-			<Listbox value={value} onChange={onChange}>
+			<Listbox value={value || undefined} onChange={onChange}>
 				<ListboxButton className="relative w-full px-3 py-2 bg-surface border border-border rounded-lg text-left text-body focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed">
 					<span className={selectedOption ? "text-body" : "text-faint"}>
 						{selectedOption?.label || placeholder || "Select an option"}
