@@ -1,4 +1,5 @@
 import type { Content } from "@tiptap/react";
+import { v4 as uuid } from "uuid";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { type CardBack, CardBacks } from "../config/cards/card_backs.ts";
@@ -14,6 +15,8 @@ type FormFieldValues = {
 };
 
 interface CardCreatorState extends FormFieldValues {
+	// internal version that will be unique every time, used for tracking persistence etc.
+	__version: string;
 	cardType: CardType | null;
 	cardBack: CardBack;
 	cardArtwork: Blob | null;
@@ -53,6 +56,7 @@ interface CardCreatorActions {
 }
 
 const initialState: CardCreatorState = {
+	__version: uuid(),
 	cardType: null,
 	cardBack: CardBacks[0],
 	cardArtwork: null,
@@ -78,7 +82,7 @@ const initialState: CardCreatorState = {
 };
 
 export const useCardCreator = create<CardCreatorState & CardCreatorActions>()(
-	devtools((set) => ({
+	devtools((set, _, store) => ({
 		...initialState,
 		setCardType: (cardType: CardType) => set({ cardType }),
 		setCardArtwork: (artwork: Blob | null) => set({ cardArtwork: artwork }),
@@ -117,6 +121,6 @@ export const useCardCreator = create<CardCreatorState & CardCreatorActions>()(
 			set({ CardWeapon: weapon }),
 		setCardMacroGroup: (group: CardFormFieldValue["CardMacroGroup"]) =>
 			set({ CardMacroGroup: group }),
-		reset: () => set(initialState),
+		reset: () => set({ ...store.getInitialState(), __version: uuid() }),
 	})),
 );
