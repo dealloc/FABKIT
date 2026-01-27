@@ -11,11 +11,9 @@ export default defineConfig({
 		rolldownOptions: {
 			output: {
 				advancedChunks: {
-					groups: [
-						{ name: 'tiptap-emoji', test: /@tiptap\/extension-emoji/ },
-					]
-				}
-			}
+					groups: [{ name: "tiptap-emoji", test: /@tiptap\/extension-emoji/ }],
+				},
+			},
 		},
 	},
 	plugins: [

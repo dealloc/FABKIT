@@ -3,6 +3,9 @@ import { CardArtworkCreditsField } from "../components/card-creator/fields/CardA
 import { CardArtworkField } from "../components/card-creator/fields/CardArtworkField.tsx";
 import { CardClassField } from "../components/card-creator/fields/CardClassField.tsx";
 import { CardDefenseField } from "../components/card-creator/fields/CardDefenseField.tsx";
+import { CardHeroIntellectField } from "../components/card-creator/fields/CardHeroIntellectField.tsx";
+import { CardLifeField } from "../components/card-creator/fields/CardLifeField.tsx";
+import { CardMacroGroupField } from "../components/card-creator/fields/CardMacroGroupField.tsx";
 import { CardNameField } from "../components/card-creator/fields/CardNameField.tsx";
 import { CardPitchField } from "../components/card-creator/fields/CardPitchField.tsx";
 import { CardPowerField } from "../components/card-creator/fields/CardPowerField.tsx";
@@ -13,6 +16,7 @@ import { CardSubTypeField } from "../components/card-creator/fields/CardSubTypeF
 import { CardTalentField } from "../components/card-creator/fields/CardTalentField.tsx";
 import { CardTextField } from "../components/card-creator/fields/CardTextField.tsx";
 import { CardTypeField } from "../components/card-creator/fields/CardTypeField.tsx";
+import { CardWeaponField } from "../components/card-creator/fields/CardWeaponField.tsx";
 import { CardSecondaryClassField } from "../components/card-creator/fields/SecondaryCardClassField.tsx";
 import { Preview } from "../components/card-creator/Preview.tsx";
 
@@ -30,11 +34,15 @@ function RouteComponent() {
 					<CardNameField />
 					<CardResourceField />
 					<CardPowerField />
+					<CardHeroIntellectField />
 					<CardTalentField />
 					<CardClassField />
 					<CardSecondaryClassField />
 					<CardSubTypeField />
+					<CardMacroGroupField />
+					<CardWeaponField />
 					<CardRarityField />
+					<CardLifeField />
 					<CardDefenseField />
 					<CardArtworkField />
 					<CardArtworkCreditsField />

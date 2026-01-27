@@ -42,7 +42,13 @@ interface CardCreatorActions {
 	) => void;
 	setCardSubType: (subType: CardFormFieldValue["CardSubType"]) => void;
 	setCardRarity: (rarity: CardFormFieldValue["CardRarity"]) => void;
+	setCardLife: (life: CardFormFieldValue["CardLife"]) => void;
 	setCardDefense: (defense: CardFormFieldValue["CardDefense"]) => void;
+	setCardHeroIntellect: (
+		intellect: CardFormFieldValue["CardHeroIntellect"],
+	) => void;
+	setCardWeapon: (weapon: CardFormFieldValue["CardWeapon"]) => void;
+	setCardMacroGroup: (group: CardFormFieldValue["CardMacroGroup"]) => void;
 	reset: () => void;
 }
 
@@ -68,6 +74,7 @@ const initialState: CardCreatorState = {
 	CardLife: null,
 	CardHeroIntellect: null,
 	CardWeapon: null,
+	CardMacroGroup: null
 };
 
 export const useCardCreator = create<CardCreatorState & CardCreatorActions>()(
@@ -99,8 +106,17 @@ export const useCardCreator = create<CardCreatorState & CardCreatorActions>()(
 			set({ CardSubType: subType }),
 		setCardRarity: (rarity: CardFormFieldValue["CardRarity"]) =>
 			set({ CardRarity: rarity }),
+		setCardLife: (life: CardFormFieldValue["CardLife"]) =>
+			set({ CardLife: life }),
 		setCardDefense: (defense: CardFormFieldValue["CardDefense"]) =>
 			set({ CardDefense: defense }),
+		setCardHeroIntellect: (
+			intellect: CardFormFieldValue["CardHeroIntellect"],
+		) => set({ CardHeroIntellect: intellect }),
+		setCardWeapon: (weapon: CardFormFieldValue["CardWeapon"]) =>
+			set({ CardWeapon: weapon }),
+		setCardMacroGroup: (group: CardFormFieldValue["CardMacroGroup"]) =>
+			set({ CardMacroGroup: group }),
 		reset: () => set(initialState),
 	})),
 );

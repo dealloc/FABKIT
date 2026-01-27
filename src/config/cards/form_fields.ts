@@ -18,7 +18,8 @@ export type CardFormField =
 	| "CardDefense"
 	| "CardLife"
 	| "CardHeroIntellect"
-	| "CardWeapon";
+	| "CardWeapon"
+	| "CardMacroGroup";
 
 // Maps each form field to its specific type
 export type CardFormFieldValue = {
@@ -36,4 +37,5 @@ export type CardFormFieldValue = {
 	CardLife: string;
 	CardHeroIntellect: string;
 	CardWeapon: "(1H)" | "(2H)";
+	CardMacroGroup: string;
 };

@@ -124,7 +124,13 @@ export const CardTypes: Record<
 	},
 	macro: {
 		label: "card.type.macro",
-		fields: ["CardName", "CardText", "CardRarity", "CardSubType"],
+		fields: [
+			"CardName",
+			"CardText",
+			"CardRarity",
+			"CardSubType",
+			"CardMacroGroup",
+		],
 	},
 	mentor: {
 		label: "card.type.mentor",
