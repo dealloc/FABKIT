@@ -11,7 +11,7 @@ export function CardLifeField() {
 	if (!shouldShow) return null;
 	return (
 		<TextInput
-			label={t("card_creator.power_label")}
+			label={t("card_creator.life_label")}
 			value={CardLife || ""}
 			onChange={setCardLife}
 			maxLength={2}

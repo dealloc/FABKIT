@@ -148,6 +148,7 @@
 		"name_label": "Name",
 		"resource_label": "Cost",
 		"power_label": "Power",
+		"life_label": "Life",
 		"talent_label": "Talent",
 		"class_label": "Class",
 		"secondary_class_label": "Secondary class (optional)",
