@@ -1,12 +1,13 @@
 import {useMemo} from "react";
-import maskImage from "../../assets/mask.png";
+import {CardBackMasks} from "../../config/cards/card_backs.ts";
 import { useCardCreator } from "../../stores/card-creator.ts";
 
 export function Preview() {
-	const { CardBack } = useCardCreator();
+	const { CardBack, CardPitch } = useCardCreator();
 	const maskStyle = useMemo(
 		() => {
-			const mask = CardBack.mask || maskImage;
+			const mask = CardBackMasks[CardBack.mask || "default"] || CardBackMasks.default;
+
 			return {
 				maskImage: `url(${mask})`,
 				maskSize: "100% 100%",
@@ -19,6 +20,11 @@ export function Preview() {
 		[CardBack.mask],
 	);
 
+	const cardBackImage = useMemo(
+		() => CardBack.images.find(image => image.pitch === CardPitch) || CardBack.images[0],
+		[CardBack.images, CardPitch],
+	);
+
 	return (
 		<div className="relative aspect-450/628 bg-transparent">
 			<img
@@ -29,8 +35,8 @@ export function Preview() {
 			/>
 			<img
 				className="absolute z-10"
-				src={`/cardbacks/${CardBack.images[0].fileName}`}
-				alt="Cardback"
+				src={`/cardbacks/${cardBackImage.fileName}`}
+				alt={`Cardback ${cardBackImage.id}`}
 			/>
 		</div>
 	);
