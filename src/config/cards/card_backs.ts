@@ -6,6 +6,7 @@ export type CardBack = {
 	name: string;
 	type: string;
 	dented: boolean;
+	mask?: string;
 	images: {
 		id: number;
 		pitch: number;
