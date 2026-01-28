@@ -1,3 +1,4 @@
+import type { ChangeEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { useCardCreator } from "../../../stores/card-creator.ts";
 import TextInput from "../../form/TextInput.tsx";
@@ -14,7 +15,9 @@ export function CardNameField() {
 		<TextInput
 			label={t("card_creator.name_label")}
 			value={CardName || ""}
-			onChange={setCardName}
+			onChange={(event: ChangeEvent<HTMLInputElement>) =>
+				setCardName(event.target.value)
+			}
 			maxLength={50}
 		/>
 	);

@@ -30,3 +30,4 @@ analyse.html
 
 # Local AI files
 .claude/settings.local.json
+.playwright-mcp/
