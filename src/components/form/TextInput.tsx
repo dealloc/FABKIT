@@ -1,5 +1,5 @@
 import { Description, Field, Input, Label } from "@headlessui/react";
-import type { ComponentProps } from "react";
+import type {ChangeEvent, ComponentProps} from "react";
 
 interface TextInputProps
 	extends Omit<ComponentProps<typeof Input>, "className"> {
@@ -9,6 +9,7 @@ interface TextInputProps
 	value?: string;
 	placeholder?: string;
 	maxLength?: number;
+	onChange?: (value: string) => void;
 }
 
 export default function TextInput({
@@ -28,6 +29,7 @@ export default function TextInput({
 			)}
 			<Input
 				{...props}
+				onChange={(event: ChangeEvent<HTMLInputElement>) => props.onChange?.(event.target.value)}
 				className="w-full px-3 py-2 bg-surface border border-border rounded-lg text-body placeholder:text-faint focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed"
 			/>
 		</Field>
