@@ -17,15 +17,15 @@ type FormFieldValues = {
 interface CardCreatorState extends FormFieldValues {
 	// internal version that will be unique every time, used for tracking persistence etc.
 	__version: string;
-	cardType: CardType | null;
-	cardBack: CardBack;
-	cardArtwork: Blob | null;
-	cardArtworkCredits: string | null;
-	cardSetNumber: string | null;
+	CardType: CardType | null;
+	CardBack: CardBack;
+	CardArtwork: Blob | null;
+	CardArtworkCredits: string | null;
+	CardSetNumber: string | null;
 	// textual representation of the rich text editor's content
-	cardTextHTML: string | null;
+	CardTextHTML: string | null;
 	// text editor's internal representation of the content, used for hydrating the editor.
-	cardTextNode: Content | null;
+	CardTextNode: Content | null;
 }
 
 interface CardCreatorActions {
@@ -57,13 +57,13 @@ interface CardCreatorActions {
 
 const initialState: CardCreatorState = {
 	__version: uuid(),
-	cardType: null,
-	cardBack: CardBacks[0],
-	cardArtwork: null,
-	cardArtworkCredits: null,
-	cardSetNumber: null,
-	cardTextHTML: null,
-	cardTextNode: null,
+	CardType: null,
+	CardBack: CardBacks[0],
+	CardArtwork: null,
+	CardArtworkCredits: null,
+	CardSetNumber: null,
+	CardTextHTML: null,
+	CardTextNode: null,
 	CardPitch: null,
 	CardName: null,
 	CardResource: null,
@@ -84,14 +84,14 @@ const initialState: CardCreatorState = {
 export const useCardCreator = create<CardCreatorState & CardCreatorActions>()(
 	devtools((set, _, store) => ({
 		...initialState,
-		setCardType: (cardType: CardType) => set({ cardType }),
-		setCardArtwork: (artwork: Blob | null) => set({ cardArtwork: artwork }),
+		setCardType: (cardType: CardType) => set({ CardType: cardType }),
+		setCardArtwork: (artwork: Blob | null) => set({ CardArtwork: artwork }),
 		setCardArtworkCredits: (credits: string | null) =>
-			set({ cardArtworkCredits: credits }),
+			set({ CardArtworkCredits: credits }),
 		setCardSetNumber: (setNumber: string | null) =>
-			set({ cardSetNumber: setNumber }),
+			set({ CardSetNumber: setNumber }),
 		setCardText: (html: string, content: Content) =>
-			set({ cardTextHTML: html, cardTextNode: content }),
+			set({ CardTextHTML: html, CardTextNode: content }),
 		setPitch: (pitch: CardFormFieldValue["CardPitch"]) =>
 			set({ CardPitch: pitch }),
 		setCardName: (name: string) => set({ CardName: name }),

@@ -7,18 +7,18 @@ import { useIsFieldVisible } from "../../utils.ts";
 
 export function CardSubTypeField() {
 	const { t } = useTranslation();
-	const { cardType, CardSubType, setCardSubType } = useCardCreator();
+	const { CardType, CardSubType, setCardSubType } = useCardCreator();
 	const shouldShow = useIsFieldVisible("CardSubType");
 
 	const options: SelectOption<string>[] = useMemo(() => {
-		if (!cardType) return [];
+		if (!CardType) return [];
 
-		const subtypes = CardSubtypes[cardType];
+		const subtypes = CardSubtypes[CardType];
 		return Object.keys(subtypes).map((key) => ({
 			value: key,
 			label: t(subtypes[key]),
 		}));
-	}, [cardType, t]);
+	}, [CardType, t]);
 
 	if (!shouldShow) return null;
 	return (

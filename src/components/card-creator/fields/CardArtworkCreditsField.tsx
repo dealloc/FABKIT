@@ -4,12 +4,12 @@ import TextInput from "../../form/TextInput.tsx";
 
 export function CardArtworkCreditsField() {
 	const { t } = useTranslation();
-	const { cardArtworkCredits, setCardArtworkCredits } = useCardCreator();
+	const { CardArtworkCredits, setCardArtworkCredits } = useCardCreator();
 
 	return (
 		<TextInput
 			label={t("card_creator.artwork_credits_label")}
-			value={cardArtworkCredits || ""}
+			value={CardArtworkCredits || ""}
 			onChange={setCardArtworkCredits}
 			maxLength={50}
 		/>

@@ -9,7 +9,7 @@ import Select from "../../form/Select.tsx";
  */
 export function CardTypeField() {
 	const { t } = useTranslation();
-	const { cardType, setCardType } = useCardCreator();
+	const { CardType, setCardType } = useCardCreator();
 
 	// TODO: invalidate memo when `t`'s language changes?
 	const options = useMemo(
@@ -26,7 +26,7 @@ export function CardTypeField() {
 	return (
 		<Select
 			label={t("card_creator.type_label")}
-			value={cardType || ""}
+			value={CardType || ""}
 			onChange={setCardType}
 			options={options}
 		/>

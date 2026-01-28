@@ -4,12 +4,12 @@ import TextInput from "../../form/TextInput.tsx";
 
 export function CardSetnumberField() {
 	const { t } = useTranslation();
-	const { cardSetNumber, setCardSetNumber } = useCardCreator();
+	const { CardSetNumber, setCardSetNumber } = useCardCreator();
 
 	return (
 		<TextInput
 			label={t("card_creator.set_number_label")}
-			value={cardSetNumber || ""}
+			value={CardSetNumber || ""}
 			onChange={setCardSetNumber}
 			maxLength={7}
 		/>

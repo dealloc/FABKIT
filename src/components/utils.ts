@@ -7,7 +7,7 @@ import { useCardCreator } from "../stores/card-creator.ts";
  * Hook to check if a specific field should be visible for the current card type.
  */
 export function useIsFieldVisible(field: CardFormField): boolean {
-	const cardType = useCardCreator((state) => state.cardType);
+	const cardType = useCardCreator((state) => state.CardType);
 
 	return useMemo(() => {
 		if (!cardType) return false;
