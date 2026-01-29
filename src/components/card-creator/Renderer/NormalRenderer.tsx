@@ -20,6 +20,7 @@ export function NormalRenderer({ config }: NormalRendererProps) {
 		CardDefense,
 		CardArtwork,
 		CardTextHTML,
+		CardArtPosition,
 	} = useCardCreator();
 
 	const artwork = useObjectURL(CardArtwork);
@@ -53,8 +54,8 @@ export function NormalRenderer({ config }: NormalRendererProps) {
 			{artwork && (
 				<image
 					href={artwork}
-					x="0"
-					y="0"
+					x={CardArtPosition?.x || 0}
+					y={CardArtPosition?.y || 0}
 					width="640"
 					height="480"
 					preserveAspectRatio="xMidYMid slice"

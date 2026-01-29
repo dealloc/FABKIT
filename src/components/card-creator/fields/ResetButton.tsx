@@ -18,7 +18,7 @@ export function ResetButton() {
 			className="bg-primary hover:bg-primary-light text-white font-bold py-2 px-4 rounded"
 			onClick={confirmBeforeReset}
 		>
-            {t('card_creator.reset_label')}
+			{t("card_creator.reset_label")}
 		</button>
 	);
 }

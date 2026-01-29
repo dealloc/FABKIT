@@ -20,6 +20,7 @@ interface CardCreatorState extends FormFieldValues {
 	CardType: CardType | null;
 	CardBack: CardBack;
 	CardArtwork: Blob | null;
+	CardArtPosition: { x: number; y: number } | null;
 	CardArtworkCredits: string | null;
 	CardSetNumber: string | null;
 	// textual representation of the rich text editor's content
@@ -31,6 +32,7 @@ interface CardCreatorState extends FormFieldValues {
 interface CardCreatorActions {
 	setCardType: (cardType: CardType) => void;
 	setCardArtwork: (artwork: Blob | null) => void;
+	setCardArtPosition: (position: { x: number; y: number } | null) => void;
 	setCardArtworkCredits: (credits: string | null) => void;
 	setCardSetNumber: (setNumber: string | null) => void;
 	setCardText: (html: string, content: Content) => void;
@@ -60,6 +62,7 @@ const initialState: CardCreatorState = {
 	CardType: null,
 	CardBack: CardBacks[0],
 	CardArtwork: null,
+	CardArtPosition: null,
 	CardArtworkCredits: null,
 	CardSetNumber: null,
 	CardTextHTML: null,
@@ -86,6 +89,8 @@ export const useCardCreator = create<CardCreatorState & CardCreatorActions>()(
 		...initialState,
 		setCardType: (cardType: CardType) => set({ CardType: cardType }),
 		setCardArtwork: (artwork: Blob | null) => set({ CardArtwork: artwork }),
+		setCardArtPosition: (position: { x: number; y: number } | null) =>
+			set({ CardArtPosition: position }),
 		setCardArtworkCredits: (credits: string | null) =>
 			set({ CardArtworkCredits: credits }),
 		setCardSetNumber: (setNumber: string | null) =>

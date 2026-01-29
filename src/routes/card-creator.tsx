@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CardArtworkCreditsField } from "../components/card-creator/fields/CardArtworkCreditsField.tsx";
 import { CardArtworkField } from "../components/card-creator/fields/CardArtworkField.tsx";
+import { CardArtworkPositionContainer } from "../components/card-creator/fields/CardArtworkPositionContainer.tsx";
 import { CardClassField } from "../components/card-creator/fields/CardClassField.tsx";
 import { CardDefenseField } from "../components/card-creator/fields/CardDefenseField.tsx";
 import { CardHeroIntellectField } from "../components/card-creator/fields/CardHeroIntellectField.tsx";
@@ -65,7 +66,9 @@ function RouteComponent() {
 				</div>
 			</section>
 			<section className="flex flex-col p-4 gap-4">
-				<Preview />
+				<CardArtworkPositionContainer>
+					<Preview />
+				</CardArtworkPositionContainer>
 				<ResetButton />
 			</section>
 		</div>
