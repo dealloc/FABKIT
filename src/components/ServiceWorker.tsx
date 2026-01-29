@@ -10,15 +10,14 @@ export function ServiceWorker() {
 	const {
 		offlineReady: [offlineReady, setOfflineReady],
 		needRefresh: [needRefresh, setNeedRefresh],
-		updateServiceWorker
+		updateServiceWorker,
 	} = useRegisterSW({
-
 		onRegisteredSW(_, registration) {
 			// 1h in milliseconds
 			const interval = 60 * 60 * 1000;
 
 			registration && setInterval(() => registration.update(), interval);
-		}
+		},
 	});
 
 	if (!needRefresh && !offlineReady) {

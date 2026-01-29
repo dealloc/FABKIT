@@ -28,7 +28,7 @@ export default defineConfig({
 			},
 		}),
 		VitePWA({
-			registerType: 'prompt',
+			registerType: "prompt",
 			devOptions: {
 				enabled: true,
 			},
