@@ -4,7 +4,12 @@ import TextInput from "../../form/TextInput.tsx";
 
 export function CardArtworkCreditsField() {
 	const { t } = useTranslation();
-	const { CardArtworkCredits, setCardArtworkCredits } = useCardCreator();
+	const CardArtworkCredits = useCardCreator(
+		(state) => state.CardArtworkCredits,
+	);
+	const setCardArtworkCredits = useCardCreator(
+		(state) => state.setCardArtworkCredits,
+	);
 
 	return (
 		<TextInput

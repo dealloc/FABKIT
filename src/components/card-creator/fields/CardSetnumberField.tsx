@@ -4,7 +4,8 @@ import TextInput from "../../form/TextInput.tsx";
 
 export function CardSetnumberField() {
 	const { t } = useTranslation();
-	const { CardSetNumber, setCardSetNumber } = useCardCreator();
+	const CardSetNumber = useCardCreator((state) => state.CardSetNumber);
+	const setCardSetNumber = useCardCreator((state) => state.setCardSetNumber);
 
 	return (
 		<TextInput

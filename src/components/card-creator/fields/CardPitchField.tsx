@@ -14,7 +14,8 @@ const pitchOptions = [
  */
 export function CardPitchField() {
 	const { t } = useTranslation();
-	const { CardPitch, setPitch } = useCardCreator();
+	const CardPitch = useCardCreator((state) => state.CardPitch);
+	const setPitch = useCardCreator((state) => state.setPitch);
 	const shouldShow = useIsFieldVisible("CardPitch");
 
 	if (!shouldShow) return null;

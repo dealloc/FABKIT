@@ -5,7 +5,8 @@ import { useIsFieldVisible } from "../../utils.ts";
 
 export function CardNameField() {
 	const { t } = useTranslation();
-	const { CardName, setCardName } = useCardCreator();
+	const CardName = useCardCreator((state) => state.CardName);
+	const setCardName = useCardCreator((state) => state.setCardName);
 	const shouldShow = useIsFieldVisible("CardName");
 
 	if (!shouldShow) return null;

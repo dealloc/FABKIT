@@ -5,7 +5,8 @@ import { useIsFieldVisible } from "../../utils.ts";
 
 export function CardLifeField() {
 	const { t } = useTranslation();
-	const { CardLife, setCardLife } = useCardCreator();
+	const CardLife = useCardCreator((state) => state.CardLife);
+	const setCardLife = useCardCreator((state) => state.setCardLife);
 	const shouldShow = useIsFieldVisible("CardLife");
 
 	if (!shouldShow) return null;

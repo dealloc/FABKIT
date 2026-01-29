@@ -5,7 +5,8 @@ import { useIsFieldVisible } from "../../utils.ts";
 
 export function CardMacroGroupField() {
 	const { t } = useTranslation();
-	const { CardMacroGroup, setCardMacroGroup } = useCardCreator();
+	const CardMacroGroup = useCardCreator((state) => state.CardMacroGroup);
+	const setCardMacroGroup = useCardCreator((state) => state.setCardMacroGroup);
 	const shouldShow = useIsFieldVisible("CardMacroGroup");
 
 	if (!shouldShow) return null;

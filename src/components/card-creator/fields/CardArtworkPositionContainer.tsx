@@ -12,7 +12,10 @@ interface CardArtworkPositionContainerProps {
 export function CardArtworkPositionContainer({
 	children,
 }: CardArtworkPositionContainerProps) {
-	const { CardArtPosition, setCardArtPosition } = useCardCreator();
+	const CardArtPosition = useCardCreator((state) => state.CardArtPosition);
+	const setCardArtPosition = useCardCreator(
+		(state) => state.setCardArtPosition,
+	);
 	const isDragging = useRef(false);
 	const dragStart = useRef({ x: 0, y: 0 });
 

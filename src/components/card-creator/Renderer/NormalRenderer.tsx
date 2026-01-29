@@ -10,18 +10,16 @@ export type NormalRendererProps = {
 };
 
 export function NormalRenderer({ config }: NormalRendererProps) {
-	const {
-		CardBack,
-		CardPitch,
-		CardName,
-		CardResource,
-		CardPower,
-		CardRarity,
-		CardDefense,
-		CardArtwork,
-		CardTextHTML,
-		CardArtPosition,
-	} = useCardCreator();
+	const CardBack = useCardCreator((state) => state.CardBack);
+	const CardPitch = useCardCreator((state) => state.CardPitch);
+	const CardName = useCardCreator((state) => state.CardName);
+	const CardResource = useCardCreator((state) => state.CardResource);
+	const CardPower = useCardCreator((state) => state.CardPower);
+	const CardRarity = useCardCreator((state) => state.CardRarity);
+	const CardDefense = useCardCreator((state) => state.CardDefense);
+	const CardArtwork = useCardCreator((state) => state.CardArtwork);
+	const CardTextHTML = useCardCreator((state) => state.CardTextHTML);
+	const CardArtPosition = useCardCreator((state) => state.CardArtPosition);
 
 	const artwork = useObjectURL(CardArtwork);
 	const cardBackImage = useMemo(
@@ -33,12 +31,17 @@ export function NormalRenderer({ config }: NormalRendererProps) {
 
 	const cardBottomText = useCardBottomText();
 
+	const svgStyle = useMemo(
+		() => ({
+			aspectRatio: `${config.viewBox.width}/${config.viewBox.height}`,
+		}),
+		[config.viewBox.width, config.viewBox.height],
+	);
+
 	return (
 		<svg
 			viewBox={`0 0 ${config.viewBox.width} ${config.viewBox.height}`}
-			style={{
-				aspectRatio: `${config.viewBox.width}/${config.viewBox.height}`,
-			}}
+			style={svgStyle}
 			className="w-full h-auto"
 			xmlns="http://www.w3.org/2000/svg"
 		>

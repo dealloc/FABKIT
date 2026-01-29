@@ -5,7 +5,8 @@ import { useIsFieldVisible } from "../../utils.ts";
 
 export function CardPowerField() {
 	const { t } = useTranslation();
-	const { CardPower, setCardPower } = useCardCreator();
+	const CardPower = useCardCreator((state) => state.CardPower);
+	const setCardPower = useCardCreator((state) => state.setCardPower);
 	const shouldShow = useIsFieldVisible("CardPower");
 
 	if (!shouldShow) return null;

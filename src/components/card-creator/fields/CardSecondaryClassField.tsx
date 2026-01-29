@@ -7,7 +7,12 @@ import { useIsFieldVisible } from "../../utils.ts";
 
 export function CardSecondaryClassField() {
 	const { t } = useTranslation();
-	const { CardSecondaryClass, setCardSecondaryClass } = useCardCreator();
+	const CardSecondaryClass = useCardCreator(
+		(state) => state.CardSecondaryClass,
+	);
+	const setCardSecondaryClass = useCardCreator(
+		(state) => state.setCardSecondaryClass,
+	);
 	const shouldShow = useIsFieldVisible("CardSecondaryClass");
 
 	// TODO: invalidate memo when `t`'s language changes?

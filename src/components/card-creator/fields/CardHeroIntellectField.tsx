@@ -5,7 +5,10 @@ import { useIsFieldVisible } from "../../utils.ts";
 
 export function CardHeroIntellectField() {
 	const { t } = useTranslation();
-	const { CardHeroIntellect, setCardHeroIntellect } = useCardCreator();
+	const CardHeroIntellect = useCardCreator((state) => state.CardHeroIntellect);
+	const setCardHeroIntellect = useCardCreator(
+		(state) => state.setCardHeroIntellect,
+	);
 	const shouldShow = useIsFieldVisible("CardHeroIntellect");
 
 	if (!shouldShow) return null;

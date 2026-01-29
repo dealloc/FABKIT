@@ -5,7 +5,8 @@ import { useIsFieldVisible } from "../../utils.ts";
 
 export function CardWeaponField() {
 	const { t } = useTranslation();
-	const { CardWeapon, setCardWeapon } = useCardCreator();
+	const CardWeapon = useCardCreator((state) => state.CardWeapon);
+	const setCardWeapon = useCardCreator((state) => state.setCardWeapon);
 	const shouldShow = useIsFieldVisible("CardWeapon");
 
 	if (!shouldShow) return null;

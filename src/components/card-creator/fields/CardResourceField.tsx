@@ -5,7 +5,8 @@ import { useIsFieldVisible } from "../../utils.ts";
 
 export function CardResourceField() {
 	const { t } = useTranslation();
-	const { CardResource, setCardResource } = useCardCreator();
+	const CardResource = useCardCreator((state) => state.CardResource);
+	const setCardResource = useCardCreator((state) => state.setCardResource);
 	const shouldShow = useIsFieldVisible("CardResource");
 
 	if (!shouldShow) return null;
