@@ -60,7 +60,10 @@ export interface BaseCardRenderConfig {
 	// Similar to masks, but for rendering `clipPath` (used for clipping texts etc).
 	clips: Record<string, ReactElement>;
 	// Contains configuration for the various "elements" of a card.
-	elements: Record<string, CardTextConfig | CardTextConfig[] | CardImageConfig | CardObjectConfig>;
+	elements: Record<
+		string,
+		CardTextConfig | CardTextConfig[] | CardImageConfig | CardObjectConfig
+	>;
 }
 
 /**

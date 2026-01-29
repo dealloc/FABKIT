@@ -102,7 +102,7 @@ export const NormalRenderConfigPreset: NormalCardRenderConfig = {
 				fontFamily: "dialog_cond_semiboldregular, Arial, sans-serif",
 				fontSize: 10.43,
 				fontWeight: 400,
-			}
-		]
+			},
+		],
 	},
 };

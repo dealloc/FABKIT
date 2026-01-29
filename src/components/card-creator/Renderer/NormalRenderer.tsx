@@ -4,7 +4,7 @@ import { CardRarities } from "../../../config/cards/rarities.ts";
 import type { NormalCardRenderConfig } from "../../../config/rendering/types.ts";
 import { useCardCreator } from "../../../stores/card-creator.ts";
 import { useCardBottomText } from "../hooks/useCardBottomText.ts";
-import {useCardFooterText} from "../hooks/useCardFooterText.ts";
+import { useCardFooterText } from "../hooks/useCardFooterText.ts";
 
 export type NormalRendererProps = {
 	config: NormalCardRenderConfig;

@@ -14,8 +14,8 @@ import {
 	X,
 } from "lucide-react";
 import { useState } from "react";
-import FabkitLogo from '../../assets/Fabkitlogo.svg';
-import FabkitLogoNotext from '../../assets/Fabkitlogo_notext.svg';
+import FabkitLogo from "../../assets/Fabkitlogo.svg";
+import FabkitLogoNotext from "../../assets/Fabkitlogo_notext.svg";
 
 const navigation = [
 	{ name: "Home", route: "/", icon: Home },
@@ -85,11 +85,7 @@ export function Menu() {
 								{/* Mobile sidebar content */}
 								<div className="flex grow flex-col gap-y-5 overflow-y-auto bg-surface px-6 pb-2">
 									<div className="flex h-16 shrink-0 items-center gap-1 text-primary">
-										<img
-											className="h-8 w-auto"
-											src={FabkitLogo}
-											alt="FABKIT"
-										/>
+										<img className="h-8 w-auto" src={FabkitLogo} alt="FABKIT" />
 										<h1 className="text-sm/6 font-semibold text-primary">
 											FaBKit
 										</h1>
@@ -138,11 +134,7 @@ export function Menu() {
 			<div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
 				<div className="flex grow flex-col border-r border-border bg-surface px-6">
 					<div className="flex h-48 items-center justify-center">
-						<img
-							className="h-30 w-auto"
-							src={FabkitLogo}
-							alt="FABKIT Logo"
-						/>
+						<img className="h-30 w-auto" src={FabkitLogo} alt="FABKIT Logo" />
 					</div>
 					<hr className="h-px border-0 bg-border" />
 					<nav className="mt-5 flex flex-1 flex-col">
@@ -191,11 +183,7 @@ export function Menu() {
 					<MenuIcon className="size-6" aria-hidden="true" />
 				</button>
 				<div className="flex flex-row items-center text-sm/6 font-semibold text-primary">
-					<img
-						src={FabkitLogoNotext}
-						alt="FABKIT Logo"
-						className="h-8 pr-2"
-					/>
+					<img src={FabkitLogoNotext} alt="FABKIT Logo" className="h-8 pr-2" />
 					FaBKit
 					{currentRouteName && ` - ${currentRouteName}`}
 				</div>

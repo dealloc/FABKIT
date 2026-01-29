@@ -3,8 +3,8 @@ import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import react from "@vitejs/plugin-react";
 import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig } from "vite";
-import { VitePWA } from "vite-plugin-pwa";
 import openGraphPlugin from "vite-plugin-open-graph";
+import { VitePWA } from "vite-plugin-pwa";
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -30,19 +30,20 @@ export default defineConfig({
 		}),
 		openGraphPlugin({
 			basic: {
-				siteName: 'FABKIT',
+				siteName: "FABKIT",
 				title: "FABKIT - Your Flesh and Blood Toolbox",
-				description: 'Flesh and Blood TCG tools built by the community, for the community. Browser-based, open source, no downloads required.',
+				description:
+					"Flesh and Blood TCG tools built by the community, for the community. Browser-based, open source, no downloads required.",
 				image: {
-					url: '/fabkit_preview_image.png',
+					url: "/fabkit_preview_image.png",
 					width: 1200,
 					height: 630,
-					type: 'image/png',
-					alt: 'FaBKit Preview Image'
+					type: "image/png",
+					alt: "FaBKit Preview Image",
 				},
-				url: 'https://fabkit.io',
-				type: 'website',
-			}
+				url: "https://fabkit.io",
+				type: "website",
+			},
 		}),
 		VitePWA({
 			registerType: "prompt",
