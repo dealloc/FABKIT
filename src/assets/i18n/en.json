@@ -182,5 +182,12 @@
 			"remove": "Remove image",
 			"preview_alt": "Image preview"
 		}
+	},
+	"pwa": {
+		"offline_ready": "App is ready to work offline",
+		"update_available": "New version available! Click reload to update.",
+		"reload": "Reload",
+		"later": "Later",
+		"ok": "OK"
 	}
 }

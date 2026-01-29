@@ -28,6 +28,13 @@ export default defineConfig({
 			},
 		}),
 		VitePWA({
+			registerType: 'prompt',
+			devOptions: {
+				enabled: true,
+			},
+			workbox: {
+				cleanupOutdatedCaches: true,
+			},
 			includeAssets: [
 				"favicon.ico",
 				"apple-touch-icon.png",
