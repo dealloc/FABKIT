@@ -14,6 +14,8 @@ import {
 	X,
 } from "lucide-react";
 import { useState } from "react";
+import FabkitLogo from '../../assets/Fabkitlogo.svg';
+import FabkitLogoNotext from '../../assets/Fabkitlogo_notext.svg';
 
 const navigation = [
 	{ name: "Home", route: "/", icon: Home },
@@ -85,7 +87,7 @@ export function Menu() {
 									<div className="flex h-16 shrink-0 items-center gap-1 text-primary">
 										<img
 											className="h-8 w-auto"
-											src="/src/assets/Fabkitlogo_notext.svg"
+											src={FabkitLogo}
 											alt="FABKIT"
 										/>
 										<h1 className="text-sm/6 font-semibold text-primary">
@@ -138,7 +140,7 @@ export function Menu() {
 					<div className="flex h-48 items-center justify-center">
 						<img
 							className="h-30 w-auto"
-							src="/src/assets/Fabkitlogo.svg"
+							src={FabkitLogo}
 							alt="FABKIT Logo"
 						/>
 					</div>
@@ -190,7 +192,7 @@ export function Menu() {
 				</button>
 				<div className="flex flex-row items-center text-sm/6 font-semibold text-primary">
 					<img
-						src="/src/assets/Fabkitlogo_notext.svg"
+						src={FabkitLogoNotext}
 						alt="FABKIT Logo"
 						className="h-8 pr-2"
 					/>
