@@ -18,13 +18,27 @@ import { CardTalentField } from "../components/card-creator/fields/CardTalentFie
 import { CardTextField } from "../components/card-creator/fields/CardTextField.tsx";
 import { CardTypeField } from "../components/card-creator/fields/CardTypeField.tsx";
 import { CardWeaponField } from "../components/card-creator/fields/CardWeaponField.tsx";
+import { ResetButton } from "../components/card-creator/fields/ResetButton.tsx";
 import { Preview } from "../components/card-creator/Preview.tsx";
+import { useCardCreator } from "../stores/card-creator.ts";
 
 export const Route = createFileRoute("/card-creator")({
 	component: RouteComponent,
 });
 
 function RouteComponent() {
+	const CardType = useCardCreator((state) => state.CardType);
+
+	if (CardType === null) {
+		return (
+			<div className="flex flex-1 flex-col justify-center items-center">
+				<div className="min-w-1/3">
+					<CardTypeField />
+				</div>
+			</div>
+		);
+	}
+
 	return (
 		<div className="flex flex-col md:grid grid-flow-cols grid-cols-4 gap-2 flex-1">
 			<section className="p-4 col-span-3 space-y-6">
@@ -50,8 +64,9 @@ function RouteComponent() {
 					<CardTextField />
 				</div>
 			</section>
-			<section className="flex flex-col p-4">
+			<section className="flex flex-col p-4 gap-4">
 				<Preview />
+				<ResetButton />
 			</section>
 		</div>
 	);

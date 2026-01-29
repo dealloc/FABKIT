@@ -161,7 +161,9 @@
 		"artwork_label": "Artwork",
 		"artwork_credits_label": "Artwork Credits",
 		"set_number_label": "Set Number",
-		"text_label": "Card text"
+		"text_label": "Card text",
+		"reset_label": "Reset",
+		"reset_prompt": "Are you sure you want to reset the form? This can not be undone."
 	},
 	"components": {
 		"featured_artist": {
