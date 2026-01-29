@@ -35,6 +35,7 @@ jobs:
         run: rm -rf public/cardbacks/generated
 
       - name: Pull Cardbacks
+        if: ${{ github.repository == 'FABKIT/FABKIT' }}
         uses: actions/checkout@v4
         with:
           repository: FABKIT/cardbacks
