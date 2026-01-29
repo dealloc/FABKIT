@@ -32,6 +32,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Remove placeholder cardbacks
+        if: ${{ github.repository == 'FABKIT/FABKIT' }}
         run: rm -rf public/cardbacks/generated
 
       - name: Pull Cardbacks
