@@ -36,7 +36,7 @@ export default function Select<T extends string>({
 	const selectedOption = options.find((opt) => opt.value === value);
 
 	return (
-		<Field className="space-y-1">
+		<Field className="space-y-1" data-value={value}>
 			<Label className="block text-sm font-medium text-muted">
 				{label}
 				{required && <span className="text-primary ml-1">*</span>}

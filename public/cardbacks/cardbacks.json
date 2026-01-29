@@ -2,8 +2,9 @@
 	{
 		"id": 1,
 		"name": "Aria",
-		"type": "General",
+		"type": "general",
 		"dented": true,
+		"renderer": "normal_dented",
 		"images": [
 			{
 				"id": 1,
@@ -25,8 +26,9 @@
 	{
 		"id": 2,
 		"name": "Aria",
-		"type": "Hero",
+		"type": "hero",
 		"dented": true,
+		"renderer": "normal_dented",
 		"images": [
 			{
 				"id": 4,
@@ -38,8 +40,9 @@
 	{
 		"id": 3,
 		"name": "Assassin",
-		"type": "General",
+		"type": "general",
 		"dented": false,
+		"renderer": "normal_flat",
 		"images": [
 			{
 				"id": 5,
@@ -61,8 +64,9 @@
 	{
 		"id": 4,
 		"name": "Blue",
-		"type": "Token",
+		"type": "token",
 		"dented": false,
+		"renderer": "normal_flat",
 		"images": [
 			{
 				"id": 8,
@@ -74,8 +78,9 @@
 	{
 		"id": 5,
 		"name": "Chaos",
-		"type": "Hero",
+		"type": "hero",
 		"dented": false,
+		"renderer": "normal_flat",
 		"images": [
 			{
 				"id": 9,
@@ -87,8 +92,9 @@
 	{
 		"id": 6,
 		"name": "Equipment",
-		"type": "Equipment",
+		"type": "equipment",
 		"dented": true,
+		"renderer": "normal_dented",
 		"images": [
 			{
 				"id": 10,
@@ -100,8 +106,9 @@
 	{
 		"id": 7,
 		"name": "Equipment",
-		"type": "Equipment",
+		"type": "equipment",
 		"dented": false,
+		"renderer": "normal_flat",
 		"images": [
 			{
 				"id": 11,
@@ -113,8 +120,9 @@
 	{
 		"id": 8,
 		"name": "Fabled",
-		"type": "Resource",
+		"type": "resource",
 		"dented": false,
+		"renderer": "normal_flat",
 		"images": [
 			{
 				"id": 12,
@@ -136,8 +144,9 @@
 	{
 		"id": 9,
 		"name": "Fabled",
-		"type": "Resource",
+		"type": "resource",
 		"dented": true,
+		"renderer": "normal_dented",
 		"images": [
 			{
 				"id": 15,
@@ -159,8 +168,9 @@
 	{
 		"id": 10,
 		"name": "Green",
-		"type": "Token",
+		"type": "token",
 		"dented": true,
+		"renderer": "normal_dented",
 		"images": [
 			{
 				"id": 18,
@@ -172,8 +182,9 @@
 	{
 		"id": 11,
 		"name": "Weapon",
-		"type": "Weapon",
+		"type": "weapon",
 		"dented": true,
+		"renderer": "normal_dented",
 		"images": [
 			{
 				"id": 19,

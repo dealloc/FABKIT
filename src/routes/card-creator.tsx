@@ -22,6 +22,8 @@ import { CardWeaponField } from "../components/card-creator/fields/CardWeaponFie
 import { ResetButton } from "../components/card-creator/fields/ResetButton.tsx";
 import { Preview } from "../components/card-creator/Preview.tsx";
 import { useCardCreator } from "../stores/card-creator.ts";
+import {CardBackField} from "../components/card-creator/fields/CardBackField.tsx";
+import {CardBackStyleField} from "../components/card-creator/fields/CardBackStyleField.tsx";
 
 export const Route = createFileRoute("/card-creator")({
 	component: RouteComponent,
@@ -75,13 +77,10 @@ function RouteComponent() {
 						Select Card Background
 					</h3>
 					<div className="flex items-center gap-4 p-3 border border-border rounded-lg bg-surface">
-						<label className="flex items-center gap-2 text-sm">
-							<input type="checkbox" className="rounded" />
-							<span className="text-body">OLD STYLE</span>
-						</label>
+						<CardBackStyleField />
 					</div>
-					<div className="p-3 border border-border rounded-lg bg-surface text-center text-sm text-muted">
-						Card back selector (placeholder)
+					<div className="p-3 bg-surface text-sm text-muted">
+						<CardBackField />
 					</div>
 				</div>
 

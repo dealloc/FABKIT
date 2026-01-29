@@ -24,7 +24,8 @@ import { NormalRenderConfigPreset } from "./rendering/preset.tsx";
 import type { CardRenderConfig } from "./rendering/types.ts";
 
 export const AllRenderConfigVariations: Record<string, CardRenderConfig> = {
-	default_flat: NormalRenderConfigPreset,
+	normal_dented: NormalRenderConfigPreset,
+	normal_flat: NormalRenderConfigPreset,
 };
 
 export type RenderConfigVariation = keyof typeof AllRenderConfigVariations;
