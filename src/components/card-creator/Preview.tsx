@@ -1,8 +1,8 @@
 import { useMemo } from "react";
+import useObjectURL from "use-object-url";
 import { CardRarities } from "../../config/cards.ts";
 import { useCardCreator } from "../../stores/card-creator.ts";
 import { useCardBottomText } from "./hooks/useCardBottomText.ts";
-import useObjectURL from "use-object-url";
 
 export function Preview() {
 	const {
@@ -13,7 +13,8 @@ export function Preview() {
 		CardPower,
 		CardRarity,
 		CardDefense,
-		CardArtwork
+		CardArtwork,
+		CardTextHTML,
 	} = useCardCreator();
 
 	const artwork = useObjectURL(CardArtwork);
@@ -97,6 +98,16 @@ export function Preview() {
 					>
 						{CardResource}
 					</text>
+				)}
+
+				{CardTextHTML && (
+					<foreignObject x="55" y="395" width="340" height="160">
+						<span
+							className="text-black"
+							// biome-ignore lint/security/noDangerouslySetInnerHtml: editor content is HTML
+							dangerouslySetInnerHTML={{ __html: CardTextHTML }}
+						/>
+					</foreignObject>
 				)}
 
 				{CardPower && (
