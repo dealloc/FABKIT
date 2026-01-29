@@ -20,7 +20,12 @@ interface CardCreatorState extends FormFieldValues {
 	CardType: CardType | null;
 	CardBack: CardBack;
 	CardArtwork: Blob | null;
-	CardArtPosition: { x: number; y: number } | null;
+	CardArtPosition: {
+		x: number;
+		y: number;
+		width: number;
+		height: number;
+	} | null;
 	CardArtworkCredits: string | null;
 	CardSetNumber: string | null;
 	// textual representation of the rich text editor's content
@@ -31,7 +36,7 @@ interface CardCreatorState extends FormFieldValues {
 
 interface CardCreatorActions {
 	setCardType: (cardType: CardType) => void;
-	setCardArtwork: (artwork: Blob | null) => void;
+	setCardArtwork: (artwork: Blob | null) => Promise<void>;
 	setCardArtPosition: (position: { x: number; y: number } | null) => void;
 	setCardArtworkCredits: (credits: string | null) => void;
 	setCardSetNumber: (setNumber: string | null) => void;
@@ -88,9 +93,42 @@ export const useCardCreator = create<CardCreatorState & CardCreatorActions>()(
 	devtools((set, _, store) => ({
 		...initialState,
 		setCardType: (cardType: CardType) => set({ CardType: cardType }),
-		setCardArtwork: (artwork: Blob | null) => set({ CardArtwork: artwork }),
+		setCardArtwork: async (artwork: Blob | null) => {
+			// If clearing artwork, reset both artwork and position
+			if (!artwork) {
+				set({ CardArtwork: null, CardArtPosition: null });
+				return;
+			}
+
+			// Load image to get natural dimensions
+			const img = new Image();
+			const url = URL.createObjectURL(artwork);
+
+			try {
+				await new Promise<void>((resolve, reject) => {
+					img.onload = () => resolve();
+					img.onerror = () => reject(new Error("Failed to load image"));
+					img.src = url;
+				});
+
+				// Set artwork and initialize position with natural dimensions
+				set({
+					CardArtwork: artwork,
+					CardArtPosition: {
+						x: 0,
+						y: 0,
+						width: img.naturalWidth,
+						height: img.naturalHeight,
+					},
+				});
+			} finally {
+				// Always clean up the object URL
+				URL.revokeObjectURL(url);
+			}
+		},
 		setCardArtPosition: (position: { x: number; y: number } | null) =>
-			set({ CardArtPosition: position }),
+			// biome-ignore lint/suspicious/noExplicitAny: Zustand uses merging, not overwriting.
+			set({ CardArtPosition: position as any }),
 		setCardArtworkCredits: (credits: string | null) =>
 			set({ CardArtworkCredits: credits }),
 		setCardSetNumber: (setNumber: string | null) =>
