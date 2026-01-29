@@ -4,6 +4,7 @@ import { CardRarities } from "../../../config/cards/rarities.ts";
 import type { NormalCardRenderConfig } from "../../../config/rendering/types.ts";
 import { useCardCreator } from "../../../stores/card-creator.ts";
 import { useCardBottomText } from "../hooks/useCardBottomText.ts";
+import {useCardFooterText} from "../hooks/useCardFooterText.ts";
 
 export type NormalRendererProps = {
 	config: NormalCardRenderConfig;
@@ -30,6 +31,7 @@ export function NormalRenderer({ config }: NormalRendererProps) {
 	);
 
 	const cardBottomText = useCardBottomText();
+	const [cardFooterTextMode, cardFooterText] = useCardFooterText();
 
 	const svgStyle = useMemo(
 		() => ({
@@ -42,7 +44,8 @@ export function NormalRenderer({ config }: NormalRendererProps) {
 		<svg
 			viewBox={`0 0 ${config.viewBox.width} ${config.viewBox.height}`}
 			style={svgStyle}
-			className="w-full h-auto"
+			// className="w-full h-auto"
+			className="min-w-112.5 min-h-157"
 			xmlns="http://www.w3.org/2000/svg"
 		>
 			<title>{CardName}</title>
@@ -198,18 +201,50 @@ export function NormalRenderer({ config }: NormalRendererProps) {
 				preserveAspectRatio="xMidYMid slice"
 			/>
 
-			<text
-				x="225"
-				y="601"
-				textAnchor="middle"
-				dominantBaseline="middle"
-				fill="white"
-				fontFamily="dialog_cond_semiboldregular, Arial, sans-serif"
-				fontSize="10.43"
-				fontWeight="400"
-			>
-				FABKIT - NOT LEGAL - FLESH AND BLOOD TCG BY LLS
-			</text>
+			{cardFooterTextMode === "single" && (
+				<text
+					x={config.elements.CardFooterTextSingle.x}
+					y={config.elements.CardFooterTextSingle.y}
+					textAnchor="middle"
+					dominantBaseline="middle"
+					fill={config.elements.CardFooterTextSingle.fill}
+					fontFamily={config.elements.CardFooterTextSingle.fontFamily}
+					fontSize={config.elements.CardFooterTextSingle.fontSize}
+					fontWeight={config.elements.CardFooterTextSingle.fontWeight}
+				>
+					{cardFooterText}
+				</text>
+			)}
+
+			{cardFooterTextMode === "multi" && (
+				<>
+					<text
+						x={config.elements.CardFooterTextMulti[0].x}
+						y={config.elements.CardFooterTextMulti[0].y}
+						textAnchor="middle"
+						dominantBaseline="middle"
+						fill={config.elements.CardFooterTextMulti[0].fill}
+						fontFamily={config.elements.CardFooterTextMulti[0].fontFamily}
+						fontSize={config.elements.CardFooterTextMulti[0].fontSize}
+						fontWeight={config.elements.CardFooterTextMulti[0].fontWeight}
+					>
+						{cardFooterText[0]}
+					</text>
+
+					<text
+						x={config.elements.CardFooterTextMulti[1].x}
+						y={config.elements.CardFooterTextMulti[1].y}
+						textAnchor="middle"
+						dominantBaseline="middle"
+						fill={config.elements.CardFooterTextMulti[1].fill}
+						fontFamily={config.elements.CardFooterTextMulti[1].fontFamily}
+						fontSize={config.elements.CardFooterTextMulti[1].fontSize}
+						fontWeight={config.elements.CardFooterTextMulti[1].fontWeight}
+					>
+						{cardFooterText[1]}
+					</text>
+				</>
+			)}
 		</svg>
 	);
 }

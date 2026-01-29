@@ -78,5 +78,31 @@ export const NormalRenderConfigPreset: NormalCardRenderConfig = {
 			width: 12,
 			height: 12,
 		},
+		CardFooterTextSingle: {
+			x: 225,
+			y: 601,
+			fill: "white",
+			fontFamily: "dialog_cond_semiboldregular, Arial, sans-serif",
+			fontSize: 10.43,
+			fontWeight: 400,
+		},
+		CardFooterTextMulti: [
+			{
+				x: 225,
+				y: 601,
+				fill: "white",
+				fontFamily: "dialog_cond_semiboldregular, Arial, sans-serif",
+				fontSize: 10.43,
+				fontWeight: 400,
+			},
+			{
+				x: 225,
+				y: 611.43,
+				fill: "white",
+				fontFamily: "dialog_cond_semiboldregular, Arial, sans-serif",
+				fontSize: 10.43,
+				fontWeight: 400,
+			}
+		]
 	},
 };

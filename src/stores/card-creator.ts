@@ -137,9 +137,9 @@ export const useCardCreator = create<CardCreatorState & CardCreatorActions>()(
 			// biome-ignore lint/suspicious/noExplicitAny: Zustand uses merging, not overwriting.
 			set({ CardArtPosition: position as any }),
 		setCardArtworkCredits: (credits: string | null) =>
-			set({ CardArtworkCredits: credits }),
+			set({ CardArtworkCredits: credits?.toUpperCase() }),
 		setCardSetNumber: (setNumber: string | null) =>
-			set({ CardSetNumber: setNumber }),
+			set({ CardSetNumber: setNumber?.toUpperCase() }),
 		setCardText: (html: string, content: Content) =>
 			set({ CardTextHTML: html, CardTextNode: content }),
 		setPitch: (pitch: CardFormFieldValue["CardPitch"]) =>
