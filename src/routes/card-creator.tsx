@@ -32,8 +32,9 @@ function RouteComponent() {
 
 	if (CardType === null) {
 		return (
-			<div className="flex flex-1 flex-col justify-center items-center">
-				<div className="min-w-1/3">
+			<div className="flex flex-1 flex-col justify-center items-center gap-8">
+				<h2 className="text-4xl font-bold text-heading">Start creating!</h2>
+				<div className="w-64">
 					<CardTypeField />
 				</div>
 			</div>
@@ -41,8 +42,9 @@ function RouteComponent() {
 	}
 
 	return (
-		<div className="flex flex-col md:grid grid-flow-cols grid-cols-4 gap-2 flex-1">
-			<section className="p-4 col-span-3 space-y-6">
+		<div className="flex flex-1 flex-col md:flex-row p-4 gap-4">
+			<section className="space-y-6">
+				{/* Form fields in grid */}
 				<div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
 					<CardTypeField />
 					<CardPitchField />
@@ -62,13 +64,42 @@ function RouteComponent() {
 					<CardArtworkField />
 					<CardArtworkCreditsField />
 					<CardSetnumberField />
-					<CardTextField />
+					<CardTextField className="col-span-1 sm:col-span-2 xl:col-span-3" />
 				</div>
 			</section>
-			<section className="flex flex-col p-4 gap-4">
-				<CardArtworkPositionContainer>
-					<Preview />
-				</CardArtworkPositionContainer>
+
+			<section className="flex flex-col gap-4">
+				{/* Card background selector placeholder */}
+				<div className="space-y-3">
+					<h3 className="text-sm font-medium text-muted">
+						Select Card Background
+					</h3>
+					<div className="flex items-center gap-4 p-3 border border-border rounded-lg bg-surface">
+						<label className="flex items-center gap-2 text-sm">
+							<input type="checkbox" className="rounded" />
+							<span className="text-body">OLD STYLE</span>
+						</label>
+					</div>
+					<div className="p-3 border border-border rounded-lg bg-surface text-center text-sm text-muted">
+						Card back selector (placeholder)
+					</div>
+				</div>
+
+				{/* Card preview */}
+				<div className="min-w-full md:min-w-96">
+					<CardArtworkPositionContainer>
+						<Preview />
+					</CardArtworkPositionContainer>
+				</div>
+
+				{/* Generate button */}
+				<button
+					type="button"
+					className="px-6 py-3 bg-primary text-white rounded-lg hover:opacity-90 transition-opacity font-medium flex items-center justify-center gap-2"
+				>
+					Generate
+				</button>
+
 				<ResetButton />
 			</section>
 		</div>

@@ -35,7 +35,7 @@ export function NormalRenderer({ config }: NormalRendererProps) {
 
 	const svgStyle = useMemo(
 		() => ({
-			aspectRatio: `${config.viewBox.width}/${config.viewBox.height}`,
+			aspectRatio: `${config.viewBox.width}/${config.viewBox.height}`
 		}),
 		[config.viewBox.width, config.viewBox.height],
 	);
@@ -44,8 +44,7 @@ export function NormalRenderer({ config }: NormalRendererProps) {
 		<svg
 			viewBox={`0 0 ${config.viewBox.width} ${config.viewBox.height}`}
 			style={svgStyle}
-			// className="w-full h-auto"
-			className="min-w-112.5 min-h-157"
+			className="w-full h-auto"
 			xmlns="http://www.w3.org/2000/svg"
 		>
 			<title>{CardName}</title>

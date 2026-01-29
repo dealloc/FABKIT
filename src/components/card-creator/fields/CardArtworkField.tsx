@@ -4,14 +4,14 @@ import ImageUpload from "../../form/ImageUpload.tsx";
 
 export function CardArtworkField() {
 	const { t } = useTranslation();
-	const { setCardArtwork } = useCardCreator();
+	const setCardArtwork = useCardCreator((state) => state.setCardArtwork);
 
 	return (
-		<span>
+		<div>
 			<div className="block text-sm font-medium text-muted mb-1">
 				{t("card_creator.artwork_label")}
 			</div>
 			<ImageUpload onImageSelect={setCardArtwork} />
-		</span>
+		</div>
 	);
 }
