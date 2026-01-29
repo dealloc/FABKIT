@@ -1,28 +1,17 @@
 import { useMemo } from "react";
+import { CardRarities } from "../../config/cards.ts";
 import { useCardCreator } from "../../stores/card-creator.ts";
-import { CardTypes } from "../../config/cards/types.ts";
-import { CardTalents } from "../../config/cards/talents.ts";
-import { CardClasses } from "../../config/cards/classes.ts";
-import { CardSubtypes } from "../../config/cards/subtypes.ts";
-import { useTranslation } from "react-i18next";
-import {CardRarities} from "../../config/cards.ts";
+import { useCardBottomText } from "./hooks/useCardBottomText.ts";
 
 export function Preview() {
-	const { t } = useTranslation();
 	const {
 		CardBack,
 		CardPitch,
 		CardName,
 		CardResource,
 		CardPower,
-		CardTalent,
-		CardType,
-		CardClass,
-		CardSecondaryClass,
-		CardSubType,
-		CardWeapon,
 		CardRarity,
-		CardDefense
+		CardDefense,
 	} = useCardCreator();
 
 	const cardBackImage = useMemo(
@@ -32,56 +21,7 @@ export function Preview() {
 		[CardBack.images, CardPitch],
 	);
 
-	const cardTypeText = useMemo(() => {
-		// Translate talent if present
-		const talent = CardTalent && CardTalent !== "none"
-			? t(CardTalents[CardTalent])
-			: null;
-
-		// Translate primary class if present
-		const primaryClass = CardClass && CardClass !== "none"
-			? t(CardClasses[CardClass])
-			: null;
-
-		// Handle class combination with proper separator
-		// Heroes use space separator, others use " / "
-		const isHero = CardType === "hero" || CardType === "demi_hero";
-		const separator = isHero ? " " : " / ";
-
-		const classText = primaryClass && CardSecondaryClass && CardSecondaryClass !== "none"
-			? `${primaryClass}${separator}${t(CardClasses[CardSecondaryClass])}`
-			: primaryClass;
-
-		// Translate card type
-		const cardType = CardType
-			? t(CardTypes[CardType].label)
-			: null;
-
-		// Build subtype portion
-		const subtypeParts: string[] = [];
-
-		// Add translated subtype if present
-		if (CardType && CardSubType && CardSubType !== "none") {
-			const subtypeKey = CardSubtypes[CardType]?.[CardSubType];
-			if (subtypeKey) {
-				subtypeParts.push(t(subtypeKey));
-			}
-		}
-
-		// Add weapon suffix for weapon types
-		if ((CardType === "weapon" || CardType === "weapon_equipment") && CardWeapon) {
-			subtypeParts.push(CardWeapon);  // Already in format "(1H)" or "(2H)"
-		}
-
-		const subtypeText = subtypeParts.length > 0
-			? `- ${subtypeParts.join(" ")}`
-			: null;
-
-		// Assemble final string
-		return [talent, classText, cardType, subtypeText]
-			.filter((part): part is string => Boolean(part))
-			.join(" ");
-	}, [CardTalent, CardClass, CardSecondaryClass, CardType, CardSubType, CardWeapon, t]);
+	const cardBottomText = useCardBottomText();
 
 	return (
 		<div className="aspect-450/628">
@@ -203,8 +143,7 @@ export function Preview() {
 					</>
 				)}
 
-
-				{cardTypeText && (
+				{cardBottomText && (
 					<text
 						x="225"
 						y="575"
@@ -216,7 +155,7 @@ export function Preview() {
 						fontWeight="400"
 						clipPath="url(#bottom-text-clip)"
 					>
-						{cardTypeText}
+						{cardBottomText}
 					</text>
 				)}
 

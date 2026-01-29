@@ -88,7 +88,7 @@ export default defineConfig({
 				"fonts/palatino_lt_std_medium.woff2",
 				"fonts/palatino_lt_std_medium_italic.svg",
 				"fonts/palatino_lt_std_medium_italic.woff",
-				"fonts/palatino_lt_std_medium_italic.woff2"
+				"fonts/palatino_lt_std_medium_italic.woff2",
 			],
 			manifest: {
 				name: "FabKit",

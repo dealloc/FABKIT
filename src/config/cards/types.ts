@@ -18,7 +18,7 @@ export const CardTypes: Record<
 			"CardSecondaryClass",
 			"CardSubType",
 			"CardRarity",
-			"CardDefense"
+			"CardDefense",
 		],
 	},
 	attack_reaction: {
