@@ -37,7 +37,14 @@ interface CardCreatorState extends FormFieldValues {
 interface CardCreatorActions {
 	setCardType: (cardType: CardType) => void;
 	setCardArtwork: (artwork: Blob | null) => Promise<void>;
-	setCardArtPosition: (position: { x: number; y: number } | null) => void;
+	setCardArtPosition: (
+		position: {
+			x: number;
+			y: number;
+			width: number;
+			height: number;
+		} | null,
+	) => void;
 	setCardArtworkCredits: (credits: string | null) => void;
 	setCardSetNumber: (setNumber: string | null) => void;
 	setCardText: (html: string, content: Content) => void;

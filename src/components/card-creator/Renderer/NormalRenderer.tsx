@@ -56,8 +56,8 @@ export function NormalRenderer({ config }: NormalRendererProps) {
 					href={artwork}
 					x={CardArtPosition?.x || 0}
 					y={CardArtPosition?.y || 0}
-					width="640"
-					height="480"
+					width={CardArtPosition?.width || 0}
+					height={CardArtPosition?.height || 0}
 					preserveAspectRatio="xMidYMid slice"
 					mask="url(#artwork-mask)"
 				/>

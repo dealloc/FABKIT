@@ -29,7 +29,7 @@ export function CardArtworkPositionContainer({
 
 	const handleMouseMove = useCallback(
 		(e: React.MouseEvent) => {
-			if (!isDragging.current) return;
+			if (!isDragging.current || !CardArtPosition) return;
 
 			const newX = e.clientX - dragStart.current.x;
 			const newY = e.clientY - dragStart.current.y;
@@ -37,9 +37,11 @@ export function CardArtworkPositionContainer({
 			setCardArtPosition({
 				x: newX,
 				y: newY,
+				width: CardArtPosition.width,
+				height: CardArtPosition.height,
 			});
 		},
-		[setCardArtPosition],
+		[CardArtPosition, setCardArtPosition],
 	);
 
 	const handleMouseUp = useCallback(() => {
@@ -54,13 +56,42 @@ export function CardArtworkPositionContainer({
 		}
 	}, []);
 
-	const handleWheel = useCallback((e: React.WheelEvent) => {
-		console.log("Wheel event:", {
-			deltaY: e.deltaY,
-			deltaX: e.deltaX,
-			deltaMode: e.deltaMode,
-		});
-	}, []);
+	const handleWheel = useCallback(
+		(e: React.WheelEvent) => {
+			if (!CardArtPosition) {
+				return;
+			}
+
+			e.preventDefault();
+
+			// Calculate scale factor from wheel delta
+			const scaleDelta = -e.deltaY * 0.001;
+			const scaleFactor = 1 + scaleDelta;
+
+			// Apply scale to width and height (preserves an aspect ratio)
+			const newWidth = CardArtPosition.width * scaleFactor;
+			const newHeight = CardArtPosition.height * scaleFactor;
+
+			// Optional: Set min/max bounds
+			const minSize = 50;
+			const maxSize = 5000;
+
+			if (newWidth < minSize || newHeight < minSize) {
+				return;
+			}
+			if (newWidth > maxSize || newHeight > maxSize) {
+				return;
+			}
+
+			setCardArtPosition({
+				x: CardArtPosition.x,
+				y: CardArtPosition.y,
+				width: newWidth,
+				height: newHeight,
+			});
+		},
+		[CardArtPosition, setCardArtPosition],
+	);
 
 	return (
 		<div
