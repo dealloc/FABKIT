@@ -8,7 +8,7 @@ export function CardArtworkField() {
 
 	return (
 		<span>
-			<div className="block text-sm font-medium text-muted mb-2">
+			<div className="block text-sm font-medium text-muted mb-1">
 				{t("card_creator.artwork_label")}
 			</div>
 			<ImageUpload onImageSelect={setCardArtwork} />

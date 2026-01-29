@@ -117,7 +117,7 @@ export default function ImageUpload({
 					onDragOver={handleDragOver}
 					onDrop={handleDrop}
 					className={`
-						flex items-center gap-2 px-3 py-2 cursor-pointer
+						flex items-center gap-2 px-3 py-2 min-h-[42px] cursor-pointer
 						border border-border rounded-lg
 						transition-colors
 						${
@@ -135,7 +135,7 @@ export default function ImageUpload({
 					</span>
 				</label>
 			) : (
-				<div className="flex items-center gap-2 px-3 py-2 border border-border rounded-lg bg-surface">
+				<div className="flex items-center gap-2 px-3 py-2 min-h-[42px] border border-border rounded-lg bg-surface">
 					<ImageIcon className="w-4 h-4 text-heading shrink-0" />
 					<span className="text-sm flex-1 truncate">{fileName}</span>
 					<button
