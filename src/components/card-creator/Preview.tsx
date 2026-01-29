@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { CardRarities } from "../../config/cards.ts";
 import { useCardCreator } from "../../stores/card-creator.ts";
 import { useCardBottomText } from "./hooks/useCardBottomText.ts";
+import useObjectURL from "use-object-url";
 
 export function Preview() {
 	const {
@@ -12,8 +13,10 @@ export function Preview() {
 		CardPower,
 		CardRarity,
 		CardDefense,
+		CardArtwork
 	} = useCardCreator();
 
+	const artwork = useObjectURL(CardArtwork);
 	const cardBackImage = useMemo(
 		() =>
 			CardBack.images.find((image) => image.pitch === CardPitch) ||
@@ -43,15 +46,18 @@ export function Preview() {
 					</clipPath>
 				</defs>
 
-				<image
-					href="https://lipsum.app/640x480/AFA/fff"
-					x="0"
-					y="0"
-					width="640"
-					height="480"
-					preserveAspectRatio="xMidYMid slice"
-					mask="url(#artwork-mask)"
-				/>
+				{artwork && (
+					<image
+						href={artwork}
+						x="0"
+						y="0"
+						width="640"
+						height="480"
+						preserveAspectRatio="xMidYMid slice"
+						mask="url(#artwork-mask)"
+					/>
+				)}
+
 				<image
 					href={`/cardbacks/${cardBackImage.fileName}`}
 					x="0"

@@ -9,7 +9,7 @@ import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 interface ImageUploadProps {
-	onImageSelect?: (file: File) => void;
+	onImageSelect?: (file: File | null) => void;
 	onError?: (error: string) => void;
 	maxSize?: number; // in bytes
 	acceptedFormats?: string[];
@@ -114,7 +114,8 @@ export default function ImageUpload({
 		setFileName(null);
 		setError(null);
 		setIsValid(false);
-	}, []);
+		onImageSelect?.(null);
+	}, [onImageSelect]);
 
 	return (
 		<div className={`relative ${className}`}>
