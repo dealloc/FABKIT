@@ -14,6 +14,8 @@ export interface CardTextConfig {
 	fontSize: number;
 	// Font weight (e.g., 400 for normal, 700 for bold)
 	fontWeight: number;
+	// X alignment of the text
+	textAnchor?: "start" | "middle" | "end";
 }
 
 // Helper type that encapsulates all information related to rendering images.
@@ -69,8 +71,37 @@ export interface BaseCardRenderConfig {
 /**
  * Specialized `CardRenderConfig` for "normal" cards which don't have any special features (like meld, marvel and so forth).
  */
-export interface NormalCardRenderConfig extends BaseCardRenderConfig {
+interface NormalCardRenderConfig extends BaseCardRenderConfig {
 	renderer: "normal";
+	variant: "dented" | "flat";
+}
+
+export interface NormalFlatRenderConfig extends NormalCardRenderConfig {
+	variant: "flat";
+	masks: {
+		CardArtWork: ReactElement;
+	};
+	clips: {
+		Title: ReactElement;
+		BottomText: ReactElement;
+	};
+	elements: {
+		CardName: CardTextConfig;
+		CardResource: CardTextConfig;
+		CardText: CardObjectConfig;
+		CardPowerImage: CardImageConfig;
+		CardPowerText: CardTextConfig;
+		CardDefenseImage: CardImageConfig;
+		CardDefenseText: CardTextConfig;
+		CardBottomText: CardTextConfig;
+		CardRarity: CardImageConfig;
+		CardFooterTextLeft: CardTextConfig;
+		CardFooterTextRight: CardTextConfig;
+	}
+}
+
+export interface NormalDentedRenderConfig extends NormalCardRenderConfig {
+	variant: "dented";
 	masks: {
 		CardArtWork: ReactElement;
 	};
@@ -90,7 +121,7 @@ export interface NormalCardRenderConfig extends BaseCardRenderConfig {
 		CardRarity: CardImageConfig;
 		CardFooterTextSingle: CardTextConfig;
 		CardFooterTextMulti: [CardTextConfig, CardTextConfig];
-	};
+	}
 }
 
 /**
@@ -100,4 +131,4 @@ export interface MeldCardRenderConfig extends BaseCardRenderConfig {
 	renderer: "meld";
 }
 
-export type CardRenderConfig = NormalCardRenderConfig | MeldCardRenderConfig;
+export type CardRenderConfig = NormalFlatRenderConfig | NormalDentedRenderConfig | MeldCardRenderConfig;

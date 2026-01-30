@@ -1,13 +1,16 @@
-import { type Ref, useMemo } from "react";
+import {type ReactNode, type Ref, useMemo} from "react";
 import useObjectURL from "use-object-url";
 import { CardRarities } from "../../../config/cards/rarities.ts";
-import type { NormalCardRenderConfig } from "../../../config/rendering/types.ts";
+import type {
+	NormalDentedRenderConfig,
+	NormalFlatRenderConfig
+} from "../../../config/rendering/types.ts";
 import { useCardCreator } from "../../../stores/card-creator.ts";
 import { useCardBottomText } from "../hooks/useCardBottomText.ts";
 import { useCardFooterText } from "../hooks/useCardFooterText.ts";
 
 export type NormalRendererProps = {
-	config: NormalCardRenderConfig;
+	config: NormalFlatRenderConfig | NormalDentedRenderConfig;
 	ref?: Ref<SVGSVGElement>;
 };
 
@@ -32,7 +35,7 @@ export function NormalRenderer({ config, ref }: NormalRendererProps) {
 	);
 
 	const cardBottomText = useCardBottomText();
-	const [cardFooterTextMode, cardFooterText] = useCardFooterText();
+	const footer = useCardFooterText();
 
 	const svgStyle = useMemo(
 		() => ({
@@ -202,50 +205,87 @@ export function NormalRenderer({ config, ref }: NormalRendererProps) {
 				preserveAspectRatio="xMidYMid slice"
 			/>
 
-			{cardFooterTextMode === "single" && (
-				<text
-					x={config.elements.CardFooterTextSingle.x}
-					y={config.elements.CardFooterTextSingle.y}
-					textAnchor="middle"
-					dominantBaseline="middle"
-					fill={config.elements.CardFooterTextSingle.fill}
-					fontFamily={config.elements.CardFooterTextSingle.fontFamily}
-					fontSize={config.elements.CardFooterTextSingle.fontSize}
-					fontWeight={config.elements.CardFooterTextSingle.fontWeight}
-				>
-					{cardFooterText}
-				</text>
-			)}
-
-			{cardFooterTextMode === "multi" && (
-				<>
-					<text
-						x={config.elements.CardFooterTextMulti[0].x}
-						y={config.elements.CardFooterTextMulti[0].y}
-						textAnchor="middle"
-						dominantBaseline="middle"
-						fill={config.elements.CardFooterTextMulti[0].fill}
-						fontFamily={config.elements.CardFooterTextMulti[0].fontFamily}
-						fontSize={config.elements.CardFooterTextMulti[0].fontSize}
-						fontWeight={config.elements.CardFooterTextMulti[0].fontWeight}
-					>
-						{cardFooterText[0]}
-					</text>
-
-					<text
-						x={config.elements.CardFooterTextMulti[1].x}
-						y={config.elements.CardFooterTextMulti[1].y}
-						textAnchor="middle"
-						dominantBaseline="middle"
-						fill={config.elements.CardFooterTextMulti[1].fill}
-						fontFamily={config.elements.CardFooterTextMulti[1].fontFamily}
-						fontSize={config.elements.CardFooterTextMulti[1].fontSize}
-						fontWeight={config.elements.CardFooterTextMulti[1].fontWeight}
-					>
-						{cardFooterText[1]}
-					</text>
-				</>
-			)}
+			{config.variant === "dented" && generateDentedFooter(config, footer)}
+			{config.variant === "flat" && generateFlatFooter(config, footer)}
 		</svg>
 	);
+}
+
+function generateDentedFooter(config: NormalDentedRenderConfig, footer: string | string[]): ReactNode {
+	if (Array.isArray(footer)) {
+		return <>
+			<text
+				x={config.elements.CardFooterTextMulti[0].x}
+				y={config.elements.CardFooterTextMulti[0].y}
+				textAnchor="middle"
+				dominantBaseline="middle"
+				fill={config.elements.CardFooterTextMulti[0].fill}
+				fontFamily={config.elements.CardFooterTextMulti[0].fontFamily}
+				fontSize={config.elements.CardFooterTextMulti[0].fontSize}
+				fontWeight={config.elements.CardFooterTextMulti[0].fontWeight}
+			>
+				{footer[0]}
+			</text>
+
+			<text
+				x={config.elements.CardFooterTextMulti[1].x}
+				y={config.elements.CardFooterTextMulti[1].y}
+				textAnchor="middle"
+				dominantBaseline="middle"
+				fill={config.elements.CardFooterTextMulti[1].fill}
+				fontFamily={config.elements.CardFooterTextMulti[1].fontFamily}
+				fontSize={config.elements.CardFooterTextMulti[1].fontSize}
+				fontWeight={config.elements.CardFooterTextMulti[1].fontWeight}
+			>
+				{footer[1]}
+			</text>
+		</>;
+	}
+
+	return <text
+		x={config.elements.CardFooterTextSingle.x}
+		y={config.elements.CardFooterTextSingle.y}
+		textAnchor="middle"
+		dominantBaseline="middle"
+		fill={config.elements.CardFooterTextSingle.fill}
+		fontFamily={config.elements.CardFooterTextSingle.fontFamily}
+		fontSize={config.elements.CardFooterTextSingle.fontSize}
+		fontWeight={config.elements.CardFooterTextSingle.fontWeight}
+	>
+		{footer}
+	</text>;
+}
+
+function generateFlatFooter(config: NormalFlatRenderConfig, footer: string | string[]): ReactNode {
+	if (!Array.isArray(footer)) {
+		return null;
+	}
+
+	return <>
+		<text
+			x={config.elements.CardFooterTextLeft.x}
+			y={config.elements.CardFooterTextLeft.y}
+			textAnchor={config.elements.CardFooterTextLeft.textAnchor || "middle"}
+			dominantBaseline="central"
+			fill={config.elements.CardFooterTextLeft.fill}
+			fontFamily={config.elements.CardFooterTextLeft.fontFamily}
+			fontSize={config.elements.CardFooterTextLeft.fontSize}
+			fontWeight={config.elements.CardFooterTextLeft.fontWeight}
+		>
+			{footer[0]}
+		</text>
+
+		<text
+			x={config.elements.CardFooterTextRight.x}
+			y={config.elements.CardFooterTextRight.y}
+			textAnchor={config.elements.CardFooterTextRight.textAnchor || "middle"}
+			dominantBaseline="middle"
+			fill={config.elements.CardFooterTextRight.fill}
+			fontFamily={config.elements.CardFooterTextRight.fontFamily}
+			fontSize={config.elements.CardFooterTextRight.fontSize}
+			fontWeight={config.elements.CardFooterTextRight.fontWeight}
+		>
+			{footer[1]}
+		</text>
+	</>;
 }

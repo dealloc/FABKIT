@@ -1,7 +1,30 @@
-import type { NormalCardRenderConfig } from "./types.ts";
+/**
+ * Here's where the real magic happens!
+ * This file contains the configuration of positioning, scaling, fonts etc of how cards are composed.
+ *
+ * This stuff gets BIIIIG, and it's not always pretty since it's optimised for performance and accuracy.
+ *
+ * Here be dragons!
+ *
+ *                             \||/
+ *                             |  @___oo
+ *                   /\  /\   / (__,,,,|
+ *                  ) /^\) ^\/ _)
+ *                  )   /^\/   _)
+ *                  )   _ /  / _)
+ *              /\  )/\/ ||  | )_)
+ *             <  >      |(,,) )__)
+ *              ||      /    \)___)\
+ *              | \____(      )___) )___
+ *               \______(_______;;; __;;;
+ *
+ */
 
-export const NormalDentedRenderConfigPreset: NormalCardRenderConfig = {
+import type {NormalDentedRenderConfig, NormalFlatRenderConfig} from "./types.ts";
+
+export const NormalDentedRenderConfigPreset: NormalDentedRenderConfig = {
 	renderer: "normal",
+	variant: "dented",
 	viewBox: {
 		width: 450,
 		height: 628,
@@ -107,8 +130,9 @@ export const NormalDentedRenderConfigPreset: NormalCardRenderConfig = {
 	},
 };
 
-export const NormalFlatRenderConfigPreset: NormalCardRenderConfig = {
+export const NormalFlatRenderConfigPreset: NormalFlatRenderConfig = {
 	renderer: "normal",
+	variant: "flat",
 	viewBox: {
 		width: 450,
 		height: 628,
@@ -180,36 +204,28 @@ export const NormalFlatRenderConfigPreset: NormalCardRenderConfig = {
 			fontWeight: 400,
 		},
 		CardRarity: {
-			x: 114,
-			y: 594,
-			width: 12,
-			height: 12,
+			x: 27.5,
+			y: 599.5,
+			width: 12.5,
+			height: 12.5,
 		},
-		CardFooterTextSingle: {
-			x: 225,
-			y: 601,
+		CardFooterTextLeft: {
+			x: 46.4,
+			y: 608.75,
 			fill: "white",
-			fontFamily: "dialog_cond_semiboldregular, Arial, sans-serif",
-			fontSize: 10.43,
+			fontFamily: "dialog_cond_semiboldregular, \"Arial Narrow\", \"Helvetica Condensed\", Arial, sans-serif",
+			fontSize: 10,
 			fontWeight: 400,
+			textAnchor: "start",
 		},
-		CardFooterTextMulti: [
-			{
-				x: 225,
-				y: 601,
-				fill: "white",
-				fontFamily: "dialog_cond_semiboldregular, Arial, sans-serif",
-				fontSize: 10.43,
-				fontWeight: 400,
-			},
-			{
-				x: 225,
-				y: 611.43,
-				fill: "white",
-				fontFamily: "dialog_cond_semiboldregular, Arial, sans-serif",
-				fontSize: 10.43,
-				fontWeight: 400,
-			},
-		],
+		CardFooterTextRight: {
+			x: 422.5,
+			y: 608.75,
+			fill: "white",
+			fontFamily: 'dialog_cond_semiboldregular, "Arial Narrow", "Helvetica Condensed", Arial, sans-serif',
+			fontSize: 10,
+			fontWeight: 400,
+			textAnchor: "end",
+		}
 	},
 };
