@@ -1,9 +1,14 @@
+import type { Ref } from "react";
 import { useTranslation } from "react-i18next";
 import { AllRenderConfigVariations } from "../../config/rendering.ts";
 import { useCardCreator } from "../../stores/card-creator.ts";
 import { NormalRenderer } from "./Renderer/NormalRenderer.tsx";
 
-export function Renderer() {
+export type RendererProps = {
+	ref?: Ref<SVGSVGElement>;
+};
+
+export function Renderer({ ref }: RendererProps) {
 	const { t } = useTranslation();
 	const CardBack = useCardCreator((state) => state.CardBack);
 	const renderConfig =
@@ -13,7 +18,7 @@ export function Renderer() {
 		case null:
 			return null;
 		case "normal":
-			return <NormalRenderer config={renderConfig} />;
+			return <NormalRenderer ref={ref} config={renderConfig} />;
 		default:
 			return (
 				<div className="border border-red-500 p-4">

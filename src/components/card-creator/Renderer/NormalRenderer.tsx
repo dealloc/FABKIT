@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { type Ref, useMemo } from "react";
 import useObjectURL from "use-object-url";
 import { CardRarities } from "../../../config/cards/rarities.ts";
 import type { NormalCardRenderConfig } from "../../../config/rendering/types.ts";
@@ -8,9 +8,10 @@ import { useCardFooterText } from "../hooks/useCardFooterText.ts";
 
 export type NormalRendererProps = {
 	config: NormalCardRenderConfig;
+	ref?: Ref<SVGSVGElement>;
 };
 
-export function NormalRenderer({ config }: NormalRendererProps) {
+export function NormalRenderer({ config, ref }: NormalRendererProps) {
 	const CardBack = useCardCreator((state) => state.CardBack);
 	const CardPitch = useCardCreator((state) => state.CardPitch);
 	const CardName = useCardCreator((state) => state.CardName);
@@ -42,6 +43,7 @@ export function NormalRenderer({ config }: NormalRendererProps) {
 
 	return (
 		<svg
+			ref={ref}
 			viewBox={`0 0 ${config.viewBox.width} ${config.viewBox.height}`}
 			style={svgStyle}
 			className="w-full h-auto"
