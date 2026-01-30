@@ -85,7 +85,7 @@ function RoadmapPage() {
 			</div>
 
 			{/* Timeline Animation */}
-			<div className="relative overflow-hidden bg-surface-muted">
+			<div className="relative w-full overflow-hidden bg-surface-muted">
 				<div className="mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8">
 					<div className="flex h-30 w-full items-center justify-center overflow-hidden py-8">
 						<div className="relative h-20 w-[90%] max-w-[800px]">

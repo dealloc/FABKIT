@@ -11,7 +11,7 @@ function RootComponent() {
 	return (
 		<>
 			<Menu />
-			<main className="flex flex-col flex-1 lg:pl-72">
+			<main className="flex flex-col items-center flex-1 lg:pl-72">
 				<Outlet />
 			</main>
 			<Footer />
