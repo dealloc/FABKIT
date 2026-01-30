@@ -97,7 +97,7 @@ export interface NormalFlatRenderConfig extends NormalCardRenderConfig {
 		CardRarity: CardImageConfig;
 		CardFooterTextLeft: CardTextConfig;
 		CardFooterTextRight: CardTextConfig;
-	}
+	};
 }
 
 export interface NormalDentedRenderConfig extends NormalCardRenderConfig {
@@ -121,7 +121,7 @@ export interface NormalDentedRenderConfig extends NormalCardRenderConfig {
 		CardRarity: CardImageConfig;
 		CardFooterTextSingle: CardTextConfig;
 		CardFooterTextMulti: [CardTextConfig, CardTextConfig];
-	}
+	};
 }
 
 /**
@@ -131,4 +131,7 @@ export interface MeldCardRenderConfig extends BaseCardRenderConfig {
 	renderer: "meld";
 }
 
-export type CardRenderConfig = NormalFlatRenderConfig | NormalDentedRenderConfig | MeldCardRenderConfig;
+export type CardRenderConfig =
+	| NormalFlatRenderConfig
+	| NormalDentedRenderConfig
+	| MeldCardRenderConfig;

@@ -17,7 +17,10 @@ export function useCardFooterText(): string | [string, string] {
 	}, [CardSetNumber, CardArtworkCredits, CardBackStyle]);
 }
 
-function generateDentedFooterText(CardSetNumber: string | null, CardArtworkCredits: string | null): string | [string, string] {
+function generateDentedFooterText(
+	CardSetNumber: string | null,
+	CardArtworkCredits: string | null,
+): string | [string, string] {
 	if (CardSetNumber === null && CardArtworkCredits === null) {
 		return "FABKIT - NOT LEGAL - FLESH AND BLOOD TCG BY LLS";
 	}
@@ -28,7 +31,10 @@ function generateDentedFooterText(CardSetNumber: string | null, CardArtworkCredi
 			"NOT LEGAL - FLESH AND BLOOD TCG BY LLS",
 		];
 	} else if (CardArtworkCredits === null) {
-		return [`${CardSetNumber} - FABKIT`, "NOT LEGAL - FLESH AND BLOOD TCG BY LLS"];
+		return [
+			`${CardSetNumber} - FABKIT`,
+			"NOT LEGAL - FLESH AND BLOOD TCG BY LLS",
+		];
 	}
 
 	return [
@@ -37,9 +43,14 @@ function generateDentedFooterText(CardSetNumber: string | null, CardArtworkCredi
 	];
 }
 
-function generateFlatFooterText(CardSetNumber: string | null, CardArtworkCredits: string | null): [string, string] {
+function generateFlatFooterText(
+	CardSetNumber: string | null,
+	CardArtworkCredits: string | null,
+): [string, string] {
 	return [
-		[CardSetNumber, 'FABKIT', CardArtworkCredits].filter(value => value?.trim()?.length).join(' | '),
-		'FaB TCC BY LSS'
+		[CardSetNumber, "FABKIT", CardArtworkCredits]
+			.filter((value) => value?.trim()?.length)
+			.join(" | "),
+		"FaB TCC BY LSS",
 	];
 }

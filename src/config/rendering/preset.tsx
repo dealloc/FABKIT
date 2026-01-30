@@ -20,7 +20,10 @@
  *
  */
 
-import type {NormalDentedRenderConfig, NormalFlatRenderConfig} from "./types.ts";
+import type {
+	NormalDentedRenderConfig,
+	NormalFlatRenderConfig,
+} from "./types.ts";
 
 export const NormalDentedRenderConfigPreset: NormalDentedRenderConfig = {
 	renderer: "normal",
@@ -213,7 +216,8 @@ export const NormalFlatRenderConfigPreset: NormalFlatRenderConfig = {
 			x: 46.4,
 			y: 608.75,
 			fill: "white",
-			fontFamily: "dialog_cond_semiboldregular, \"Arial Narrow\", \"Helvetica Condensed\", Arial, sans-serif",
+			fontFamily:
+				'dialog_cond_semiboldregular, "Arial Narrow", "Helvetica Condensed", Arial, sans-serif',
 			fontSize: 10,
 			fontWeight: 400,
 			textAnchor: "start",
@@ -222,10 +226,11 @@ export const NormalFlatRenderConfigPreset: NormalFlatRenderConfig = {
 			x: 422.5,
 			y: 608.75,
 			fill: "white",
-			fontFamily: 'dialog_cond_semiboldregular, "Arial Narrow", "Helvetica Condensed", Arial, sans-serif',
+			fontFamily:
+				'dialog_cond_semiboldregular, "Arial Narrow", "Helvetica Condensed", Arial, sans-serif',
 			fontSize: 10,
 			fontWeight: 400,
 			textAnchor: "end",
-		}
+		},
 	},
 };
