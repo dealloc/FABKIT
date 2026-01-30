@@ -163,7 +163,6 @@
 		"set_number_label": "Set Number",
 		"text_label": "Card text",
 		"reset_label": "Reset",
-		"reset_prompt": "Are you sure you want to reset the form? This can not be undone.",
 		"card_back_style_dented_label": "Dented",
 		"card_back_style_flat_label": "Flat"
 	},
@@ -186,6 +185,12 @@
 		},
 		"renderer": {
 			"unsupported": "Unsupported render mode requested, this is a bug. Please report it on GitHub / Discord."
+		},
+		"reset-creator": {
+			"title": "Reset Card Creator",
+			"prompt": "Are you sure you want to reset the form? This can not be undone.",
+			"yes": "Yes, reset the form",
+			"cancel": "Cancel"
 		}
 	},
 	"pwa": {

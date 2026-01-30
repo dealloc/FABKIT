@@ -1,24 +1,16 @@
-import { useCallback } from "react";
+import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { useCardCreator } from "../../../stores/card-creator.ts";
 
 export function ResetButton() {
-	const { reset } = useCardCreator();
 	const { t } = useTranslation();
 
-	const confirmBeforeReset = useCallback(() => {
-		if (window.confirm(t("card_creator.reset_prompt"))) {
-			reset();
-		}
-	}, [reset, t]);
-
 	return (
-		<button
-			type="button"
-			className="bg-primary-dark hover:bg-primary-light text-white font-bold py-2 px-4 rounded"
-			onClick={confirmBeforeReset}
+		<Link
+			to="/reset-form"
+			mask={{ to: "/card-creator" }}
+			className="px-6 py-3 bg-primary-dark text-white font-bold rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
 		>
 			{t("card_creator.reset_label")}
-		</button>
+		</Link>
 	);
 }

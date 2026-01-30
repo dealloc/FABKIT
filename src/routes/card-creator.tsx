@@ -1,4 +1,4 @@
-import {createFileRoute, Link} from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { CardArtworkCreditsField } from "../components/card-creator/fields/CardArtworkCreditsField.tsx";
 import { CardArtworkField } from "../components/card-creator/fields/CardArtworkField.tsx";
 import { CardArtworkPositionContainer } from "../components/card-creator/fields/CardArtworkPositionContainer.tsx";
