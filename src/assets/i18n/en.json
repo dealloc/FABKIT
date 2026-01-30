@@ -163,7 +163,9 @@
 		"set_number_label": "Set Number",
 		"text_label": "Card text",
 		"reset_label": "Reset",
-		"reset_prompt": "Are you sure you want to reset the form? This can not be undone."
+		"reset_prompt": "Are you sure you want to reset the form? This can not be undone.",
+		"card_back_style_dented_label": "Dented",
+		"card_back_style_flat_label": "Flat"
 	},
 	"components": {
 		"featured_artist": {

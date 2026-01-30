@@ -6,7 +6,7 @@ import {
 	type CardBack,
 	CardBacks,
 	getCardBacksForTypeAndStyle,
-	getSuggestedCardBack
+	getSuggestedCardBack,
 } from "../config/cards/card_backs.ts";
 import type {
 	CardFormField,
@@ -108,25 +108,30 @@ const initialState: CardCreatorState = {
 export const useCardCreator = create<CardCreatorState & CardCreatorActions>()(
 	devtools((set, _, store) => ({
 		...initialState,
-		setCardType: (cardType: CardType) => set(state => {
-			// When selecting a new card type, make sure that either:
-			// - the current card back is valid for that card type
-			// - we select the first available card back for that card type
-			const available = getCardBacksForTypeAndStyle(cardType, state.CardBackStyle);
-			let cardBack = state.CardBack;
-			if (!available.includes(state.CardBack))
-				cardBack = getSuggestedCardBack(available);
+		setCardType: (cardType: CardType) =>
+			set((state) => {
+				// When selecting a new card type, make sure that either:
+				// - the current card back is valid for that card type
+				// - we select the first available card back for that card type
+				const available = getCardBacksForTypeAndStyle(
+					cardType,
+					state.CardBackStyle,
+				);
+				let cardBack = state.CardBack;
+				if (!available.includes(state.CardBack))
+					cardBack = getSuggestedCardBack(available);
 
-			return { CardType: cardType, CardBack: cardBack };
-		}),
+				return { CardType: cardType, CardBack: cardBack };
+			}),
 		setCardBack: (cardBack: CardBack) => set({ CardBack: cardBack }),
-		setCardBackStyle: (backType: "flat" | "dented") => set(state => {
-			// When changing card back style, we select the first available card back for that style.
-			const available = getCardBacksForTypeAndStyle(state.CardType, backType);
-			const cardBack = getSuggestedCardBack(available);
+		setCardBackStyle: (backType: "flat" | "dented") =>
+			set((state) => {
+				// When changing card back style, we select the first available card back for that style.
+				const available = getCardBacksForTypeAndStyle(state.CardType, backType);
+				const cardBack = getSuggestedCardBack(available);
 
-			return { CardBackStyle: backType, CardBack: cardBack };
-		}),
+				return { CardBackStyle: backType, CardBack: cardBack };
+			}),
 		setCardArtwork: async (artwork: Blob | null) => {
 			// If clearing artwork, reset both artwork and position
 			if (!artwork) {

@@ -25,9 +25,9 @@ export function NormalRenderer({ config }: NormalRendererProps) {
 	const artwork = useObjectURL(CardArtwork);
 	const cardBackImage = useMemo(
 		() =>
-			CardBack.images.find((image) => image.pitch === CardPitch) ||
-			CardBack.images[0],
-		[CardBack.images, CardPitch],
+			CardBack?.images.find((image) => image.pitch === CardPitch) ||
+			CardBack?.images[0],
+		[CardBack?.images, CardPitch],
 	);
 
 	const cardBottomText = useCardBottomText();
@@ -35,7 +35,7 @@ export function NormalRenderer({ config }: NormalRendererProps) {
 
 	const svgStyle = useMemo(
 		() => ({
-			aspectRatio: `${config.viewBox.width}/${config.viewBox.height}`
+			aspectRatio: `${config.viewBox.width}/${config.viewBox.height}`,
 		}),
 		[config.viewBox.width, config.viewBox.height],
 	);
@@ -69,7 +69,7 @@ export function NormalRenderer({ config }: NormalRendererProps) {
 			)}
 
 			<image
-				href={`/cardbacks/${cardBackImage.fileName}`}
+				href={`/cardbacks/${cardBackImage?.fileName}`}
 				x="0"
 				y="0"
 				width={config.viewBox.width}

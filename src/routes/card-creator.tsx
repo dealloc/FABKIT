@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { CardArtworkCreditsField } from "../components/card-creator/fields/CardArtworkCreditsField.tsx";
 import { CardArtworkField } from "../components/card-creator/fields/CardArtworkField.tsx";
 import { CardArtworkPositionContainer } from "../components/card-creator/fields/CardArtworkPositionContainer.tsx";
+import { CardBackField } from "../components/card-creator/fields/CardBackField.tsx";
+import { CardBackStyleField } from "../components/card-creator/fields/CardBackStyleField.tsx";
 import { CardClassField } from "../components/card-creator/fields/CardClassField.tsx";
 import { CardDefenseField } from "../components/card-creator/fields/CardDefenseField.tsx";
 import { CardHeroIntellectField } from "../components/card-creator/fields/CardHeroIntellectField.tsx";
@@ -22,8 +24,6 @@ import { CardWeaponField } from "../components/card-creator/fields/CardWeaponFie
 import { ResetButton } from "../components/card-creator/fields/ResetButton.tsx";
 import { Preview } from "../components/card-creator/Preview.tsx";
 import { useCardCreator } from "../stores/card-creator.ts";
-import {CardBackField} from "../components/card-creator/fields/CardBackField.tsx";
-import {CardBackStyleField} from "../components/card-creator/fields/CardBackStyleField.tsx";
 
 export const Route = createFileRoute("/card-creator")({
 	component: RouteComponent,

@@ -1,6 +1,6 @@
 import _CardBacks from "../../../public/cardbacks/cardbacks.json";
-import type {RenderConfigVariation} from "../rendering.ts";
-import type {CardType} from "./types.ts";
+import type { RenderConfigVariation } from "../rendering.ts";
+import type { CardType } from "./types.ts";
 
 // Typing of the auto-generated `cardbacks.json` file.
 export type CardBack = {
@@ -19,21 +19,35 @@ export type CardBack = {
 // Auto-generated list of cardbacks.
 export const CardBacks: CardBack[] = _CardBacks;
 
-export function getCardBacksForTypeAndStyle(type: CardType | null, style: "flat" | "dented"): CardBack[] {
+export function getCardBacksForTypeAndStyle(
+	type: CardType | null,
+	style: "flat" | "dented",
+): CardBack[] {
 	if (type === null) {
 		return [];
 	}
 
 	const isDented = style === "dented";
-	let types = ['general'];
-	if (type === 'ally') {
-		types = ['token', 'hero'];
-	} else if (type !== null && ['equipment', 'hero', 'equipment', 'weapon', 'token', 'resource', 'event'].includes(type)) {
+	let types = ["general"];
+	if (type === "ally") {
+		types = ["token", "hero"];
+	} else if (
+		type !== null &&
+		[
+			"equipment",
+			"hero",
+			"equipment",
+			"weapon",
+			"token",
+			"resource",
+			"event",
+		].includes(type)
+	) {
 		types = [type];
-	} else if (type === 'demi_hero') {
-		types = ['hero'];
-	} else if (type === 'weapon_equipment') {
-		types = ['weapon'];
+	} else if (type === "demi_hero") {
+		types = ["hero"];
+	} else if (type === "weapon_equipment") {
+		types = ["weapon"];
 	}
 
 	return CardBacks.filter(
