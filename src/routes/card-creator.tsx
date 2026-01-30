@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import {createFileRoute, Link} from "@tanstack/react-router";
 import { CardArtworkCreditsField } from "../components/card-creator/fields/CardArtworkCreditsField.tsx";
 import { CardArtworkField } from "../components/card-creator/fields/CardArtworkField.tsx";
 import { CardArtworkPositionContainer } from "../components/card-creator/fields/CardArtworkPositionContainer.tsx";
@@ -76,7 +76,7 @@ function RouteComponent() {
 					<h3 className="text-sm font-medium text-muted">
 						Select Card Background
 					</h3>
-					<div className="flex items-center gap-4 p-3 border border-border rounded-lg bg-surface">
+					<div className="flex items-center gap-4 p-2 border border-border rounded-lg bg-surface">
 						<CardBackStyleField />
 					</div>
 					<div className="p-3 bg-surface text-sm text-muted">
@@ -92,12 +92,12 @@ function RouteComponent() {
 				</div>
 
 				{/* Generate button */}
-				<button
-					type="button"
-					className="px-6 py-3 bg-primary text-white rounded-lg hover:opacity-90 transition-opacity font-medium flex items-center justify-center gap-2"
+				<Link
+					to="/preview"
+					className="px-6 py-3 bg-primary text-white font-bold rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
 				>
 					Generate
-				</button>
+				</Link>
 
 				<ResetButton />
 			</section>

@@ -15,7 +15,7 @@ export function ResetButton() {
 	return (
 		<button
 			type="button"
-			className="bg-primary hover:bg-primary-light text-white font-bold py-2 px-4 rounded"
+			className="bg-primary-dark hover:bg-primary-light text-white font-bold py-2 px-4 rounded"
 			onClick={confirmBeforeReset}
 		>
 			{t("card_creator.reset_label")}

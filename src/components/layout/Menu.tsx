@@ -24,10 +24,6 @@ const navigation = [
 	{ name: "Contact", route: "/contact", icon: MessageCircle },
 ];
 
-if (import.meta.env.DEV) {
-	navigation.push({ name: "Preview", route: "/preview", icon: Paintbrush });
-}
-
 export function Menu() {
 	const [sidebarOpen, setSidebarOpen] = useState(false);
 	const location = useLocation();
