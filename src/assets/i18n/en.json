@@ -183,6 +183,9 @@
 			"success": "Image loaded",
 			"remove": "Remove image",
 			"preview_alt": "Image preview"
+		},
+		"renderer": {
+			"unsupported": "Unsupported render mode requested, this is a bug. Please report it on GitHub / Discord."
 		}
 	},
 	"pwa": {

@@ -22,7 +22,7 @@ import { CardTextField } from "../components/card-creator/fields/CardTextField.t
 import { CardTypeField } from "../components/card-creator/fields/CardTypeField.tsx";
 import { CardWeaponField } from "../components/card-creator/fields/CardWeaponField.tsx";
 import { ResetButton } from "../components/card-creator/fields/ResetButton.tsx";
-import { Preview } from "../components/card-creator/Preview.tsx";
+import { Renderer } from "../components/card-creator/Renderer.tsx";
 import { useCardCreator } from "../stores/card-creator.ts";
 
 export const Route = createFileRoute("/card-creator")({
@@ -87,7 +87,7 @@ function RouteComponent() {
 				{/* Card preview */}
 				<div className="min-w-full md:min-w-96">
 					<CardArtworkPositionContainer>
-						<Preview />
+						<Renderer />
 					</CardArtworkPositionContainer>
 				</div>
 
