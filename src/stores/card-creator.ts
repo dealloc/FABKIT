@@ -8,11 +8,12 @@ import {
 	getCardBacksForTypeAndStyle,
 	getSuggestedCardBack,
 } from "../config/cards/card_backs.ts";
-import type {
-	CardFormField,
-	CardFormFieldValue,
+import {
+	type CardFormField, CardFormFields,
+	type CardFormFieldValue,
 } from "../config/cards/form_fields.ts";
 import type { CardType } from "../config/cards/types.ts";
+import {isFieldVisible} from "../components/utils.ts";
 
 // Utility type that allows us to be type safe without having to copy every type from CardFormField
 type FormFieldValues = {
@@ -121,7 +122,16 @@ export const useCardCreator = create<CardCreatorState & CardCreatorActions>()(
 				if (!available.includes(state.CardBack))
 					cardBack = getSuggestedCardBack(available);
 
-				return { CardType: cardType, CardBack: cardBack };
+				// When we change the state some fields become invisible.
+				// All fields that are not visible for the new card type are set to null.
+				const result: Partial<CardCreatorState> = { CardType: cardType, CardBack: cardBack };
+				for (const field of CardFormFields) {
+					if (!isFieldVisible(field, cardType)) {
+						Object.assign(result, { [field]: null });
+					}
+				}
+
+				return result;
 			}),
 		setCardBack: (cardBack: CardBack) => set({ CardBack: cardBack }),
 		setCardBackStyle: (backType: "flat" | "dented") =>

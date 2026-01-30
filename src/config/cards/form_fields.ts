@@ -4,22 +4,25 @@ import type { CardClass } from "./classes.ts";
 import type { CardRarity } from "./rarities.ts";
 import type { CardTalent } from "./talents.ts";
 
-export type CardFormField =
-	| "CardPitch"
-	| "CardName"
-	| "CardResource"
-	| "CardPower"
-	| "CardText"
-	| "CardTalent"
-	| "CardClass"
-	| "CardSecondaryClass"
-	| "CardSubType"
-	| "CardRarity"
-	| "CardDefense"
-	| "CardLife"
-	| "CardHeroIntellect"
-	| "CardWeapon"
-	| "CardMacroGroup";
+export const CardFormFields = [
+	"CardPitch",
+	"CardName",
+	"CardResource",
+	"CardPower",
+	"CardText",
+	"CardTalent",
+	"CardClass",
+	"CardSecondaryClass",
+	"CardSubType",
+	"CardRarity",
+	"CardDefense",
+	"CardLife",
+	"CardHeroIntellect",
+	"CardWeapon",
+	"CardMacroGroup",
+] as const;
+
+export type CardFormField = (typeof CardFormFields)[number];
 
 // Maps each form field to its specific type
 export type CardFormFieldValue = {
