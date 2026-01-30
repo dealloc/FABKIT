@@ -54,9 +54,6 @@ jobs:
       - name: Update PWA assets
         run: bun run scripts/update-pwa-assets
 
-      - name: Pre-build (generate sources)
-        run: bun run prebuild
-
       - name: Build (Production)
         if: ${{ github.repository == 'FABKIT/FABKIT' }}
         run: bun run build
