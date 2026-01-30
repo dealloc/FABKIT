@@ -1,4 +1,5 @@
 import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { DevBanner } from "../components/DevBanner.tsx";
 import { Footer } from "../components/layout/Footer.tsx";
 import { Menu } from "../components/layout/Menu.tsx";
 import { ServiceWorker } from "../components/ServiceWorker.tsx";
@@ -16,6 +17,7 @@ function RootComponent() {
 			</main>
 			<Footer />
 			<ServiceWorker />
+			<DevBanner />
 		</>
 	);
 }
