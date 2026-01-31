@@ -8,6 +8,7 @@ import type {
 import { useCardCreator } from "../../../stores/card-creator.ts";
 import { useCardBottomText } from "../hooks/useCardBottomText.ts";
 import { useCardFooterText } from "../hooks/useCardFooterText.ts";
+import {useScaledFontSize, useScaledFontSizeFromHTML} from "../hooks/useScaledFontSize.ts";
 
 export type NormalRendererProps = {
 	config: NormalFlatRenderConfig | NormalDentedRenderConfig;
@@ -26,6 +27,25 @@ export function NormalRenderer({ config, ref }: NormalRendererProps) {
 	const CardTextHTML = useCardCreator((state) => state.CardTextHTML);
 	const CardArtPosition = useCardCreator((state) => state.CardArtPosition);
 
+	// Dynamically scale the font of the card name based on it's length.
+	const CardNameFontSize = useScaledFontSize({
+		text: CardName || '',
+		baseFontSize: config.elements.CardName.fontSize,
+		referenceLength: 20,
+		minFontSize: 12,
+		maxFontSize: 32,
+		scalingFactor: 0.7
+	});
+
+	const CardTextFontSize = useScaledFontSizeFromHTML({
+		html: CardTextHTML || '',
+		baseFontSize: 20,
+		referenceLength: 100,
+		minFontSize: 10,
+		maxFontSize: 20,
+		scalingFactor: 0.5
+	});
+
 	const artwork = useObjectURL(CardArtwork);
 	const cardBackImage = useMemo(
 		() =>
@@ -36,6 +56,14 @@ export function NormalRenderer({ config, ref }: NormalRendererProps) {
 
 	const cardBottomText = useCardBottomText();
 	const footer = useCardFooterText();
+	const cardBottomTextFontSize = useScaledFontSize({
+		text: cardBottomText,
+		baseFontSize: config.elements.CardBottomText.fontSize,
+		referenceLength: 20,
+		minFontSize: 10,
+		maxFontSize: 20,
+		scalingFactor: 0.6
+	});
 
 	const svgStyle = useMemo(
 		() => ({
@@ -91,7 +119,7 @@ export function NormalRenderer({ config, ref }: NormalRendererProps) {
 					dominantBaseline="middle"
 					fill={config.elements.CardName.fill}
 					fontFamily={config.elements.CardName.fontFamily}
-					fontSize={config.elements.CardName.fontSize}
+					fontSize={CardNameFontSize}
 					fontWeight={config.elements.CardName.fontWeight}
 					clipPath="url(#title-clip)"
 				>
@@ -121,11 +149,14 @@ export function NormalRenderer({ config, ref }: NormalRendererProps) {
 					width={config.elements.CardText.width}
 					height={config.elements.CardText.height}
 				>
-					<span
-						className="text-black"
-						// biome-ignore lint/security/noDangerouslySetInnerHtml: editor content is HTML
-						dangerouslySetInnerHTML={{ __html: CardTextHTML }}
-					/>
+					<div className="flex h-full w-full flex-col justify-center">
+						<span
+							className="text-black text-center font-card-text"
+							style={{ fontSize: CardTextFontSize }}
+							// biome-ignore lint/security/noDangerouslySetInnerHtml: editor content is HTML
+							dangerouslySetInnerHTML={{ __html: CardTextHTML }}
+						/>
+					</div>
 				</foreignObject>
 			)}
 
@@ -188,7 +219,7 @@ export function NormalRenderer({ config, ref }: NormalRendererProps) {
 					dominantBaseline="middle"
 					fill={config.elements.CardBottomText.fill}
 					fontFamily={config.elements.CardBottomText.fontFamily}
-					fontSize={config.elements.CardBottomText.fontSize}
+					fontSize={cardBottomTextFontSize}
 					fontWeight={config.elements.CardBottomText.fontWeight}
 					clipPath="url(#bottom-text-clip)"
 				>

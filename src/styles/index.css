@@ -43,6 +43,9 @@
 	--color-border-primary: rgba(166, 134, 74, 0.2);
 
 	--breakpoint-xs: 30rem;
+
+	/* Fonts */
+	--font-card-text: 'palatino_lt_stdroman', serif;
 }
 
 [data-theme="dark"] {
