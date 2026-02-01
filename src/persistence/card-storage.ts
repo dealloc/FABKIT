@@ -1,26 +1,94 @@
+/**
+ * Card Storage Persistence Layer
+ *
+ * Manages IndexedDB storage for saved cards, including serialization,
+ * import/export functionality, and CRUD operations.
+ *
+ * ## IndexedDB Schema
+ * - **Database**: "fabkit-cards" (version 1)
+ * - **Object Store**: "cards"
+ * - **Primary Key**: "version" (UUID from CardCreatorState.__version)
+ * - **Indexes**:
+ *   - cardName (non-unique)
+ *   - createdAt (non-unique)
+ *   - updatedAt (non-unique, used for default sorting)
+ *
+ * ## Serialization Format
+ * - CardBack objects are converted to numeric IDs for storage
+ * - Blob objects (artwork, preview) are stored directly in IndexedDB
+ * - For export, Blobs are converted to base64 data URLs
+ *
+ * ## .fabkit File Format
+ * JSON structure with base64-encoded images:
+ * ```json
+ * {
+ *   "version": "uuid",
+ *   "cardName": "string",
+ *   "createdAt": timestamp,
+ *   "updatedAt": timestamp,
+ *   "preview": "data:image/png;base64,...",
+ *   "state": { ...SerializedCardState with base64 artwork }
+ * }
+ * ```
+ */
+
 import { CardBacks } from "../config/cards/card_backs.ts";
 import type { CardCreatorState } from "../stores/card-creator";
 
+/** IndexedDB database name */
 const DB_NAME = "fabkit-cards";
+
+/** IndexedDB database version (increment to trigger schema migrations) */
 const DB_VERSION = 1;
+
+/** IndexedDB object store name */
 const STORE_NAME = "cards";
 
+/**
+ * Stored card record in IndexedDB.
+ * Contains all metadata and card state needed to restore a saved card.
+ */
 export interface StoredCard {
-	version: string; // __version UUID as primary key
+	/** Primary key: UUID from CardCreatorState.__version */
+	version: string;
+
+	/** User-provided card name (or "unnamed") */
 	cardName: string;
+
+	/** Unix timestamp when card was first created */
 	createdAt: number;
+
+	/** Unix timestamp of last update */
 	updatedAt: number;
+
+	/** Preview image Blob (PNG rendered from SVG) */
 	preview: Blob;
+
+	/** Serialized card creator state */
 	state: SerializedCardState;
 }
 
+/**
+ * Serialized card state for storage.
+ * CardBack object is replaced with numeric ID for simpler serialization.
+ */
 export interface SerializedCardState
 	extends Omit<CardCreatorState, "CardBack"> {
+	/** CardBack ID instead of full object */
 	CardBack: number;
 }
 
+/** Cached database instance to avoid multiple open requests */
 let dbInstance: IDBDatabase | null = null;
 
+/**
+ * Initializes and returns the IndexedDB database instance.
+ * Creates the database and schema on first run.
+ * Subsequent calls return the cached instance.
+ *
+ * @returns Promise resolving to the IDBDatabase instance
+ * @throws Error if database initialization fails
+ */
 export async function initCardDatabase(): Promise<IDBDatabase> {
 	if (dbInstance) return dbInstance;
 
@@ -46,6 +114,13 @@ export async function initCardDatabase(): Promise<IDBDatabase> {
 	});
 }
 
+/**
+ * Converts CardCreatorState to a serializable format.
+ * Replaces the CardBack object with its numeric ID.
+ *
+ * @param state - Full card creator state
+ * @returns Serialized state safe for IndexedDB storage
+ */
 export function serializeCardState(
 	state: CardCreatorState,
 ): SerializedCardState {
@@ -78,6 +153,14 @@ export function serializeCardState(
 	};
 }
 
+/**
+ * Converts stored card state back to CardCreatorState format.
+ * Restores the CardBack object from its ID.
+ * Falls back to first card back if ID lookup fails.
+ *
+ * @param stored - Serialized card state from IndexedDB
+ * @returns Partial CardCreatorState ready to load into the store
+ */
 export function deserializeCardState(
 	stored: SerializedCardState,
 ): Partial<CardCreatorState> {
@@ -88,6 +171,16 @@ export function deserializeCardState(
 	};
 }
 
+/**
+ * Saves a new card to IndexedDB.
+ * Sets createdAt and updatedAt to current timestamp.
+ *
+ * @param name - User-provided card name
+ * @param state - Current card creator state
+ * @param preview - Preview image Blob (PNG)
+ * @returns Promise resolving to the card's version UUID
+ * @throws Error if save operation fails (e.g., duplicate version)
+ */
 export async function saveCard(
 	name: string,
 	state: CardCreatorState,
@@ -115,6 +208,15 @@ export async function saveCard(
 	});
 }
 
+/**
+ * Updates an existing card in IndexedDB.
+ * Preserves createdAt timestamp and updates updatedAt to current time.
+ *
+ * @param version - Card version UUID (primary key)
+ * @param state - Updated card creator state
+ * @param preview - Updated preview image Blob (PNG)
+ * @throws Error if card doesn't exist or update operation fails
+ */
 export async function updateCard(
 	version: string,
 	state: CardCreatorState,
@@ -146,6 +248,13 @@ export async function updateCard(
 	});
 }
 
+/**
+ * Retrieves a single card by its version UUID.
+ *
+ * @param version - Card version UUID (primary key)
+ * @returns Promise resolving to StoredCard or null if not found
+ * @throws Error if database query fails
+ */
 export async function getCard(version: string): Promise<StoredCard | null> {
 	const db = await initCardDatabase();
 
@@ -159,6 +268,13 @@ export async function getCard(version: string): Promise<StoredCard | null> {
 	});
 }
 
+/**
+ * Retrieves all saved cards, sorted by most recently updated first.
+ * Uses the "updatedAt" index for efficient sorting.
+ *
+ * @returns Promise resolving to array of StoredCard objects
+ * @throws Error if database query fails
+ */
 export async function getAllCards(): Promise<StoredCard[]> {
 	const db = await initCardDatabase();
 
@@ -184,6 +300,12 @@ export async function getAllCards(): Promise<StoredCard[]> {
 	});
 }
 
+/**
+ * Deletes a card from IndexedDB.
+ *
+ * @param version - Card version UUID (primary key)
+ * @throws Error if delete operation fails
+ */
 export async function deleteCard(version: string): Promise<void> {
 	const db = await initCardDatabase();
 
@@ -197,6 +319,14 @@ export async function deleteCard(version: string): Promise<void> {
 	});
 }
 
+/**
+ * Converts a Blob to a base64 data URL.
+ * Used for embedding images in JSON export format.
+ *
+ * @param blob - Image Blob to convert
+ * @returns Promise resolving to base64 data URL string
+ * @throws Error if FileReader fails
+ */
 async function blobToBase64(blob: Blob): Promise<string> {
 	return new Promise((resolve, reject) => {
 		const reader = new FileReader();
@@ -206,6 +336,13 @@ async function blobToBase64(blob: Blob): Promise<string> {
 	});
 }
 
+/**
+ * Exports a card to .fabkit JSON format.
+ * Converts all Blob images (preview, artwork) to base64 for portability.
+ *
+ * @param card - Stored card to export
+ * @returns Promise resolving to formatted JSON string
+ */
 export async function exportCardToJSON(card: StoredCard): Promise<string> {
 	// Convert preview Blob to base64
 	const previewBase64 = await blobToBase64(card.preview);
@@ -231,6 +368,13 @@ export async function exportCardToJSON(card: StoredCard): Promise<string> {
 	return JSON.stringify(exportData, null, 2);
 }
 
+/**
+ * Triggers browser download of card JSON as a .fabkit file.
+ * Creates a temporary download link and auto-clicks it.
+ *
+ * @param jsonString - Card JSON from exportCardToJSON()
+ * @param cardName - Card name (sanitized for filename)
+ */
 export function downloadCardJSON(jsonString: string, cardName: string): void {
 	const blob = new Blob([jsonString], { type: "application/fabkit+json" });
 	const url = URL.createObjectURL(blob);
@@ -243,11 +387,26 @@ export function downloadCardJSON(jsonString: string, cardName: string): void {
 	URL.revokeObjectURL(url);
 }
 
+/**
+ * Converts a base64 data URL back to a Blob.
+ * Used when importing .fabkit files.
+ *
+ * @param base64 - Base64 data URL string
+ * @returns Promise resolving to Blob
+ */
 async function base64ToBlob(base64: string): Promise<Blob> {
 	const response = await fetch(base64);
 	return response.blob();
 }
 
+/**
+ * Imports a card from .fabkit JSON format into IndexedDB.
+ * Converts base64 images back to Blobs and saves the card.
+ * Uses put() operation, so it will overwrite existing cards with same version UUID.
+ *
+ * @param jsonString - .fabkit file contents
+ * @throws Error if JSON is invalid or missing required fields
+ */
 export async function importCardFromJSON(jsonString: string): Promise<void> {
 	const data = JSON.parse(jsonString);
 

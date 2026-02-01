@@ -1,3 +1,11 @@
+/**
+ * Card Creator Store
+ *
+ * Centralized Zustand store for managing card creation state.
+ * Handles all form fields, card artwork, card backs, and text content
+ * for the TCG card creator application.
+ */
+
 import type { Content } from "@tiptap/react";
 import { v4 as uuid } from "uuid";
 import { create } from "zustand";
@@ -16,37 +24,92 @@ import {
 } from "../config/cards/form_fields.ts";
 import type { CardType } from "../config/cards/types.ts";
 
-// Utility type that allows us to be type safe without having to copy every type from CardFormField
+/**
+ * Utility type that maps all card form fields to their possible values.
+ * Allows type-safe access to field values without duplicating type definitions.
+ */
 type FormFieldValues = {
 	[K in CardFormField]: CardFormFieldValue[K] | null;
 };
 
+/**
+ * Card Creator State
+ *
+ * Complete state shape for the card creator, including all form fields,
+ * artwork configuration, and text content representations.
+ */
 export interface CardCreatorState extends FormFieldValues {
-	// internal version that will be unique every time, used for tracking persistence etc.
+	/** Internal version UUID that changes with each reset, used for tracking persistence and cache invalidation */
 	__version: string;
+
+	/** Selected card type (action, hero, weapon, etc.) - determines which fields are visible */
 	CardType: CardType | null;
+
+	/** Currently selected card back configuration object */
 	CardBack: CardBack;
+
+	/** Card back visual style variant - affects available card backs */
 	CardBackStyle: "flat" | "dented";
+
+	/** Uploaded card artwork as a Blob, or null if no artwork uploaded */
 	CardArtwork: Blob | null;
+
+	/**
+	 * Artwork positioning and scale configuration.
+	 * Contains x/y offset and width/height dimensions for artwork placement on the card.
+	 */
 	CardArtPosition: {
 		x: number;
 		y: number;
 		width: number;
 		height: number;
 	} | null;
+
+	/** Artist credit text (auto-converted to uppercase) */
 	CardArtworkCredits: string | null;
+
+	/** Card set number text (auto-converted to uppercase) */
 	CardSetNumber: string | null;
-	// textual representation of the rich text editor's content
+
+	/** HTML string representation of the rich text editor content (for display/export) */
 	CardTextHTML: string | null;
-	// text editor's internal representation of the content, used for hydrating the editor.
+
+	/** Tiptap editor's internal Content representation (for hydrating editor state) */
 	CardTextNode: Content | null;
 }
 
+/**
+ * Card Creator Actions
+ *
+ * All available store actions for modifying card creator state.
+ * These actions handle validation, side effects, and state updates.
+ */
 export interface CardCreatorActions {
+	/**
+	 * Sets the card type and handles side effects:
+	 * - Validates/updates card back compatibility
+	 * - Clears fields that aren't visible for the new type
+	 */
 	setCardType: (cardType: CardType) => void;
+
+	/** Sets the currently selected card back */
 	setCardBack: (cardBack: CardBack) => void;
+
+	/**
+	 * Changes the card back style (flat/dented) and automatically
+	 * selects the first available card back for that style
+	 */
 	setCardBackStyle: (backType: "flat" | "dented") => void;
+
+	/**
+	 * Sets card artwork from a Blob and automatically initializes
+	 * position based on natural image dimensions.
+	 * Passing null clears both artwork and position.
+	 * @returns Promise that resolves when image dimensions are loaded
+	 */
 	setCardArtwork: (artwork: Blob | null) => Promise<void>;
+
+	/** Updates the artwork position and scale */
 	setCardArtPosition: (
 		position: {
 			x: number;
@@ -55,31 +118,85 @@ export interface CardCreatorActions {
 			height: number;
 		} | null,
 	) => void;
+
+	/** Sets artist credit text (automatically uppercased) */
 	setCardArtworkCredits: (credits: string | null) => void;
+
+	/** Sets card set number text (automatically uppercased) */
 	setCardSetNumber: (setNumber: string | null) => void;
+
+	/**
+	 * Updates card text content in both HTML and Tiptap Content formats.
+	 * Both representations are stored for display and editor hydration.
+	 */
 	setCardText: (html: string, content: Content) => void;
+
+	/** Sets card pitch value (red/yellow/blue) */
 	setPitch: (pitch: CardFormFieldValue["CardPitch"]) => void;
+
+	/** Sets card name */
 	setCardName: (name: string) => void;
+
+	/** Sets card resource value */
 	setCardResource: (resource: CardFormFieldValue["CardResource"]) => void;
+
+	/** Sets card power value */
 	setCardPower: (power: CardFormFieldValue["CardPower"]) => void;
+
+	/** Sets card talent */
 	setCardTalent: (talent: CardFormFieldValue["CardTalent"]) => void;
+
+	/** Sets primary card class */
 	setCardClass: (cardClass: CardFormFieldValue["CardClass"]) => void;
+
+	/** Sets secondary card class */
 	setCardSecondaryClass: (
 		cardClass: CardFormFieldValue["CardSecondaryClass"],
 	) => void;
+
+	/** Sets card subtype */
 	setCardSubType: (subType: CardFormFieldValue["CardSubType"]) => void;
+
+	/** Sets card rarity (basic, common, rare, legendary) */
 	setCardRarity: (rarity: CardFormFieldValue["CardRarity"]) => void;
+
+	/** Sets hero life value */
 	setCardLife: (life: CardFormFieldValue["CardLife"]) => void;
+
+	/** Sets card defense value */
 	setCardDefense: (defense: CardFormFieldValue["CardDefense"]) => void;
+
+	/** Sets hero intellect value */
 	setCardHeroIntellect: (
 		intellect: CardFormFieldValue["CardHeroIntellect"],
 	) => void;
+
+	/** Sets weapon type */
 	setCardWeapon: (weapon: CardFormFieldValue["CardWeapon"]) => void;
+
+	/** Sets card macro group */
 	setCardMacroGroup: (group: CardFormFieldValue["CardMacroGroup"]) => void;
+
+	/**
+	 * Resets all state to initial values and generates a new version UUID.
+	 * This invalidates any saved/cached state.
+	 */
 	reset: () => void;
+
+	/**
+	 * Loads a partial card state (used when opening saved cards from gallery).
+	 * Merges provided state with current state.
+	 */
 	loadCard: (state: Partial<CardCreatorState>) => void;
 }
 
+/**
+ * Initial state for the card creator.
+ * Most fields are null/empty except for sensible defaults:
+ * - First available card back
+ * - "dented" back style (most common)
+ * - "basic" rarity
+ */
 const initialState: CardCreatorState = {
 	__version: uuid(),
 	CardType: null,
@@ -108,6 +225,16 @@ const initialState: CardCreatorState = {
 	CardMacroGroup: null,
 };
 
+/**
+ * Card Creator Store Hook
+ *
+ * Primary Zustand store for card creation state and actions.
+ * Includes Redux DevTools integration for debugging.
+ *
+ * @example
+ * const { CardType, setCardType } = useCardCreator();
+ * setCardType('hero');
+ */
 export const useCardCreator = create<CardCreatorState & CardCreatorActions>()(
 	devtools((set, _, store) => ({
 		...initialState,

@@ -1,3 +1,35 @@
+/**
+ * Normal Card Renderer Component
+ *
+ * Renders standard (non-meld) TCG cards as SVG based on configuration presets.
+ *
+ * ## Rendering Process
+ *
+ * 1. **Card Back Layer**: Renders the base card back image (pitch-specific)
+ * 2. **Artwork Layer**: Applies user artwork with mask clipping
+ * 3. **Text Elements**: Renders card name, resource, power, defense, etc.
+ * 4. **Rich Text**: Renders formatted card text via foreignObject + HTML
+ * 5. **Footer**: Renders set number and artist credits (variant-specific layout)
+ *
+ * ## Dynamic Scaling
+ *
+ * Font sizes automatically scale based on content length:
+ * - **Card Name**: Scales down for long names (uses useScaledFontSize)
+ * - **Card Text**: Scales down for lengthy text (uses useScaledFontSizeFromHTML)
+ * - **Bottom Text**: Scales for class/subtype overflow
+ *
+ * ## Masking & Clipping
+ *
+ * - **Artwork Mask**: Defines the visible card art area
+ * - **Title Clip**: Prevents card name from overflowing title box
+ * - **Bottom Text Clip**: Prevents class/subtype overflow
+ *
+ * ## Variant Differences
+ *
+ * - **Flat**: Footer splits into left/right corners
+ * - **Dented**: Footer uses single or stacked centered text
+ */
+
 import { type ReactNode, type Ref, useMemo } from "react";
 import useObjectURL from "use-object-url";
 import { CardRarities } from "../../../config/cards/rarities.ts";
@@ -14,10 +46,19 @@ import {
 } from "../hooks/useScaledFontSize.ts";
 
 export type NormalRendererProps = {
+	/** Render configuration preset (flat or dented variant) */
 	config: NormalFlatRenderConfig | NormalDentedRenderConfig;
+
+	/** React ref for accessing the rendered SVG element (used for export) */
 	ref?: Ref<SVGSVGElement>;
 };
 
+/**
+ * Normal Card Renderer
+ *
+ * Main rendering component for standard TCG cards.
+ * Converts card creator state + render config into a complete SVG card.
+ */
 export function NormalRenderer({ config, ref }: NormalRendererProps) {
 	const CardBack = useCardCreator((state) => state.CardBack);
 	const CardPitch = useCardCreator((state) => state.CardPitch);
@@ -245,6 +286,17 @@ export function NormalRenderer({ config, ref }: NormalRendererProps) {
 	);
 }
 
+/**
+ * Generates footer text for dented card backs.
+ *
+ * Layout logic:
+ * - Single string: Renders centered single-line footer
+ * - Array of 2 strings: Renders two centered lines (stacked vertically)
+ *
+ * @param config - Dented render configuration
+ * @param footer - Footer text (single string or [line1, line2])
+ * @returns React elements for footer text
+ */
 function generateDentedFooter(
 	config: NormalDentedRenderConfig,
 	footer: string | string[],
@@ -301,6 +353,21 @@ function generateDentedFooter(
 	);
 }
 
+/**
+ * Generates footer text for flat card backs.
+ *
+ * Layout logic:
+ * - Single string: No footer (returns null)
+ * - Array of 2 strings: Splits into left and right corners
+ *
+ * Typically used for:
+ * - Left: Set number (e.g., "MON001")
+ * - Right: Artist credit (e.g., "ARTIST NAME")
+ *
+ * @param config - Flat render configuration
+ * @param footer - Footer text array [left, right]
+ * @returns React elements for footer text or null
+ */
 function generateFlatFooter(
 	config: NormalFlatRenderConfig,
 	footer: string | string[],

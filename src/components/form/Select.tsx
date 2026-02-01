@@ -1,3 +1,32 @@
+/**
+ * Select Dropdown Component
+ *
+ * Styled select/dropdown component built on Headless UI Listbox.
+ * Provides type-safe options with semantic color tokens.
+ *
+ * ## Features
+ * - Generic type parameter for type-safe values
+ * - Semantic color tokens (bg-surface, text-body, etc.)
+ * - Check icon for selected state
+ * - Keyboard navigation support
+ * - Focus ring with primary color
+ * - Anchor positioning (dropdown appears below button)
+ * - Optional label and description
+ *
+ * @example
+ * <Select
+ *   label="Card Type"
+ *   value={cardType}
+ *   onChange={setCardType}
+ *   options={[
+ *     { value: "action", label: "Action" },
+ *     { value: "hero", label: "Hero" }
+ *   ]}
+ *   placeholder="Select a card type"
+ *   required
+ * />
+ */
+
 import {
 	Description,
 	Field,
@@ -9,21 +38,49 @@ import {
 } from "@headlessui/react";
 import { Check, ChevronDown } from "lucide-react";
 
+/**
+ * Single option in a Select dropdown.
+ * Generic type T ensures value type safety.
+ */
 export interface SelectOption<T extends string> {
+	/** Internal value (stored in state) */
 	value: T;
+
+	/** Display label shown to user */
 	label: string;
 }
 
+/**
+ * Props for Select component.
+ * Generic type T propagates through value and options for type safety.
+ */
 interface SelectProps<T extends string> {
+	/** Select label text (can be null to hide label) */
 	label: string | null;
+
+	/** Optional helper text shown below label */
 	description?: string;
+
+	/** Shows asterisk indicator in label */
 	required?: boolean;
+
+	/** Currently selected value (controlled component) */
 	value: T | null;
+
+	/** Callback when selection changes, receives new value */
 	onChange: (value: T) => void;
+
+	/** Available options to choose from */
 	options: SelectOption<T>[];
+
+	/** Placeholder text when no option selected */
 	placeholder?: string;
 }
 
+/**
+ * Type-safe dropdown select component.
+ * Uses Headless UI Listbox for accessibility and keyboard navigation.
+ */
 export default function Select<T extends string>({
 	label,
 	description,

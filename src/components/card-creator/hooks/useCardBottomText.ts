@@ -1,3 +1,28 @@
+/**
+ * Card Bottom Text Hook
+ *
+ * Generates the bottom center text on cards that displays talent, class,
+ * card type, and subtype information.
+ *
+ * ## Format Examples
+ *
+ * - "Light Warrior Action - Attack"
+ * - "Draconic Illusionist Hero"
+ * - "Ninja Action - Attack Reaction (2H)"
+ * - "Equipment - Arms"
+ *
+ * ## Assembly Logic
+ *
+ * Combines (in order, space-separated):
+ * 1. Talent (if present and not "none")
+ * 2. Class(es) - space separator for heroes, " / " for others
+ * 3. Card type
+ * 4. Subtype (if present) prefixed with "-"
+ * 5. Weapon hand (for weapon types) like "(1H)" or "(2H)"
+ *
+ * All text is localized via i18next.
+ */
+
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { CardClasses } from "../../../config/cards/classes.ts";
@@ -6,6 +31,12 @@ import { CardTalents } from "../../../config/cards/talents.ts";
 import { CardTypes } from "../../../config/cards/types.ts";
 import { useCardCreator } from "../../../stores/card-creator.ts";
 
+/**
+ * Computes the bottom center text for a card based on current state.
+ * Automatically handles talent, class, type, and subtype combinations.
+ *
+ * @returns Formatted bottom text string (e.g., "Light Warrior Action - Attack")
+ */
 export function useCardBottomText() {
 	const { t } = useTranslation();
 	const {
