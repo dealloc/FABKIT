@@ -23,6 +23,7 @@ function RouteComponent() {
 	return (
 		<div className="flex flex-1 flex-col justify-center items-center p-4 gap-4 max-w-1/2">
 			<Renderer ref={svgRef} />
+			<div id="temp-export"></div>
 
 			<section>
 				<button type="button" onClick={exportImage}>export</button>

@@ -5,6 +5,7 @@
       "name": "fabkit",
       "dependencies": {
         "@headlessui/react": "^2.2.9",
+        "@jpinsonneau/html-to-image": "^1.11.13",
         "@tanstack/react-router": "^1.157.10",
         "@tanstack/react-router-devtools": "^1.157.10",
         "@tiptap/extension-bold": "^3.17.1",
@@ -337,6 +338,8 @@
     "@isaacs/brace-expansion": ["@isaacs/brace-expansion@5.0.0", "", { "dependencies": { "@isaacs/balanced-match": "^4.0.1" } }, "sha512-ZT55BDLV0yv0RBm2czMiZ+SqCGO7AvmOM3G/w2xhVPH+te0aKgFjmBvGlL1dH+ql2tgGO3MVrbb3jCKyvpgnxA=="],
 
     "@isaacs/cliui": ["@isaacs/cliui@8.0.2", "", { "dependencies": { "string-width": "^5.1.2", "string-width-cjs": "npm:string-width@^4.2.0", "strip-ansi": "^7.0.1", "strip-ansi-cjs": "npm:strip-ansi@^6.0.1", "wrap-ansi": "^8.1.0", "wrap-ansi-cjs": "npm:wrap-ansi@^7.0.0" } }, "sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA=="],
+
+    "@jpinsonneau/html-to-image": ["@jpinsonneau/html-to-image@1.11.13", "", {}, "sha512-SfxGKL5MuUbTNO9aU7TGBsI9Fm68fXlF+TqqD75LAfO5FN//Fe46+rzKxIVZPUzi7NEKGJO3O1jBeua2Cd2Cbg=="],
 
     "@jridgewell/gen-mapping": ["@jridgewell/gen-mapping@0.3.13", "", { "dependencies": { "@jridgewell/sourcemap-codec": "^1.5.0", "@jridgewell/trace-mapping": "^0.3.24" } }, "sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA=="],
 
