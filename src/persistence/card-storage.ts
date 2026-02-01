@@ -150,6 +150,7 @@ export function serializeCardState(
 		CardHeroIntellect: state.CardHeroIntellect,
 		CardWeapon: state.CardWeapon,
 		CardMacroGroup: state.CardMacroGroup,
+		CardOverlay: state.CardOverlay,
 	};
 }
 
