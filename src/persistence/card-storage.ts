@@ -242,3 +242,47 @@ export function downloadCardJSON(jsonString: string, cardName: string): void {
 	document.body.removeChild(a);
 	URL.revokeObjectURL(url);
 }
+
+async function base64ToBlob(base64: string): Promise<Blob> {
+	const response = await fetch(base64);
+	return response.blob();
+}
+
+export async function importCardFromJSON(jsonString: string): Promise<void> {
+	const data = JSON.parse(jsonString);
+
+	// Validate basic structure
+	if (!data.version || !data.cardName || !data.state) {
+		throw new Error("Invalid card file format");
+	}
+
+	// Convert base64 images back to Blobs
+	const preview = await base64ToBlob(data.preview);
+	const artwork = data.state.CardArtwork
+		? await base64ToBlob(data.state.CardArtwork)
+		: null;
+
+	// Create the stored card object
+	const card: StoredCard = {
+		version: data.version,
+		cardName: data.cardName,
+		createdAt: data.createdAt || Date.now(),
+		updatedAt: Date.now(), // Update to current time on import
+		preview,
+		state: {
+			...data.state,
+			CardArtwork: artwork,
+		},
+	};
+
+	// Save to IndexedDB (will overwrite if version already exists)
+	const db = await initCardDatabase();
+	return new Promise((resolve, reject) => {
+		const transaction = db.transaction([STORE_NAME], "readwrite");
+		const store = transaction.objectStore(STORE_NAME);
+		const request = store.put(card); // Use put instead of add to allow overwriting
+
+		request.onsuccess = () => resolve();
+		request.onerror = () => reject(request.error);
+	});
+}
