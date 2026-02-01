@@ -196,3 +196,49 @@ export async function deleteCard(version: string): Promise<void> {
 		request.onerror = () => reject(request.error);
 	});
 }
+
+async function blobToBase64(blob: Blob): Promise<string> {
+	return new Promise((resolve, reject) => {
+		const reader = new FileReader();
+		reader.onloadend = () => resolve(reader.result as string);
+		reader.onerror = reject;
+		reader.readAsDataURL(blob);
+	});
+}
+
+export async function exportCardToJSON(card: StoredCard): Promise<string> {
+	// Convert preview Blob to base64
+	const previewBase64 = await blobToBase64(card.preview);
+
+	// Convert artwork Blob to base64 if it exists
+	const artworkBase64 = card.state.CardArtwork
+		? await blobToBase64(card.state.CardArtwork)
+		: null;
+
+	// Create exportable object with base64 images
+	const exportData = {
+		version: card.version,
+		cardName: card.cardName,
+		createdAt: card.createdAt,
+		updatedAt: card.updatedAt,
+		preview: previewBase64,
+		state: {
+			...card.state,
+			CardArtwork: artworkBase64,
+		},
+	};
+
+	return JSON.stringify(exportData, null, 2);
+}
+
+export function downloadCardJSON(jsonString: string, cardName: string): void {
+	const blob = new Blob([jsonString], { type: "application/fabkit+json" });
+	const url = URL.createObjectURL(blob);
+	const a = document.createElement("a");
+	a.href = url;
+	a.download = `${cardName.replace(/[^a-z0-9]/gi, "_").toLowerCase()}.fabkit`;
+	document.body.appendChild(a);
+	a.click();
+	document.body.removeChild(a);
+	URL.revokeObjectURL(url);
+}
