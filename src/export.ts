@@ -8,9 +8,12 @@ import { Canvg, type IOptions, presets } from "canvg";
 const serializer = new XMLSerializer();
 const preset = presets.offscreen();
 
-export async function convertToImage(svg: SVGSVGElement): Promise<Blob> {
-	const width = svg.width.baseVal.value;
-	const height = svg.height.baseVal.value;
+export async function convertToImage(
+	svg: SVGSVGElement,
+	scale = 1.0,
+): Promise<Blob> {
+	const width = svg.width.baseVal.value * scale;
+	const height = svg.height.baseVal.value * scale;
 	const canvas = new OffscreenCanvas(width, height);
 	const ctx = canvas.getContext("2d");
 	const svgString = serializer.serializeToString(svg);
@@ -32,14 +35,14 @@ export async function convertToImage(svg: SVGSVGElement): Promise<Blob> {
 		// TODO: splice `image` onto `canvas` as the coordinates of the `foreignObject`
 		ctx.drawImage(
 			image,
-			foreignObject.x.baseVal.value,
-			foreignObject.y.baseVal.value,
-			foreignObject.width.baseVal.value,
-			foreignObject.height.baseVal.value,
+			foreignObject.x.baseVal.value * scale,
+			foreignObject.y.baseVal.value * scale,
+			foreignObject.width.baseVal.value * scale,
+			foreignObject.height.baseVal.value * scale,
 		);
 	}
 
-	return await canvas.convertToBlob({ type: "image/png", quality: 2 });
+	return await canvas.convertToBlob({ type: "image/png", quality: scale });
 }
 
 async function exportForeignObject(

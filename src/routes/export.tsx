@@ -17,14 +17,14 @@ function RouteComponent() {
 	const imageUrl = useMemo(
 		() => (exportedCard ? URL.createObjectURL(exportedCard) : null),
 		[exportedCard],
-	)
+	);
 
 	useEffect(() => {
 		const renderCard = async () => {
 			if (!svgRef.current) {
 				console.error("SVG ref is not available");
 				setIsExporting(false);
-				return
+				return;
 			}
 
 			try {
@@ -35,7 +35,7 @@ function RouteComponent() {
 			} finally {
 				setIsExporting(false);
 			}
-		}
+		};
 
 		// Give the Renderer time to mount and render
 		setTimeout(renderCard, 100);
@@ -47,7 +47,7 @@ function RouteComponent() {
 			if (imageUrl) {
 				URL.revokeObjectURL(imageUrl);
 			}
-		}
+		};
 	}, [imageUrl]);
 
 	const handleDownload = () => {
@@ -59,7 +59,7 @@ function RouteComponent() {
 		document.body.appendChild(link);
 		link.click();
 		document.body.removeChild(link);
-	}
+	};
 
 	return (
 		<>
@@ -89,5 +89,5 @@ function RouteComponent() {
 				</div>
 			)}
 		</>
-	)
+	);
 }

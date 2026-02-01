@@ -8,7 +8,10 @@ import type {
 import { useCardCreator } from "../../../stores/card-creator.ts";
 import { useCardBottomText } from "../hooks/useCardBottomText.ts";
 import { useCardFooterText } from "../hooks/useCardFooterText.ts";
-import {useScaledFontSize, useScaledFontSizeFromHTML} from "../hooks/useScaledFontSize.ts";
+import {
+	useScaledFontSize,
+	useScaledFontSizeFromHTML,
+} from "../hooks/useScaledFontSize.ts";
 
 export type NormalRendererProps = {
 	config: NormalFlatRenderConfig | NormalDentedRenderConfig;
@@ -29,21 +32,21 @@ export function NormalRenderer({ config, ref }: NormalRendererProps) {
 
 	// Dynamically scale the font of the card name based on it's length.
 	const CardNameFontSize = useScaledFontSize({
-		text: CardName || '',
+		text: CardName || "",
 		baseFontSize: config.elements.CardName.fontSize,
 		referenceLength: 20,
 		minFontSize: 12,
 		maxFontSize: 32,
-		scalingFactor: 0.7
+		scalingFactor: 0.7,
 	});
 
 	const CardTextFontSize = useScaledFontSizeFromHTML({
-		html: CardTextHTML || '',
+		html: CardTextHTML || "",
 		baseFontSize: 20,
 		referenceLength: 100,
 		minFontSize: 10,
 		maxFontSize: 20,
-		scalingFactor: 0.5
+		scalingFactor: 0.5,
 	});
 
 	const artwork = useObjectURL(CardArtwork);
@@ -62,7 +65,7 @@ export function NormalRenderer({ config, ref }: NormalRendererProps) {
 		referenceLength: 20,
 		minFontSize: 10,
 		maxFontSize: 20,
-		scalingFactor: 0.6
+		scalingFactor: 0.6,
 	});
 
 	const svgStyle = useMemo(

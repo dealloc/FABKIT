@@ -2,6 +2,7 @@ import type { Content } from "@tiptap/react";
 import { v4 as uuid } from "uuid";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
+import { isFieldVisible } from "../components/utils.ts";
 import {
 	type CardBack,
 	CardBacks,
@@ -9,18 +10,18 @@ import {
 	getSuggestedCardBack,
 } from "../config/cards/card_backs.ts";
 import {
-	type CardFormField, CardFormFields,
+	type CardFormField,
+	CardFormFields,
 	type CardFormFieldValue,
 } from "../config/cards/form_fields.ts";
 import type { CardType } from "../config/cards/types.ts";
-import {isFieldVisible} from "../components/utils.ts";
 
 // Utility type that allows us to be type safe without having to copy every type from CardFormField
 type FormFieldValues = {
 	[K in CardFormField]: CardFormFieldValue[K] | null;
 };
 
-interface CardCreatorState extends FormFieldValues {
+export interface CardCreatorState extends FormFieldValues {
 	// internal version that will be unique every time, used for tracking persistence etc.
 	__version: string;
 	CardType: CardType | null;
@@ -41,7 +42,7 @@ interface CardCreatorState extends FormFieldValues {
 	CardTextNode: Content | null;
 }
 
-interface CardCreatorActions {
+export interface CardCreatorActions {
 	setCardType: (cardType: CardType) => void;
 	setCardBack: (cardBack: CardBack) => void;
 	setCardBackStyle: (backType: "flat" | "dented") => void;
@@ -76,6 +77,7 @@ interface CardCreatorActions {
 	setCardWeapon: (weapon: CardFormFieldValue["CardWeapon"]) => void;
 	setCardMacroGroup: (group: CardFormFieldValue["CardMacroGroup"]) => void;
 	reset: () => void;
+	loadCard: (state: Partial<CardCreatorState>) => void;
 }
 
 const initialState: CardCreatorState = {
@@ -124,7 +126,10 @@ export const useCardCreator = create<CardCreatorState & CardCreatorActions>()(
 
 				// When we change the state some fields become invisible.
 				// All fields that are not visible for the new card type are set to null.
-				const result: Partial<CardCreatorState> = { CardType: cardType, CardBack: cardBack };
+				const result: Partial<CardCreatorState> = {
+					CardType: cardType,
+					CardBack: cardBack,
+				};
 				for (const field of CardFormFields) {
 					if (!isFieldVisible(field, cardType)) {
 						Object.assign(result, { [field]: null });
@@ -214,5 +219,6 @@ export const useCardCreator = create<CardCreatorState & CardCreatorActions>()(
 		setCardMacroGroup: (group: CardFormFieldValue["CardMacroGroup"]) =>
 			set({ CardMacroGroup: group }),
 		reset: () => set({ ...store.getInitialState(), __version: uuid() }),
+		loadCard: (state: Partial<CardCreatorState>) => set(state),
 	})),
 );

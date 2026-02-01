@@ -1,4 +1,4 @@
-import { readdir, readFile, writeFile, stat } from "node:fs/promises";
+import { readdir, readFile, stat, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 
 const CARDBACKS_DIR = "public/cardbacks/generated";
@@ -29,9 +29,7 @@ async function scanDirectoryRecursive(
 				);
 				results.push(...subResults);
 			} else if (entry.isFile()) {
-				if (
-					extensions.some((ext) => entry.name.toLowerCase().endsWith(ext))
-				) {
+				if (extensions.some((ext) => entry.name.toLowerCase().endsWith(ext))) {
 					// Convert to relative path from public/
 					const relativePath = fullPath
 						.replace(/\\/g, "/")
@@ -150,7 +148,11 @@ async function main() {
 		console.warn("⚠️  No image files found in public/img");
 	}
 
-	if (cardbackImages.length === 0 && fontFiles.length === 0 && imgFiles.length === 0) {
+	if (
+		cardbackImages.length === 0 &&
+		fontFiles.length === 0 &&
+		imgFiles.length === 0
+	) {
 		return;
 	}
 

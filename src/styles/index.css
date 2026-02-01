@@ -45,7 +45,7 @@
 	--breakpoint-xs: 30rem;
 
 	/* Fonts */
-	--font-card-text: 'palatino_lt_stdroman', serif;
+	--font-card-text: "palatino_lt_stdroman", serif;
 }
 
 [data-theme="dark"] {

@@ -7,6 +7,7 @@ import {
 import { Link, useLocation } from "@tanstack/react-router";
 import {
 	Home,
+	Images,
 	Map as MapIcon,
 	Menu as MenuIcon,
 	MessageCircle,
@@ -20,6 +21,7 @@ import FabkitLogoNotext from "../../assets/Fabkitlogo_notext.svg";
 const navigation = [
 	{ name: "Home", route: "/", icon: Home },
 	{ name: "Card Creator", route: "/card-creator", icon: Paintbrush },
+	{ name: "Gallery", route: "/gallery", icon: Images },
 	{ name: "Roadmap", route: "/roadmap", icon: MapIcon },
 	{ name: "Contact", route: "/contact", icon: MessageCircle },
 ];

@@ -137,7 +137,7 @@ export default defineConfig({
 				"img/symbols/icon_int.svg",
 				"img/symbols/icon_pwr.svg",
 				"img/symbols/icon_t.svg",
-				"img/symbols/icon_u.svg"
+				"img/symbols/icon_u.svg",
 			],
 			manifest: {
 				name: "FabKit",

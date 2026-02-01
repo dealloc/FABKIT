@@ -164,7 +164,22 @@
 		"text_label": "Card text",
 		"reset_label": "Reset",
 		"card_back_style_dented_label": "Dented",
-		"card_back_style_flat_label": "Flat"
+		"card_back_style_flat_label": "Flat",
+		"save": "Save Card",
+		"saving": "Saving...",
+		"save_success": "Card saved successfully!",
+		"save_error": "Failed to save card. Please try again.",
+		"save_error_no_name": "Please enter a card name before saving."
+	},
+	"gallery": {
+		"title": "Saved Cards",
+		"subtitle": "Browse and manage your saved cards",
+		"empty": "No saved cards yet",
+		"create_first": "Create your first card",
+		"edit": "Edit",
+		"delete": "Delete",
+		"edit_warning": "Loading this card will replace your current work. Continue?",
+		"delete_confirm": "Are you sure you want to delete this card? This cannot be undone."
 	},
 	"export": {
 		"exporting_label": "Exporting your card, this may take a few seconds...",

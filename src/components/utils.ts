@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import type { CardFormField } from "../config/cards/form_fields.ts";
-import {type CardType, CardTypes} from "../config/cards/types.ts";
+import { type CardType, CardTypes } from "../config/cards/types.ts";
 import { useCardCreator } from "../stores/card-creator.ts";
 
 /**
@@ -19,7 +19,10 @@ export function useIsFieldVisible(field: CardFormField): boolean {
 /**
  * non-hook version of `useIsFieldVisible`
  */
-export function isFieldVisible(field: CardFormField, cardType: CardType | null): boolean {
+export function isFieldVisible(
+	field: CardFormField,
+	cardType: CardType | null,
+): boolean {
 	if (!cardType) return false;
 
 	return CardTypes[cardType].fields.includes(field);

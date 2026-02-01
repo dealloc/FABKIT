@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useRef } from "react";
 import { CardArtworkCreditsField } from "../components/card-creator/fields/CardArtworkCreditsField.tsx";
 import { CardArtworkField } from "../components/card-creator/fields/CardArtworkField.tsx";
 import { CardArtworkPositionContainer } from "../components/card-creator/fields/CardArtworkPositionContainer.tsx";
@@ -22,6 +23,7 @@ import { CardTextField } from "../components/card-creator/fields/CardTextField.t
 import { CardTypeField } from "../components/card-creator/fields/CardTypeField.tsx";
 import { CardWeaponField } from "../components/card-creator/fields/CardWeaponField.tsx";
 import { ResetButton } from "../components/card-creator/fields/ResetButton.tsx";
+import { SaveButton } from "../components/card-creator/fields/SaveButton.tsx";
 import { Renderer } from "../components/card-creator/Renderer.tsx";
 import { useCardCreator } from "../stores/card-creator.ts";
 
@@ -31,6 +33,7 @@ export const Route = createFileRoute("/card-creator")({
 
 function RouteComponent() {
 	const CardType = useCardCreator((state) => state.CardType);
+	const previewRef = useRef<SVGSVGElement>(null);
 
 	if (CardType === null) {
 		return (
@@ -87,18 +90,19 @@ function RouteComponent() {
 				{/* Card preview */}
 				<div className="min-w-full md:min-w-96">
 					<CardArtworkPositionContainer>
-						<Renderer />
+						<Renderer ref={previewRef} />
 					</CardArtworkPositionContainer>
 				</div>
 
-				{/* Generate button */}
+				{/* Action buttons */}
 				<Link
 					to="/export"
-					className="px-6 py-3 bg-primary text-white font-bold rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+					className="flex-1 px-6 py-3 bg-primary text-white font-bold rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
 				>
 					Generate
 				</Link>
 
+				<SaveButton previewRef={previewRef} />
 				<ResetButton />
 			</section>
 		</div>
