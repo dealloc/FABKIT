@@ -1,6 +1,7 @@
 import { Image as ImageIcon, Upload, X } from "lucide-react";
-import { useCallback, useState } from "react";
+import {useCallback, useRef, useState} from "react";
 import { useTranslation } from "react-i18next";
+import { v4 as uuid } from "uuid";
 
 interface ImageUploadProps {
 	onImageSelect?: (file: File | null) => void;
@@ -18,6 +19,7 @@ export default function ImageUpload({
 	className = "",
 }: ImageUploadProps) {
 	const { t } = useTranslation();
+	const id = useRef(uuid());
 	const [isDragging, setIsDragging] = useState(false);
 	const [fileName, setFileName] = useState<string | null>(null);
 	const [error, setError] = useState<string | null>(null);
@@ -103,7 +105,7 @@ export default function ImageUpload({
 		<div className={`relative ${className}`}>
 			<input
 				type="file"
-				id="image-upload"
+				id={id.current}
 				accept={acceptedFormats.join(",")}
 				onChange={handleFileInput}
 				className="sr-only"
@@ -111,7 +113,7 @@ export default function ImageUpload({
 
 			{!fileName ? (
 				<label
-					htmlFor="image-upload"
+					htmlFor={id.current}
 					onDragEnter={handleDragEnter}
 					onDragLeave={handleDragLeave}
 					onDragOver={handleDragOver}

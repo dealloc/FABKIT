@@ -76,6 +76,9 @@ export interface CardCreatorState extends FormFieldValues {
 
 	/** Tiptap editor's internal Content representation (for hydrating editor state) */
 	CardTextNode: Content | null;
+
+	/** Allows overlaying the card with another image */
+	CardOverlay: Blob | null;
 }
 
 /**
@@ -177,6 +180,8 @@ export interface CardCreatorActions {
 	/** Sets card macro group */
 	setCardMacroGroup: (group: CardFormFieldValue["CardMacroGroup"]) => void;
 
+	setOverlay: (overlay: Blob | null) => void;
+
 	/**
 	 * Resets all state to initial values and generates a new version UUID.
 	 * This invalidates any saved/cached state.
@@ -223,6 +228,7 @@ const initialState: CardCreatorState = {
 	CardHeroIntellect: null,
 	CardWeapon: null,
 	CardMacroGroup: null,
+	CardOverlay: null,
 };
 
 /**
@@ -345,6 +351,7 @@ export const useCardCreator = create<CardCreatorState & CardCreatorActions>()(
 			set({ CardWeapon: weapon }),
 		setCardMacroGroup: (group: CardFormFieldValue["CardMacroGroup"]) =>
 			set({ CardMacroGroup: group }),
+		setOverlay: (overlay: Blob | null) => set({ CardOverlay: overlay }),
 		reset: () => set({ ...store.getInitialState(), __version: uuid() }),
 		loadCard: (state: Partial<CardCreatorState>) => set(state),
 	})),

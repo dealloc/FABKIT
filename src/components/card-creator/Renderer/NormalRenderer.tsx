@@ -70,6 +70,7 @@ export function NormalRenderer({ config, ref }: NormalRendererProps) {
 	const CardArtwork = useCardCreator((state) => state.CardArtwork);
 	const CardTextHTML = useCardCreator((state) => state.CardTextHTML);
 	const CardArtPosition = useCardCreator((state) => state.CardArtPosition);
+	const CardOverlay = useCardCreator((state) => state.CardOverlay);
 
 	// Dynamically scale the font of the card name based on it's length.
 	const CardNameFontSize = useScaledFontSize({
@@ -91,6 +92,7 @@ export function NormalRenderer({ config, ref }: NormalRendererProps) {
 	});
 
 	const artwork = useObjectURL(CardArtwork);
+	const overlay = useObjectURL(CardOverlay);
 	const cardBackImage = useMemo(
 		() =>
 			CardBack?.images.find((image) => image.pitch === CardPitch) ||
@@ -282,6 +284,18 @@ export function NormalRenderer({ config, ref }: NormalRendererProps) {
 
 			{config.variant === "dented" && generateDentedFooter(config, footer)}
 			{config.variant === "flat" && generateFlatFooter(config, footer)}
+
+			{overlay && (
+				<image
+					href={overlay}
+					x={0}
+					y={0}
+					opacity={0.5}
+					width={config.viewBox.width}
+					height={config.viewBox.height}
+					preserveAspectRatio="xMidYMid slice"
+				/>
+			)}
 		</svg>
 	);
 }

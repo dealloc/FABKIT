@@ -26,6 +26,7 @@ import { ResetButton } from "../components/card-creator/fields/ResetButton.tsx";
 import { SaveButton } from "../components/card-creator/fields/SaveButton.tsx";
 import { Renderer } from "../components/card-creator/Renderer.tsx";
 import { useCardCreator } from "../stores/card-creator.ts";
+import {CardOverlayField} from "../components/card-creator/fields/CardOverlayField.tsx";
 
 export const Route = createFileRoute("/card-creator")({
 	component: RouteComponent,
@@ -69,6 +70,7 @@ function RouteComponent() {
 					<CardArtworkField />
 					<CardArtworkCreditsField />
 					<CardSetnumberField />
+					<CardOverlayField />
 					<CardTextField className="col-span-1 sm:col-span-2 xl:col-span-3" />
 				</div>
 			</section>
