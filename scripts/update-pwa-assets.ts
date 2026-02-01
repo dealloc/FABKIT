@@ -1,10 +1,52 @@
-import { readdir, readFile, writeFile } from "node:fs/promises";
+import { readdir, readFile, writeFile, stat } from "node:fs/promises";
+import { join } from "node:path";
 
 const CARDBACKS_DIR = "public/cardbacks/generated";
 const FONTS_DIR = "public/fonts";
+const IMG_DIR = "public/img";
 const VITE_CONFIG_PATH = "vite.config.ts";
 const IMAGE_EXTENSIONS = [".png", ".jpg", ".jpeg", ".webp", ".svg"];
 const FONT_EXTENSIONS = [".woff", ".woff2", ".ttf", ".otf", ".svg"];
+
+async function scanDirectoryRecursive(
+	dir: string,
+	baseDir: string,
+	extensions: string[],
+): Promise<string[]> {
+	const results: string[] = [];
+
+	try {
+		const entries = await readdir(dir, { withFileTypes: true });
+
+		for (const entry of entries) {
+			const fullPath = join(dir, entry.name);
+
+			if (entry.isDirectory()) {
+				const subResults = await scanDirectoryRecursive(
+					fullPath,
+					baseDir,
+					extensions,
+				);
+				results.push(...subResults);
+			} else if (entry.isFile()) {
+				if (
+					extensions.some((ext) => entry.name.toLowerCase().endsWith(ext))
+				) {
+					// Convert to relative path from public/
+					const relativePath = fullPath
+						.replace(/\\/g, "/")
+						.replace("public/", "");
+					results.push(relativePath);
+				}
+			}
+		}
+	} catch (error) {
+		// Directory doesn't exist or can't be read
+		return [];
+	}
+
+	return results.sort();
+}
 
 async function getCardbackImages(): Promise<string[]> {
 	try {
@@ -36,9 +78,19 @@ async function getFontFiles(): Promise<string[]> {
 	}
 }
 
+async function getImgFiles(): Promise<string[]> {
+	try {
+		return await scanDirectoryRecursive(IMG_DIR, IMG_DIR, IMAGE_EXTENSIONS);
+	} catch (error) {
+		console.error(`Error reading img directory: ${error}`);
+		return [];
+	}
+}
+
 async function updateViteConfig(
 	cardbackPaths: string[],
 	fontPaths: string[],
+	imgPaths: string[],
 ): Promise<void> {
 	const configContent = await readFile(VITE_CONFIG_PATH, "utf-8");
 
@@ -53,7 +105,13 @@ async function updateViteConfig(
 
 	// Build the new includeAssets array content
 	const staticAssets = ["favicon.ico", "apple-touch-icon.png"];
-	const allAssets = [...staticAssets, ...cardbackPaths, ...fontPaths];
+
+	const allAssets = [
+		...staticAssets,
+		...cardbackPaths,
+		...fontPaths,
+		...imgPaths,
+	];
 
 	const newIncludeAssets = allAssets
 		.map((asset) => `\t\t\t\t"${asset}"`)
@@ -66,7 +124,7 @@ async function updateViteConfig(
 
 	await writeFile(VITE_CONFIG_PATH, newConfig, "utf-8");
 	console.log(
-		`✅ Updated ${VITE_CONFIG_PATH} with ${cardbackPaths.length} cardback images and ${fontPaths.length} font files`,
+		`✅ Updated ${VITE_CONFIG_PATH} with ${cardbackPaths.length} cardback images, ${fontPaths.length} font files, and ${imgPaths.length} img files`,
 	);
 }
 
@@ -77,6 +135,9 @@ async function main() {
 	console.log("🔍 Scanning for font files...");
 	const fontFiles = await getFontFiles();
 
+	console.log("🔍 Scanning for img files...");
+	const imgFiles = await getImgFiles();
+
 	if (cardbackImages.length === 0) {
 		console.warn("⚠️  No cardback images found in public/cardbacks/generated");
 	}
@@ -85,13 +146,18 @@ async function main() {
 		console.warn("⚠️  No font files found in public/fonts");
 	}
 
-	if (cardbackImages.length === 0 && fontFiles.length === 0) {
+	if (imgFiles.length === 0) {
+		console.warn("⚠️  No image files found in public/img");
+	}
+
+	if (cardbackImages.length === 0 && fontFiles.length === 0 && imgFiles.length === 0) {
 		return;
 	}
 
 	console.log(`📦 Found ${cardbackImages.length} cardback images`);
 	console.log(`📦 Found ${fontFiles.length} font files`);
-	await updateViteConfig(cardbackImages, fontFiles);
+	console.log(`📦 Found ${imgFiles.length} img files`);
+	await updateViteConfig(cardbackImages, fontFiles, imgFiles);
 	console.log("✨ Done!");
 }
 
