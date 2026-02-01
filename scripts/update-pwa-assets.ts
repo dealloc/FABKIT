@@ -1,4 +1,4 @@
-import { readdir, readFile, stat, writeFile } from "node:fs/promises";
+import { readdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 
 const CARDBACKS_DIR = "public/cardbacks/generated";
@@ -39,6 +39,8 @@ async function scanDirectoryRecursive(
 			}
 		}
 	} catch (error) {
+		console.error(error);
+
 		// Directory doesn't exist or can't be read
 		return [];
 	}
