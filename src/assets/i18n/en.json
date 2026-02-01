@@ -166,6 +166,10 @@
 		"card_back_style_dented_label": "Dented",
 		"card_back_style_flat_label": "Flat"
 	},
+	"export": {
+		"exporting_label": "Exporting your card, this may take a few seconds...",
+		"download": "Download"
+	},
 	"components": {
 		"featured_artist": {
 			"label": "Featured Artist",
