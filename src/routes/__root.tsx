@@ -18,6 +18,14 @@ function RootComponent() {
 			<Footer />
 			<ServiceWorker />
 			<DevBanner />
+			{/* Decorative gradient bubble */}
+			<div
+				className="fixed bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] pointer-events-none -z-10"
+				style={{
+					background:
+						"radial-gradient(ellipse at center, rgba(166, 134, 74, 0.2) 0%, transparent 70%)",
+				}}
+			/>
 		</>
 	);
 }
