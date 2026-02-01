@@ -97,7 +97,7 @@ function RouteComponent() {
 				{/* Action buttons */}
 				<Link
 					to="/export"
-					className="flex-1 px-6 py-3 bg-primary text-white font-bold rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+					className="px-6 py-3 bg-primary disabled:bg-border text-white font-bold rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
 				>
 					Generate
 				</Link>
