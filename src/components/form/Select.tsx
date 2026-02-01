@@ -15,7 +15,7 @@ export interface SelectOption<T extends string> {
 }
 
 interface SelectProps<T extends string> {
-	label: string;
+	label: string | null;
 	description?: string;
 	required?: boolean;
 	value: T | null;
@@ -37,10 +37,12 @@ export default function Select<T extends string>({
 
 	return (
 		<Field className="space-y-1" data-value={value}>
-			<Label className="block text-sm font-medium text-muted">
-				{label}
-				{required && <span className="text-primary ml-1">*</span>}
-			</Label>
+			{label && (
+				<Label className="block text-sm font-medium text-muted">
+					{label}
+					{required && <span className="text-primary ml-1">*</span>}
+				</Label>
+			)}
 			{description && (
 				<Description className="text-xs text-subtle">{description}</Description>
 			)}

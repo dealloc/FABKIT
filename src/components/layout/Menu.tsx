@@ -17,6 +17,7 @@ import {
 import { useState } from "react";
 import FabkitLogo from "../../assets/Fabkitlogo.svg";
 import FabkitLogoNotext from "../../assets/Fabkitlogo_notext.svg";
+import {LanguageSelector} from "./LanguageSelector.tsx";
 
 const navigation = [
 	{ name: "Home", route: "/", icon: Home },
@@ -166,6 +167,9 @@ export function Menu() {
 								</ul>
 							</li>
 						</ul>
+						<div className="mb-4">
+							<LanguageSelector />
+						</div>
 					</nav>
 				</div>
 			</div>
