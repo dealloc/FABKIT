@@ -1,5 +1,5 @@
 import { Image as ImageIcon, Upload, X } from "lucide-react";
-import {useCallback, useRef, useState} from "react";
+import { useCallback, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { v4 as uuid } from "uuid";
 

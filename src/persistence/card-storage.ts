@@ -127,7 +127,7 @@ export function serializeCardState(
 	return {
 		__version: state.__version,
 		CardType: state.CardType,
-		CardBack: state.CardBack.id,
+		CardBack: state.CardBack?.id || 1,
 		CardBackStyle: state.CardBackStyle,
 		CardArtwork: state.CardArtwork,
 		CardArtPosition: state.CardArtPosition,

@@ -1,5 +1,6 @@
 // Contains configuration data for FaB cards and related types as well as utility types.
 
+export { type CardStyle, CardStyles } from "./cards/card_styles";
 export { type CardClass, CardClasses } from "./cards/classes";
 export type { CardFormField } from "./cards/form_fields";
 export { CardRarities, type CardRarity } from "./cards/rarities";

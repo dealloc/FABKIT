@@ -17,6 +17,7 @@ import {
 	getCardBacksForTypeAndStyle,
 	getSuggestedCardBack,
 } from "../config/cards/card_backs.ts";
+import { type CardStyle, CardStyles } from "../config/cards/card_styles.ts";
 import {
 	type CardFormField,
 	CardFormFields,
@@ -46,10 +47,10 @@ export interface CardCreatorState extends FormFieldValues {
 	CardType: CardType | null;
 
 	/** Currently selected card back configuration object */
-	CardBack: CardBack;
+	CardBack: CardBack | null;
 
 	/** Card back visual style variant - affects available card backs */
-	CardBackStyle: "flat" | "dented";
+	CardBackStyle: CardStyle;
 
 	/** Uploaded card artwork as a Blob, or null if no artwork uploaded */
 	CardArtwork: Blob | null;
@@ -102,7 +103,7 @@ export interface CardCreatorActions {
 	 * Changes the card back style (flat/dented) and automatically
 	 * selects the first available card back for that style
 	 */
-	setCardBackStyle: (backType: "flat" | "dented") => void;
+	setCardBackStyle: (backType: CardStyle) => void;
 
 	/**
 	 * Sets card artwork from a Blob and automatically initializes
@@ -249,19 +250,35 @@ export const useCardCreator = create<CardCreatorState & CardCreatorActions>()(
 				// When selecting a new card type, make sure that either:
 				// - the current card back is valid for that card type
 				// - we select the first available card back for that card type
-				const available = getCardBacksForTypeAndStyle(
+				let available = getCardBacksForTypeAndStyle(
 					cardType,
 					state.CardBackStyle,
 				);
-				let cardBack = state.CardBack;
-				if (!available.includes(state.CardBack))
+				let cardStyle = state.CardBackStyle;
+				let cardBack: CardBack | null = state.CardBack;
+				if (state.CardBack === null || !available.includes(state.CardBack))
 					cardBack = getSuggestedCardBack(available);
+
+				if (null === cardBack) {
+					for (const style of CardStyles) {
+						available = getCardBacksForTypeAndStyle(cardType, style);
+
+						if (available.length > 0)
+							cardBack = getSuggestedCardBack(available);
+
+						if (null !== cardBack) {
+							cardStyle = style;
+							break;
+						}
+					}
+				}
 
 				// When we change the state some fields become invisible.
 				// All fields that are not visible for the new card type are set to null.
 				const result: Partial<CardCreatorState> = {
 					CardType: cardType,
 					CardBack: cardBack,
+					CardBackStyle: cardStyle,
 				};
 				for (const field of CardFormFields) {
 					if (!isFieldVisible(field, cardType)) {
@@ -272,7 +289,7 @@ export const useCardCreator = create<CardCreatorState & CardCreatorActions>()(
 				return result;
 			}),
 		setCardBack: (cardBack: CardBack) => set({ CardBack: cardBack }),
-		setCardBackStyle: (backType: "flat" | "dented") =>
+		setCardBackStyle: (backType: CardStyle) =>
 			set((state) => {
 				// When changing card back style, we select the first available card back for that style.
 				const available = getCardBacksForTypeAndStyle(state.CardType, backType);

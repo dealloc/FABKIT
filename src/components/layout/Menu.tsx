@@ -17,7 +17,7 @@ import {
 import { useState } from "react";
 import FabkitLogo from "../../assets/Fabkitlogo.svg";
 import FabkitLogoNotext from "../../assets/Fabkitlogo_notext.svg";
-import {LanguageSelector} from "./LanguageSelector.tsx";
+import { LanguageSelector } from "./LanguageSelector.tsx";
 
 const navigation = [
 	{ name: "Home", route: "/", icon: Home },

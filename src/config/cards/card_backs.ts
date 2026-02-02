@@ -1,5 +1,6 @@
 import _CardBacks from "../../../public/cardbacks/cardbacks.json";
 import type { RenderConfigVariation } from "../rendering.ts";
+import type { CardStyle } from "./card_styles.ts";
 import type { CardType } from "./types.ts";
 
 // Typing of the auto-generated `cardbacks.json` file.
@@ -21,7 +22,7 @@ export const CardBacks: CardBack[] = _CardBacks;
 
 export function getCardBacksForTypeAndStyle(
 	type: CardType | null,
-	style: "flat" | "dented",
+	style: CardStyle,
 ): CardBack[] {
 	if (type === null) {
 		return [];
@@ -55,6 +56,7 @@ export function getCardBacksForTypeAndStyle(
 	);
 }
 
-export function getSuggestedCardBack(available: CardBack[]): CardBack {
+export function getSuggestedCardBack(available: CardBack[]): CardBack | null {
+	if (available.length === 0) return null;
 	return available[0];
 }

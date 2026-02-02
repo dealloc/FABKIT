@@ -11,6 +11,7 @@ import { CardHeroIntellectField } from "../components/card-creator/fields/CardHe
 import { CardLifeField } from "../components/card-creator/fields/CardLifeField.tsx";
 import { CardMacroGroupField } from "../components/card-creator/fields/CardMacroGroupField.tsx";
 import { CardNameField } from "../components/card-creator/fields/CardNameField.tsx";
+import { CardOverlayField } from "../components/card-creator/fields/CardOverlayField.tsx";
 import { CardPitchField } from "../components/card-creator/fields/CardPitchField.tsx";
 import { CardPowerField } from "../components/card-creator/fields/CardPowerField.tsx";
 import { CardRarityField } from "../components/card-creator/fields/CardRarityField.tsx";
@@ -26,7 +27,6 @@ import { ResetButton } from "../components/card-creator/fields/ResetButton.tsx";
 import { SaveButton } from "../components/card-creator/fields/SaveButton.tsx";
 import { Renderer } from "../components/card-creator/Renderer.tsx";
 import { useCardCreator } from "../stores/card-creator.ts";
-import {CardOverlayField} from "../components/card-creator/fields/CardOverlayField.tsx";
 
 export const Route = createFileRoute("/card-creator")({
 	component: RouteComponent,

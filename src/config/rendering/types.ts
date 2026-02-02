@@ -19,6 +19,7 @@
  */
 
 import type { ReactElement } from "react";
+import type { CardStyle } from "../cards/card_styles.ts";
 
 /**
  * Configuration for rendering SVG text elements.
@@ -143,7 +144,7 @@ interface NormalCardRenderConfig extends BaseCardRenderConfig {
 	renderer: "normal";
 
 	/** Card back visual style - affects footer layout and element positioning */
-	variant: "dented" | "flat";
+	variant: CardStyle;
 }
 
 /**
