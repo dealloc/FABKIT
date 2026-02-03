@@ -106,6 +106,9 @@ export function CardArtworkPositionContainer({
 
 	const handleTouchStart = useCallback(
 		(e: React.TouchEvent) => {
+			// Prevent browser's default touch behavior (page scroll/zoom)
+			e.preventDefault();
+
 			if (e.touches.length === 1) {
 				// Single touch - start dragging
 				isDragging.current = true;
@@ -172,7 +175,8 @@ export function CardArtworkPositionContainer({
 		[CardArtPosition, setCardArtPosition],
 	);
 
-	const handleTouchEnd = useCallback(() => {
+	const handleTouchEnd = useCallback((e: React.TouchEvent) => {
+		e.preventDefault();
 		isDragging.current = false;
 		lastTouchDistance.current = null;
 	}, []);
@@ -180,6 +184,7 @@ export function CardArtworkPositionContainer({
 	return (
 		<div
 			role="application"
+			style={{ touchAction: "none" }}
 			onMouseDown={handleMouseDown}
 			onMouseMove={handleMouseMove}
 			onMouseUp={handleMouseUp}
