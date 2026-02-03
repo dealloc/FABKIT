@@ -9,7 +9,7 @@ export const Route = createFileRoute("/")({
 function RouteComponent() {
 	return (
 		<div className="flex flex-col justify-center items-center p-4 gap-4">
-			<div className="w-1/3">
+			<div className="w-full md:w-1/3">
 				<CardTypeField />
 			</div>
 			<FeaturedArtist />
