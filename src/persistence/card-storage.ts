@@ -151,6 +151,7 @@ export function serializeCardState(
 		CardWeapon: state.CardWeapon,
 		CardMacroGroup: state.CardMacroGroup,
 		CardOverlay: state.CardOverlay,
+		CardOverlayOpacity: state.CardOverlayOpacity,
 	};
 }
 

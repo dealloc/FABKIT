@@ -80,6 +80,9 @@ export interface CardCreatorState extends FormFieldValues {
 
 	/** Allows overlaying the card with another image */
 	CardOverlay: Blob | null;
+
+	/** The opacity applied to the overlay image */
+	CardOverlayOpacity: number;
 }
 
 /**
@@ -183,6 +186,8 @@ export interface CardCreatorActions {
 
 	setOverlay: (overlay: Blob | null) => void;
 
+	setOverlayOpacity: (opacity: number) => void;
+
 	/**
 	 * Resets all state to initial values and generates a new version UUID.
 	 * This invalidates any saved/cached state.
@@ -230,6 +235,7 @@ const initialState: CardCreatorState = {
 	CardWeapon: null,
 	CardMacroGroup: null,
 	CardOverlay: null,
+	CardOverlayOpacity: 0.5,
 };
 
 /**
@@ -369,6 +375,8 @@ export const useCardCreator = create<CardCreatorState & CardCreatorActions>()(
 		setCardMacroGroup: (group: CardFormFieldValue["CardMacroGroup"]) =>
 			set({ CardMacroGroup: group }),
 		setOverlay: (overlay: Blob | null) => set({ CardOverlay: overlay }),
+		setOverlayOpacity: (overlayOpacity: number) =>
+			set({ CardOverlayOpacity: Math.max(0, Math.min(1, overlayOpacity)) }),
 		reset: () => set({ ...store.getInitialState(), __version: uuid() }),
 		loadCard: (state: Partial<CardCreatorState>) => set(state),
 	})),

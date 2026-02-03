@@ -12,6 +12,7 @@ import { CardLifeField } from "../components/card-creator/fields/CardLifeField.t
 import { CardMacroGroupField } from "../components/card-creator/fields/CardMacroGroupField.tsx";
 import { CardNameField } from "../components/card-creator/fields/CardNameField.tsx";
 import { CardOverlayField } from "../components/card-creator/fields/CardOverlayField.tsx";
+import { CardOverlayOpacityField } from "../components/card-creator/fields/CardOverlayOpacityField.tsx";
 import { CardPitchField } from "../components/card-creator/fields/CardPitchField.tsx";
 import { CardPowerField } from "../components/card-creator/fields/CardPowerField.tsx";
 import { CardRarityField } from "../components/card-creator/fields/CardRarityField.tsx";
@@ -71,6 +72,7 @@ function RouteComponent() {
 					<CardArtworkCreditsField />
 					<CardSetnumberField />
 					<CardOverlayField />
+					<CardOverlayOpacityField />
 					<CardTextField className="col-span-1 sm:col-span-2 xl:col-span-3" />
 				</div>
 			</section>

@@ -71,6 +71,9 @@ export function NormalRenderer({ config, ref }: NormalRendererProps) {
 	const CardTextHTML = useCardCreator((state) => state.CardTextHTML);
 	const CardArtPosition = useCardCreator((state) => state.CardArtPosition);
 	const CardOverlay = useCardCreator((state) => state.CardOverlay);
+	const CardOverlayOpacity = useCardCreator(
+		(state) => state.CardOverlayOpacity,
+	);
 
 	// Dynamically scale the font of the card name based on it's length.
 	const CardNameFontSize = useScaledFontSize({
@@ -290,7 +293,7 @@ export function NormalRenderer({ config, ref }: NormalRendererProps) {
 					href={overlay}
 					x={0}
 					y={0}
-					opacity={0.5}
+					opacity={CardOverlayOpacity}
 					width={config.viewBox.width}
 					height={config.viewBox.height}
 					preserveAspectRatio="xMidYMid slice"
