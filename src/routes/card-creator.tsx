@@ -71,8 +71,12 @@ function RouteComponent() {
 					<CardArtworkField />
 					<CardArtworkCreditsField />
 					<CardSetnumberField />
-					<CardOverlayField />
-					<CardOverlayOpacityField />
+					{import.meta.env.DEV && (
+						<>
+							<CardOverlayField />
+							<CardOverlayOpacityField />
+						</>
+					)}
 					<CardTextField className="col-span-1 sm:col-span-2 xl:col-span-3" />
 				</div>
 			</section>
