@@ -17,7 +17,8 @@ import {
 import { useState } from "react";
 import FabkitLogo from "../../assets/Fabkitlogo.svg";
 import FabkitLogoNotext from "../../assets/Fabkitlogo_notext.svg";
-import { LanguageSelector } from "./LanguageSelector.tsx";
+import { LanguageToggle } from "./LanguageToggle.tsx";
+import { ThemeToggle } from "./ThemeToggle.tsx";
 
 const navigation = [
 	{ name: "Home", route: "/", icon: Home },
@@ -167,28 +168,41 @@ export function Menu() {
 								</ul>
 							</li>
 						</ul>
-						<div className="mb-4">
-							<LanguageSelector />
-						</div>
 					</nav>
 				</div>
 			</div>
 
 			{/* Mobile top bar */}
-			<div className="sticky top-0 z-40 flex items-center gap-x-6 bg-surface px-4 py-4 shadow-xs sm:px-6 lg:hidden">
-				<button
-					type="button"
-					className="-m-2.5 p-2.5 text-primary lg:hidden"
-					onClick={() => setSidebarOpen(true)}
-				>
-					<span className="sr-only">Open sidebar</span>
-					<MenuIcon className="size-6" aria-hidden="true" />
-				</button>
-				<div className="flex flex-row items-center text-sm/6 font-semibold text-primary">
-					<img src={FabkitLogoNotext} alt="FABKIT Logo" className="h-8 pr-2" />
-					FaBKit
-					{currentRouteName && ` - ${currentRouteName}`}
+			<div className="sticky top-0 z-40 flex items-center justify-between gap-x-6 bg-surface px-4 py-4 shadow-xs sm:px-6 lg:hidden">
+				<div className="flex items-center gap-x-6">
+					<button
+						type="button"
+						className="-m-2.5 p-2.5 text-primary lg:hidden"
+						onClick={() => setSidebarOpen(true)}
+					>
+						<span className="sr-only">Open sidebar</span>
+						<MenuIcon className="size-6" aria-hidden="true" />
+					</button>
+					<div className="flex flex-row items-center text-sm/6 font-semibold text-primary">
+						<img
+							src={FabkitLogoNotext}
+							alt="FABKIT Logo"
+							className="h-8 pr-2"
+						/>
+						FaBKit
+						{currentRouteName && ` - ${currentRouteName}`}
+					</div>
 				</div>
+				<div className="flex items-center gap-2">
+					<LanguageToggle />
+					<ThemeToggle />
+				</div>
+			</div>
+
+			{/* Desktop utility bar */}
+			<div className="fixed top-4 right-4 z-50 hidden lg:flex lg:items-center lg:gap-2">
+				<LanguageToggle />
+				<ThemeToggle />
 			</div>
 		</div>
 	);

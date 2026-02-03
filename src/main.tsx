@@ -34,7 +34,7 @@ declare module "@tanstack/react-router" {
 const root = document.getElementById("root");
 createRoot(root || document.body).render(
 	<StrictMode>
-		<ThemeProvider>
+		<ThemeProvider attribute="data-theme" defaultTheme="system">
 			<RouterProvider router={router} />
 		</ThemeProvider>
 	</StrictMode>,

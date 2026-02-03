@@ -229,5 +229,14 @@
 		"reload": "Reload",
 		"later": "Later",
 		"ok": "OK"
+	},
+	"theme": {
+		"light": "Light",
+		"dark": "Dark",
+		"system": "System",
+		"toggle_light": "Switch to dark theme",
+		"toggle_dark": "Switch to system theme",
+		"toggle_system": "Switch to light theme",
+		"toggle_language": "Change language"
 	}
 }
