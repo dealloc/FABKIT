@@ -218,6 +218,9 @@
 			"prompt": "Are you sure you want to reset the form? This can not be undone.",
 			"yes": "Yes, reset the form",
 			"cancel": "Cancel"
+		},
+		"combobox": {
+			"custom_value": "Custom: {{value}}"
 		}
 	},
 	"pwa": {

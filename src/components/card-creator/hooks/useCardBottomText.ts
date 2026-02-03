@@ -25,9 +25,9 @@
 
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { CardClasses } from "../../../config/cards/classes.ts";
+import { type CardClass, CardClasses } from "../../../config/cards/classes.ts";
 import { CardSubtypes } from "../../../config/cards/subtypes.ts";
-import { CardTalents } from "../../../config/cards/talents.ts";
+import { type CardTalent, CardTalents } from "../../../config/cards/talents.ts";
 import { CardTypes } from "../../../config/cards/types.ts";
 import { useCardCreator } from "../../../stores/card-creator.ts";
 
@@ -51,11 +51,20 @@ export function useCardBottomText() {
 	return useMemo(() => {
 		// Translate talent if present
 		const talent =
-			CardTalent && CardTalent !== "none" ? t(CardTalents[CardTalent]) : null;
+			CardTalent && CardTalent !== "none"
+				? t(CardTalents[CardTalent as CardTalent]) || CardTalent
+				: null;
 
 		// Translate primary class if present
 		const primaryClass =
-			CardClass && CardClass !== "none" ? t(CardClasses[CardClass]) : null;
+			CardClass && CardClass !== "none"
+				? t(CardClasses[CardClass as CardClass]) || CardClass
+				: null;
+
+		const secondaryClass =
+			CardSecondaryClass && CardSecondaryClass !== "none"
+				? t(CardClasses[CardSecondaryClass as CardClass]) || CardSecondaryClass
+				: null;
 
 		// Handle class combination with a proper separator
 		// Heroes use space separator, others use "/"
@@ -63,8 +72,8 @@ export function useCardBottomText() {
 		const separator = isHero ? " " : " / ";
 
 		const classText =
-			primaryClass && CardSecondaryClass && CardSecondaryClass !== "none"
-				? `${primaryClass}${separator}${t(CardClasses[CardSecondaryClass])}`
+			primaryClass && secondaryClass
+				? `${primaryClass}${separator}${secondaryClass}`
 				: primaryClass;
 
 		// Translate a card type
@@ -75,7 +84,7 @@ export function useCardBottomText() {
 
 		// Add a translated subtype if present
 		if (CardType && CardSubType && CardSubType !== "none") {
-			const subtypeKey = CardSubtypes[CardType]?.[CardSubType];
+			const subtypeKey = CardSubtypes[CardType]?.[CardSubType] || CardSubType;
 			if (subtypeKey) {
 				subtypeParts.push(t(subtypeKey));
 			}

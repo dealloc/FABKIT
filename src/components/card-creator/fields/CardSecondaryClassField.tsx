@@ -2,7 +2,8 @@ import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { type CardClass, CardClasses } from "../../../config/cards/classes.ts";
 import { useCardCreator } from "../../../stores/card-creator.ts";
-import Select, { type SelectOption } from "../../form/Select.tsx";
+import { Combobox } from "../../form/Combobox.tsx";
+import type { SelectOption } from "../../form/Select.tsx";
 import { useIsFieldVisible } from "../../utils.ts";
 
 export function CardSecondaryClassField() {
@@ -27,7 +28,7 @@ export function CardSecondaryClassField() {
 
 	if (!shouldShow) return null;
 	return (
-		<Select
+		<Combobox
 			label={t("card_creator.secondary_class_label")}
 			value={CardSecondaryClass || "none"}
 			onChange={setCardSecondaryClass}

@@ -4,7 +4,7 @@ import Slider from "../../form/Slider.tsx";
 
 export function CardOverlayOpacityField() {
 	const { t } = useTranslation();
-	const CardOverlay = useCardCreator(state => state.CardOverlay);
+	const CardOverlay = useCardCreator((state) => state.CardOverlay);
 	const CardOverlayOpacity = useCardCreator(
 		(state) => state.CardOverlayOpacity,
 	);
