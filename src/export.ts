@@ -44,12 +44,14 @@ const preset = presets.offscreen();
  *
  * @param svg - SVG element containing the card preview
  * @param scale - Output scale multiplier (default 1.0, use 2.0+ for high-quality export)
- * @returns Promise resolving to PNG image Blob
+ * @param type - The image format to use when converting to an image.
+ * @returns Promise resolving to an image Blob of the type `type`.
  * @throws Error if canvas context cannot be acquired
  */
 export async function convertToImage(
 	svg: SVGSVGElement,
 	scale = 1.0,
+	type: "image/png" | "image/jpeg" | "image/webp" = "image/png",
 ): Promise<Blob> {
 	const width = svg.width.baseVal.value * scale;
 	const height = svg.height.baseVal.value * scale;
@@ -81,7 +83,7 @@ export async function convertToImage(
 		);
 	}
 
-	return await canvas.convertToBlob({ type: "image/png", quality: scale });
+	return await canvas.convertToBlob({ type, quality: scale });
 }
 
 /**
