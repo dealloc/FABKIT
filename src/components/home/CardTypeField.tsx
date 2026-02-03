@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { CardTypes } from "../../config/cards.ts";
 import { useCardCreator } from "../../stores/card-creator.ts";
-import Select from "../form/Select.tsx";
+import ButtonDropdown from "../form/ButtonDropdown.tsx";
 
 /**
  * Renders the card type field.
@@ -29,13 +29,17 @@ export function CardTypeField() {
 	);
 
 	if (isLoading) {
-		return <LoaderCircle className="animate-spin" />;
+		return (
+			<div className="flex items-center justify-center py-12">
+				<LoaderCircle className="h-8 w-8 animate-spin text-primary" />
+			</div>
+		);
 	}
 
 	return (
-		<Select
+		<ButtonDropdown
 			label={t("card_creator.type_label")}
-			value={""}
+			value={null}
 			onChange={async (type) => {
 				setIsLoading(true);
 
